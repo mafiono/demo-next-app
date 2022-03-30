@@ -1,0 +1,12 @@
+.collapsible {
+  position: relative;
+  &::after {
+    content: '';
+    height: 40px;
+    position: absolute;
+    display: block;
+    width: 100%;
+    bottom: 0;
+    @apply bg-gradient-to-b from-transparent to-[#171717];
+  }
+}
