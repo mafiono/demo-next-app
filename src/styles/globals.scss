@@ -28,4 +28,7 @@ and left sides of the text */
   content: '';
   border-bottom: 2px solid #282a2f;
   flex: 1;
+  &.-white {
+    border-color: white;
+  }
 }

@@ -1,0 +1,8 @@
+.input {
+  &-md {
+    @apply p-[11px] bg-white rounded-[8px] flex items-center gap-[1rem];
+    > input {
+      @apply outline-none w-full;
+    }
+  }
+}

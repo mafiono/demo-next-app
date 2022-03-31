@@ -55,7 +55,7 @@ const HeaderComponent = (props: any) => {
                 src='assets/icons/eye-icon.svg'
               />
             </div>
-            <a href='/test' className='btn --md --accent w-[99px]'>
+            <a href='/login' className='btn --md --accent w-[99px]'>
               <span>Log In</span>
             </a>
             <a href='/test' className='btn --md --danger w-[99px]'>
@@ -76,18 +76,21 @@ const HeaderComponent = (props: any) => {
             <BrandLogo className='w-[133.69px] h-[40.43px]' />
           </div>
           <div className='flex justify-end items-center gap-[6.33px]'>
-            <button className='h-[36.67px] w-[36.67px] rounded-[5px] bg-[#5605A0] items-center justify-center flex'>
+            <a
+              href='/login'
+              className='h-[36.67px] w-[36.67px] rounded-[5px] bg-[#5605A0] items-center justify-center flex'
+            >
               <img
                 className='h-[20px] w-[20px]'
                 src='assets/icons/login-icon.svg'
               />
-            </button>
-            <button className='h-[36.67px] w-[36.67px] rounded-[5px] bg-[#FF3076] items-center justify-center flex'>
+            </a>
+            <a className='h-[36.67px] w-[36.67px] rounded-[5px] bg-[#FF3076] items-center justify-center flex'>
               <img
                 className='h-[20px] w-[20px]'
                 src='assets/icons/add-user-icon.svg'
               />
-            </button>
+            </a>
           </div>
         </div>
       </div>
