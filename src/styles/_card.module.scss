@@ -1,0 +1,14 @@
+.card {
+  @apply rounded-[8px];
+
+  &.--dark {
+    @apply bg-[#1F2127];
+  }
+  &.--primary {
+    @apply bg-primary;
+  }
+
+  &-info-center {
+    @apply aspect-square w-[91px] md:w-[95px] lg:w-[180px];
+  }
+}

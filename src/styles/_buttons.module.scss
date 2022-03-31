@@ -1,0 +1,42 @@
+.btn {
+  // colors palette
+  &.--primary {
+    @apply bg-primary
+      text-white;
+  }
+  &.--danger {
+    @apply bg-danger
+      text-white;
+  }
+  &.--accent {
+    @apply bg-accent
+      text-white;
+  }
+
+  // size
+  &.--lg {
+    @apply rounded-[8px]
+         font-semibold
+         h-[37px] md:h-[51px] lg:h-[61px]
+         text-[14px] md:text-[20px]
+         text-center
+         flex
+         items-center
+         justify-center
+         gap-[16px];
+    > img {
+      @apply aspect-square h-[20px] lg:h-[30px];
+    }
+  }
+  &.--md {
+    @apply rounded-[8px]
+         font-semibold
+         h-[40px]
+         text-[14px]
+         text-center
+         flex
+         items-center
+         justify-center
+         gap-[16px];
+  }
+}
