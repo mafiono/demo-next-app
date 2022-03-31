@@ -55,10 +55,10 @@ const HeaderComponent = (props: any) => {
                 src='assets/icons/eye-icon.svg'
               />
             </div>
-            <a href='/login' className='btn --md --accent w-[99px]'>
+            <a href='' className='btn --md --accent w-[99px]'>
               <span>Log In</span>
             </a>
-            <a href='/test' className='btn --md --danger w-[99px]'>
+            <a href='/register' className='btn --md --danger w-[99px]'>
               <span>Sign Up</span>
             </a>
           </div>

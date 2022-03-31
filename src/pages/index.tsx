@@ -69,18 +69,18 @@ const Home: NextPage = props => {
               })}
             </div>
             <div className='grid grid-cols-3 col-span-full md:col-[1/4] gap-[1rem] p-0 box-border relative'>
-              <a href='/dsklh' className='btn --danger --lg'>
+              <a href='/promotion' className='btn --danger --lg'>
                 <img alt='promotions' src='/assets/icons/promotion-icon.svg' />
                 <span>Promotion</span>
               </a>
-              <a href='/dsklh' className='btn --primary --lg'>
+              <a href='/register' className='btn --primary --lg'>
                 <img
                   alt='registration'
                   src='/assets/icons/registration-icon.svg'
                 />
                 <span>Sign Up</span>
               </a>
-              <a href='/dsklh' className='btn --accent --lg'>
+              <a href='/login' className='btn --accent --lg'>
                 <img alt='login' src='/assets/icons/login-icon-v2.svg' />
                 <span>Log In</span>
               </a>

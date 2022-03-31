@@ -9,7 +9,7 @@ const LoginPage = () => {
       <div className='p-[0.5rem] box-border absolute top-0 left-0 right-0 z-50'>
         <button
           className='flex items-center gap-[1rem]'
-          onClick={() => Router.back()}
+          onClick={() => Router.push('/')}
         >
           <img
             src='/assets/icons/back-arrow.svg'
@@ -19,7 +19,7 @@ const LoginPage = () => {
           <p className='label-card font-semibold text-white'>Back</p>
         </button>
       </div>
-      <main className=' h-full grid grid-cols-6 box-border relative'>
+      <main className=' h-full grid grid-cols-6 box-border relative pt-[60px] md:pt-0'>
         <div className=' col-span-full md:col-span-4 flex flex-1 items-center justify-center gap-[1rem] flex-col relative'>
           <div className='absolute top-[85px] left-[46px]'>
             <img
@@ -29,7 +29,7 @@ const LoginPage = () => {
             />
           </div>
           <div className='bg-[#C4C4C40D] opacity-[0.5] h-[274px] w-[274px] rounded-full absolute bottom-[155px] right-[48px]' />
-          <div className='bg-[#C4C4C40D] opacity-[0.5] h-[159px] w-[159px] rounded-full absolute bottom-[58px] right-[-96px]' />
+          <div className='bg-[#C4C4C40D] opacity-[0.5] h-[159px] w-[159px] rounded-full absolute bottom-[58px] right-[-96px] hidden md:block' />
           <div>
             <img
               alt='brand'
@@ -72,8 +72,10 @@ const LoginPage = () => {
             <div className='divider -white w-[312px] md:w-[310px] lg:w-[455px]' />
             <button className='text-white py-[0.5rem] h-[37px] md:h-[51px] lg:h-[61px] w-[312px] md:w-[310px] lg:w-[455px] text-left flex items-center justify-between'>
               <span className='text-left'>
-                Don’t Have an Account ?{' '}
-                <span className='text-primary underline'>Register Now !</span>{' '}
+                Don`t Have an Account ?
+                <a href='/register'>
+                  <span className='text-primary underline'>Register Now !</span>
+                </a>
               </span>
               <img
                 alt='arrow'

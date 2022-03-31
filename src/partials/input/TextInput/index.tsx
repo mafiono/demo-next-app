@@ -39,16 +39,14 @@ function TextInput(props: Props) {
       </div>
       {props.error && (
         <div
-          className={`${props.classNameError} flex items-center justify-start gap-[0.5rem]`}
+          className={`text-white ${props?.classNameError} flex items-center justify-start gap-[0.5rem]`}
         >
           <img
             src='/assets/icons/warning-icon.svg'
             alt='warning-icon'
             className='h-[16px] aspect-square'
           />
-          <p className='text-[12px] text-white italic'>
-            {props?.errorMessage || 'Error'}
-          </p>
+          <p className='text-[12px] italic'>{props?.errorMessage || 'Error'}</p>
         </div>
       )}
     </div>

@@ -1,15 +1,18 @@
 /* eslint-disable @next/next/no-img-element */
+import { Modal, Typography } from '@mui/material'
+import { Box } from '@mui/system'
 import Router from 'next/router'
-import React from 'react'
+import React, { useState } from 'react'
 import TextInput from '../partials/input/TextInput'
 
 const RegisterPage = () => {
+  const [openModal, setOpenModal] = useState(false)
   return (
     <div className='h-screen'>
-      <div className='p-[0.5rem] box-border absolute top-0 left-0 right-0 z-50'>
+      <div className='p-[0.5rem] box-border sticky top-0 left-0 right-0 z-50'>
         <button
           className='flex items-center gap-[1rem]'
-          onClick={() => Router.back()}
+          onClick={() => Router.push('/')}
         >
           <img
             src='/assets/icons/back-arrow.svg'
@@ -19,7 +22,7 @@ const RegisterPage = () => {
           <p className='label-card font-semibold text-white'>Back</p>
         </button>
       </div>
-      <main className='h-full grid grid-cols-6 box-border relative'>
+      <main className='h-full grid grid-cols-6 box-border relative pt-[60px] md:pt-0'>
         <div className='col-span-full md:col-span-4 flex flex-1 items-center justify-center gap-[1rem] flex-col relative  container mx-auto lg:px-[5rem] md:px-[3rem] px-[1rem]'>
           <div className='absolute top-[85px] left-[46px]'>
             <img
@@ -29,7 +32,7 @@ const RegisterPage = () => {
             />
           </div>
           <div className='bg-[#C4C4C40D] opacity-[0.5] h-[274px] w-[274px] rounded-full absolute bottom-[155px] right-[48px]' />
-          <div className='bg-[#C4C4C40D] opacity-[0.5] h-[159px] w-[159px] rounded-full absolute bottom-[58px] right-[-96px]' />
+          <div className='bg-[#C4C4C40D] opacity-[0.5] h-[159px] w-[159px] rounded-full absolute bottom-[58px] right-[-96px] hidden md:block' />
           <div>
             <img
               alt='brand'
@@ -196,7 +199,10 @@ const RegisterPage = () => {
                 </p>
               </div>
               <div className='col-span-full md:col-span-2'>
-                <button className='btn --lg --primary w-full'>
+                <button
+                  onClick={() => setOpenModal(true)}
+                  className='btn --lg --primary w-full'
+                >
                   <span>Sign Up</span>
                 </button>
               </div>
@@ -213,6 +219,51 @@ const RegisterPage = () => {
             </div>
           </div>
         </div>
+        <Modal
+          open={openModal}
+          onClose={() => setOpenModal(false)}
+          aria-labelledby='modal-modal-title'
+          aria-describedby='modal-modal-description'
+        >
+          <div className='w-full h-full flex items-center justify-center'>
+            <div className='bg-white w-[314px] md:w-[374.06px] lg:w-[552px] min-h-[361.86px] rounded-[8px] relative p-[22px]'>
+              <button
+                onClick={() => setOpenModal(false)}
+                className='absolute top-[-21px] md:top-[-24px] lg:top-[-40px] right-[-20px] z-20'
+              >
+                <img
+                  alt='close-btn'
+                  src='/assets/icons/close-primary.svg'
+                  className='w-[42px] md:w-[59.29px] lg:h-[87.5px] aspect-square'
+                />
+              </button>
+              <div className='items-center justify-center flex'>
+                <img
+                  alt='jackpot'
+                  src='/assets/modal/jacpot-img-modal.svg'
+                  className='w-[270px] md:w-[208px] lg:w-[360px] aspect-square'
+                />
+              </div>
+              <div className='text-center flex items-center justify-center mb-[1rem]'>
+                <div className=''>
+                  <p className='title-page text-primary font-bold'>
+                    Welcome Back!!
+                  </p>
+                  <p className='text-[10px] md:text-[12px] lg:text-[14pxr] text-[#909195]'>
+                    Check out our latest game and countless promo available.Get
+                    the extra bonus and ready to win big.
+                  </p>
+                </div>
+              </div>
+              <button
+                onClick={() => setOpenModal(false)}
+                className='btn --lg --primary w-full'
+              >
+                <span>Play Now</span>
+              </button>
+            </div>
+          </div>
+        </Modal>
       </main>
     </div>
   )
