@@ -1,3 +1,4 @@
+/* eslint-disable @next/next/no-html-link-for-pages */
 /* eslint-disable @next/next/no-img-element */
 import { Modal } from '@mui/material'
 import Router from 'next/router'
@@ -170,12 +171,9 @@ const ChoseCharacter = () => {
                 </p>
               </div>
             </div>
-            <button
-              onClick={() => setOpenModal(false)}
-              className='btn --lg --primary w-full'
-            >
-              <span>Play Now</span>
-            </button>
+            <a href='/' className='btn --lg --primary w-full'>
+              Play Now
+            </a>
           </div>
         </div>
       </Modal>

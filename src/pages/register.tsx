@@ -199,12 +199,12 @@ const RegisterPage = () => {
                 </p>
               </div>
               <div className='col-span-full md:col-span-2'>
-                <button
-                  onClick={() => setOpenModal(true)}
+                <a
+                  href='/choose-character'
                   className='btn --lg --primary w-full'
                 >
                   <span>Sign Up</span>
-                </button>
+                </a>
               </div>
             </div>
           </div>
@@ -219,48 +219,6 @@ const RegisterPage = () => {
             </div>
           </div>
         </div>
-        <Modal
-          open={openModal}
-          onClose={() => setOpenModal(false)}
-          aria-labelledby='modal-modal-title'
-          aria-describedby='modal-modal-description'
-        >
-          <div className='w-full h-full flex items-center justify-center'>
-            <div className='bg-white w-[314px] md:w-[374.06px] lg:w-[552px] min-h-[361.86px] rounded-[8px] relative p-[22px]'>
-              <button
-                onClick={() => setOpenModal(false)}
-                className='absolute top-[-21px] md:top-[-24px] lg:top-[-40px] right-[-20px] z-20'
-              >
-                <img
-                  alt='close-btn'
-                  src='/assets/icons/close-primary.svg'
-                  className='w-[42px] md:w-[59.29px] lg:h-[87.5px] aspect-square'
-                />
-              </button>
-              <div className='items-center justify-center flex'>
-                <img
-                  alt='jackpot'
-                  src='/assets/modal/jacpot-img-modal.svg'
-                  className='w-[270px] md:w-[208px] lg:w-[360px] aspect-square'
-                />
-              </div>
-              <div className='text-center flex items-center justify-center mb-[1rem]'>
-                <div className=''>
-                  <p className='title-page text-primary font-bold'>
-                    Welcome Back!!
-                  </p>
-                  <p className='text-[10px] md:text-[12px] lg:text-[14pxr] text-[#909195]'>
-                    Check out our latest game and countless promo available.Get
-                    the extra bonus and ready to win big.
-                  </p>
-                </div>
-              </div>
-              <a href='/choose-character' className='btn --lg --primary w-full'>
-                Play Now
-              </a>
-            </div>
-          </div>
-        </Modal>
       </main>
     </div>
   )

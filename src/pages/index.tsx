@@ -13,6 +13,8 @@ import { SwiperSlide } from 'swiper/react'
 import SideMenuComponent from '../components/SideMenuComponent'
 
 const Home: NextPage = props => {
+  console.log({ props })
+
   const [collapsible, setCollapsible] = useState(false)
   return (
     <div>

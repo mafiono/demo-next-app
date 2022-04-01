@@ -57,7 +57,7 @@ function SideMenuComponent() {
               <a
                 key={i.toString()}
                 href={e.path}
-                className='w-full h-full items-center justify-center flex'
+                className=' hover:scale-105 w-full h-full items-center justify-center flex'
               >
                 <img
                   src={e.img}

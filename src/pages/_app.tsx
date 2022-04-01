@@ -1,9 +1,14 @@
 import '../styles/globals.scss'
 import '../styles/styles.scss'
 import type { AppProps } from 'next/app'
+import { AuthProvider } from '../contexts/auth'
 
 function MyApp({ Component, pageProps }: AppProps) {
-  return <Component {...pageProps} />
+  return (
+    <AuthProvider>
+      <Component {...pageProps} />
+    </AuthProvider>
+  )
 }
 
 export default MyApp

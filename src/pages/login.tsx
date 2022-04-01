@@ -1,9 +1,11 @@
 /* eslint-disable @next/next/no-img-element */
+import { Modal } from '@mui/material'
 import Router from 'next/router'
-import React from 'react'
+import React, { useState } from 'react'
 import TextInput from '../partials/input/TextInput'
 
 const LoginPage = () => {
+  const [openModal, setOpenModal] = useState<boolean>(false)
   return (
     <div className='h-screen'>
       <div className='p-[0.5rem] box-border absolute top-0 left-0 right-0 z-50'>
@@ -56,8 +58,11 @@ const LoginPage = () => {
             type='password'
             error
           />
-          <button className='btn --lg --primary w-[312px] md:w-[310px] lg:w-[455px]'>
-            <span>Log In</span>
+          <button
+            onClick={() => setOpenModal(true)}
+            className='btn --lg --primary w-[312px] md:w-[310px] lg:w-[455px]'
+          >
+            Log In
           </button>
 
           <div>
@@ -96,6 +101,51 @@ const LoginPage = () => {
           </div>
         </div>
       </main>
+      <Modal
+        open={openModal}
+        onClose={() => setOpenModal(false)}
+        aria-labelledby='modal-modal-title'
+        aria-describedby='modal-modal-description'
+      >
+        <div className='w-full h-full flex items-center justify-center'>
+          <div className='bg-white w-[314px] md:w-[374.06px] lg:w-[552px] min-h-[361.86px] rounded-[8px] relative p-[22px]'>
+            <button
+              onClick={() => setOpenModal(false)}
+              className='absolute top-[-21px] md:top-[-24px] lg:top-[-40px] right-[-20px] z-20'
+            >
+              <img
+                alt='close-btn'
+                src='/assets/icons/close-primary.svg'
+                className='w-[42px] md:w-[59.29px] lg:h-[87.5px] aspect-square'
+              />
+            </button>
+            <div className='items-center justify-center flex'>
+              <img
+                alt='jackpot'
+                src='/assets/modal/jacpot-img-modal.svg'
+                className='w-[270px] md:w-[208px] lg:w-[360px] aspect-square'
+              />
+            </div>
+            <div className='text-center flex items-center justify-center mb-[1rem]'>
+              <div className=''>
+                <p className='title-page text-primary font-bold'>
+                  Welcome Back!!
+                </p>
+                <p className='text-[10px] md:text-[12px] lg:text-[14pxr] text-[#909195]'>
+                  Check out our latest game and countless promo available.Get
+                  the extra bonus and ready to win big.
+                </p>
+              </div>
+            </div>
+            <a
+              onClick={() => Router.push('/')}
+              className='btn --lg --primary w-full'
+            >
+              Play Now
+            </a>
+          </div>
+        </div>
+      </Modal>
     </div>
   )
 }
