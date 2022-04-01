@@ -9,7 +9,7 @@ const RegisterPage = () => {
   const [openModal, setOpenModal] = useState(false)
   return (
     <div className='h-screen'>
-      <div className='p-[0.5rem] box-border sticky top-0 left-0 right-0 z-50'>
+      <div className='p-[0.5rem] box-border absolute top-0 left-0 right-0 z-50'>
         <button
           className='flex items-center gap-[1rem]'
           onClick={() => Router.push('/')}
@@ -23,7 +23,7 @@ const RegisterPage = () => {
         </button>
       </div>
       <main className='h-full grid grid-cols-6 box-border relative pt-[60px] md:pt-0'>
-        <div className='col-span-full md:col-span-4 flex flex-1 items-center justify-center gap-[1rem] flex-col relative  container mx-auto lg:px-[5rem] md:px-[3rem] px-[1rem]'>
+        <div className='pb-[1rem] md:pb-0 col-span-full md:col-span-4 flex flex-1 items-center justify-center gap-[1rem] flex-col relative  container mx-auto lg:px-[5rem] md:px-[3rem] px-[1rem]'>
           <div className='absolute top-[85px] left-[46px]'>
             <img
               src='/assets/bg/bg-triangle.svg'
