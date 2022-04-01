@@ -85,7 +85,10 @@ const HeaderComponent = (props: any) => {
                 src='assets/icons/login-icon.svg'
               />
             </a>
-            <a className='h-[36.67px] w-[36.67px] rounded-[5px] bg-[#FF3076] items-center justify-center flex'>
+            <a
+              href='/register'
+              className='h-[36.67px] w-[36.67px] rounded-[5px] bg-[#FF3076] items-center justify-center flex'
+            >
               <img
                 className='h-[20px] w-[20px]'
                 src='assets/icons/add-user-icon.svg'

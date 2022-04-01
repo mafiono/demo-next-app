@@ -255,12 +255,9 @@ const RegisterPage = () => {
                   </p>
                 </div>
               </div>
-              <button
-                onClick={() => setOpenModal(false)}
-                className='btn --lg --primary w-full'
-              >
-                <span>Play Now</span>
-              </button>
+              <a href='/choose-character' className='btn --lg --primary w-full'>
+                Play Now
+              </a>
             </div>
           </div>
         </Modal>
