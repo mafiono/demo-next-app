@@ -1,8 +1,10 @@
 /* eslint-disable @next/next/no-img-element */
+import { Modal } from '@mui/material'
 import Router from 'next/router'
-import React from 'react'
+import React, { useState } from 'react'
 
 const ChoseCharacter = () => {
+  const [openModal, setOpenModal] = useState<boolean>(false)
   return (
     <div className='flex flex-col flex-1 h-screen gap-[1rem]'>
       <div className='p-[.5rem]'>
@@ -118,7 +120,10 @@ const ChoseCharacter = () => {
                         })}
                       </ul>
                     </div>
-                    <button className='choose-btn btn --md p-[0.5rem]'>
+                    <button
+                      onClick={() => setOpenModal(true)}
+                      className='choose-btn btn --md p-[0.5rem]'
+                    >
                       <span>Choose Character</span>
                     </button>
                   </div>
@@ -128,26 +133,53 @@ const ChoseCharacter = () => {
           </div>
         </div>
       </div>
+      <Modal
+        open={openModal}
+        onClose={() => setOpenModal(false)}
+        aria-labelledby='modal-modal-title'
+        aria-describedby='modal-modal-description'
+      >
+        <div className='w-full h-full flex items-center justify-center'>
+          <div className='bg-white w-[314px] md:w-[374.06px] lg:w-[552px] min-h-[361.86px] rounded-[8px] relative p-[22px]'>
+            <button
+              onClick={() => setOpenModal(false)}
+              className='absolute top-[-21px] md:top-[-24px] lg:top-[-40px] right-[-20px] z-20'
+            >
+              <img
+                alt='close-btn'
+                src='/assets/icons/close-primary.svg'
+                className='w-[42px] md:w-[59.29px] lg:h-[87.5px] aspect-square'
+              />
+            </button>
+            <div className='items-center justify-center flex'>
+              <img
+                alt='jackpot'
+                src='/assets/modal/welcome-img.svg'
+                className='w-[271.37px] md:w-[273.09px] lg:w-[403px] aspect-square'
+              />
+            </div>
+            <div className='text-center flex items-center justify-center mb-[1rem]'>
+              <div className=''>
+                <p className='title-page text-primary font-bold'>
+                  Welcome To Unoplay
+                </p>
+                <p className='text-[10px] md:text-[12px] lg:text-[14pxr] text-[#909195]'>
+                  Your account has been Registered !!. Check out our awesome
+                  games and become the ultimate winner to receives special
+                  prize.
+                </p>
+              </div>
+            </div>
+            <button
+              onClick={() => setOpenModal(false)}
+              className='btn --lg --primary w-full'
+            >
+              <span>Play Now</span>
+            </button>
+          </div>
+        </div>
+      </Modal>
     </div>
-    // <div className='h-screen'>
-
-    //   <h1 className='title-page text-center text-white'>Choose Character</h1>
-    //   <div className='grid grid-cols-4 bg-blue-800 h-full'>
-    //     {Array(4)
-    //       .fill(0)
-    //       .map((e, index) => {
-    //         return (
-    //           <div className='bg-red-300 p-[1rem]' key={index.toString()}>
-    //             Enim enim laboris pariatur laborum laboris minim irure do ad
-    //             officia consectetur laborum adipisicing voluptate. Anim do
-    //             officia in nostrud consectetur ad tempor culpa adipisicing
-    //             aliqua mollit ullamco cillum. Reprehenderit veniam ullamco anim
-    //             commodo consequat duis irure do pariatur ea ex magna.
-    //           </div>
-    //         )
-    //       })}
-    //   </div>
-    // </div>
   )
 }
 
