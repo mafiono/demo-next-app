@@ -2,10 +2,34 @@
 import { Modal } from '@mui/material'
 import Router from 'next/router'
 import React, { useState } from 'react'
+import axiosClient from '../config/client'
+import { LOGIN_CONSTANTS } from '../config/constants'
+
 import TextInput from '../partials/input/TextInput'
+import { LoginDto } from '../types/dto'
 
 const LoginPage = () => {
   const [openModal, setOpenModal] = useState<boolean>(false)
+  const [formData, setFormData] = useState<LoginDto>()
+  const handleChangeForm = (e: any) => {
+    const { value, name } = e.target
+    console.log({ value, name })
+    setFormData(prev => ({
+      ...prev,
+      [name]: value,
+    }))
+  }
+  const handlePostData = () => {
+    console.log(formData, axiosClient.defaults)
+    axiosClient
+      .post('/login', formData)
+      .then(res => {
+        console.log(res.data)
+      })
+      .catch(error => {
+        console.log(error)
+      })
+  }
   return (
     <div className='h-screen'>
       <div className='p-[0.5rem] box-border absolute top-0 left-0 right-0 z-50'>
@@ -49,6 +73,8 @@ const LoginPage = () => {
             type='text'
             error={false}
             errorMessage='error message'
+            name={LOGIN_CONSTANTS.LOGIN_ID}
+            onChange={handleChangeForm}
           />
           <TextInput
             classNameContainer='w-[312px] md:w-[310px] lg:w-[455px]'
@@ -56,11 +82,12 @@ const LoginPage = () => {
             icon='/assets/icons/key-icon.svg'
             leftIcon='/assets/icons/eye-icon.svg'
             type='password'
-            error
+            name={LOGIN_CONSTANTS.PASSWORD}
+            onChange={handleChangeForm}
           />
           <button
-            onClick={() => setOpenModal(true)}
-            className='btn --lg --primary w-[312px] md:w-[310px] lg:w-[455px]'
+            onClick={handlePostData}
+            className='btn --lg --primary w-[312px] md:w-[310px] lg:w-[455px] z-[999]'
           >
             Log In
           </button>
