@@ -6,7 +6,7 @@ import { useAuth } from '../../contexts/auth'
 import Device from '../../partials/MobileDetection'
 import Skeleton from '@mui/material/Skeleton'
 import { Box } from '@mui/system'
-
+import cookie from 'js-cookie'
 interface PropsBand {
   className?: string
 }
@@ -22,14 +22,17 @@ const BrandLogo = (props: PropsBand) => {
   )
 }
 const HeaderComponent = (props: any) => {
-  const { user, loading } = useAuth() as any
+  const { user } = useAuth() as any
+
+  const authToken = cookie.get('JWT_TOKEN')
+
   return (
     <header className='sticky top-0 bg-primary z-50'>
       <div className='container mx-auto'>
         {/* // desktop */}
         <div className='hidden md:flex justify-between items-center h-[64px]'>
           <BrandLogo />
-          {user ? (
+          {user || authToken ? (
             <div>
               <ul className='flex items-center gap-[32px] justify-end'>
                 <li>
@@ -143,30 +146,7 @@ const HeaderComponent = (props: any) => {
           <div className='flex items-center justify-center'>
             <BrandLogo className='w-[133.69px] h-[40.43px]' />
           </div>
-          {loading ? (
-            <ul className='flex items-center gap-[6.33px] justify-end'>
-              <li>
-                <div className=' overflow-hidden rounded-[8px]'>
-                  <Skeleton
-                    animation='wave'
-                    variant='rectangular'
-                    width={36.67}
-                    height={36.67}
-                  />
-                </div>
-              </li>
-              <li>
-                <div className=' overflow-hidden rounded-[8px]'>
-                  <Skeleton
-                    animation='wave'
-                    variant='rectangular'
-                    width={36.67}
-                    height={36.67}
-                  />
-                </div>
-              </li>
-            </ul>
-          ) : user ? (
+          {user || authToken ? (
             <ul className='flex items-center gap-[6.33px] justify-end'>
               <li>
                 <a
