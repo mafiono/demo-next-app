@@ -12,6 +12,7 @@ interface Props {
   error?: boolean
   errorMessage?: string
   classNameError?: string
+  onChange?: (arg: any) => void
 }
 function TextInput(props: Props) {
   return (
@@ -25,6 +26,7 @@ function TextInput(props: Props) {
           />
         )}
         <input
+          onChange={props.onChange}
           name={props.name}
           placeholder={props.placeholder}
           type={props.type}
