@@ -29,7 +29,7 @@ const ForgotPassword = () => {
               className='w-[102.48px] lg:w-[124px]'
             />
             <p className='title-page'>Forget Your Password ?</p>
-            <p className='text-[10px] md:text-[11px] lg:text-[14px]'>
+            <p className='text-[10px] md:text-[11px] lg:text-[14px] text-center'>
               It seems that you forget your account username / password.Enter
               your personal info below and we’ll send you a link to get back at
               your account
