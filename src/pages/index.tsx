@@ -1,17 +1,21 @@
 /* eslint-disable @next/next/no-img-element */
 /* eslint-disable react/jsx-no-comment-textnodes */
 import type { NextPage } from 'next'
-import Head from 'next/head'
-import Image from 'next/image'
 import React, { useState } from 'react'
-import HeaderComponent from '../components/HeaderComponent'
-import styles from '../styles/home.module.scss'
-import Marquee from 'react-fast-marquee'
-import MarqueeComponent from '../partials/MarqueeComponent'
 import { SwipperComponent, SwipperWithButton } from '../partials/Swipper'
 import { SwiperSlide } from 'swiper/react'
-import SideMenuComponent from '../components/SideMenuComponent'
 import Link from 'next/link'
+import dynamic from 'next/dynamic'
+
+// import HeaderComponent from '../components/HeaderComponent'
+// import MarqueeComponent from '../partials/MarqueeComponent'
+// import SideMenuComponent from '../components/SideMenuComponent'
+
+const HeaderComponent = dynamic(() => import('../components/HeaderComponent'))
+const MarqueeComponent = dynamic(() => import('../partials/MarqueeComponent'))
+const SideMenuComponent = dynamic(
+  () => import('../components/SideMenuComponent'),
+)
 
 const Home: NextPage = props => {
   console.log({ props })
