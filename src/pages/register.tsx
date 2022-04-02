@@ -1,11 +1,8 @@
 /* eslint-disable @next/next/no-img-element */
-import { Modal, Typography } from '@mui/material'
-import { Box } from '@mui/system'
 import Router from 'next/router'
 import React, { useState } from 'react'
 import { REGISTER_ENUM } from '../config/enum/register.enum'
 import BaseInputText from '../partials/input/BaseInputText'
-import TextInput from '../partials/input/TextInput'
 import { REGISTER_DTO } from '../config/types/dto'
 import BaseInputSelect from '../partials/input/BaseInputSelect'
 import Link from 'next/link'

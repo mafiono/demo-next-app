@@ -1,6 +1,6 @@
 /* eslint-disable @next/next/no-img-element */
 import { A11y, Autoplay, Navigation, Pagination, Scrollbar } from 'swiper'
-import { Swiper, SwiperSlide, SwiperProps } from 'swiper/react'
+import { Swiper, SwiperProps } from 'swiper/react'
 
 // Import Swiper styles
 import 'swiper/css'

@@ -7,10 +7,6 @@ import { SwiperSlide } from 'swiper/react'
 import Link from 'next/link'
 import dynamic from 'next/dynamic'
 
-// import HeaderComponent from '../components/HeaderComponent'
-// import MarqueeComponent from '../partials/MarqueeComponent'
-// import SideMenuComponent from '../components/SideMenuComponent'
-
 const HeaderComponent = dynamic(() => import('../components/HeaderComponent'))
 const MarqueeComponent = dynamic(() => import('../partials/MarqueeComponent'))
 const SideMenuComponent = dynamic(
