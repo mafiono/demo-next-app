@@ -3,10 +3,20 @@ import { Modal, Typography } from '@mui/material'
 import { Box } from '@mui/system'
 import Router from 'next/router'
 import React, { useState } from 'react'
+import { REGISTER_ENUM } from '../config/enum/register.enum'
+import BaseInputText from '../partials/input/BaseInputText'
 import TextInput from '../partials/input/TextInput'
-
+import { REGISTER_DTO } from '../config/types/dto'
 const RegisterPage = () => {
   const [openModal, setOpenModal] = useState(false)
+  const [formData, setFormData] = useState<REGISTER_DTO>()
+  const handleChangeForm = (e: any) => {
+    const { name, value } = e
+    setFormData(prev => ({
+      ...prev,
+      [name]: value,
+    }))
+  }
   return (
     <div className='h-screen'>
       <div className='p-[0.5rem] box-border absolute top-0 left-0 right-0 z-50'>
@@ -53,13 +63,16 @@ const RegisterPage = () => {
                 <p className='label-card text-white'>:</p>
               </div>
               <div className=' col-span-full md:col-span-3'>
-                <TextInput
-                  classNameContainer='w-full'
-                  placeholder='Enter Your Username or Phone Number'
-                  icon='/assets/icons/user-icon.svg'
+                <BaseInputText
+                  id={REGISTER_ENUM.USERNAME}
                   type='text'
+                  placeholder='Enter Your Username or Phone Number'
+                  leftIcon='/assets/icons/user-icon.svg'
+                  rightIconType='button'
                   error={false}
-                  errorMessage='error message'
+                  errorMessage='Reprehenderit est esse et magna officia.'
+                  name={REGISTER_ENUM.USERNAME}
+                  onChange={handleChangeForm}
                 />
               </div>
             </div>
@@ -69,12 +82,17 @@ const RegisterPage = () => {
                 <p className='label-card text-white'>:</p>
               </div>
               <div className=' col-span-full md:col-span-3'>
-                <TextInput
-                  classNameContainer='w-full'
-                  placeholder='Enter Your Password'
-                  icon='/assets/icons/key-icon.svg'
-                  leftIcon='/assets/icons/eye-icon.svg'
+                <BaseInputText
+                  id={REGISTER_ENUM.PASSWORD}
                   type='password'
+                  placeholder='Enter Your Username or Phone Number'
+                  leftIcon='/assets/icons/key-icon.svg'
+                  rightIcon='/assets/icons/eye-icon.svg'
+                  rightIconType='button'
+                  error={false}
+                  errorMessage='Reprehenderit est esse et magna officia.'
+                  name={REGISTER_ENUM.PASSWORD}
+                  onChange={handleChangeForm}
                 />
               </div>
             </div>
@@ -84,12 +102,17 @@ const RegisterPage = () => {
                 <p className='label-card text-white'>:</p>
               </div>
               <div className='col-span-full md:col-span-3'>
-                <TextInput
-                  classNameContainer='w-full'
-                  placeholder='Enter Confirmation Password'
-                  icon='/assets/icons/key-icon.svg'
-                  leftIcon='/assets/icons/eye-icon.svg'
+                <BaseInputText
+                  id={REGISTER_ENUM.CONFIRM_PASSWORD}
                   type='password'
+                  placeholder='Enter Your Username or Phone Number'
+                  leftIcon='/assets/icons/key-icon.svg'
+                  rightIcon='/assets/icons/eye-icon.svg'
+                  rightIconType='button'
+                  error={false}
+                  errorMessage='Reprehenderit est esse et magna officia.'
+                  name={REGISTER_ENUM.CONFIRM_PASSWORD}
+                  onChange={handleChangeForm}
                 />
               </div>
             </div>

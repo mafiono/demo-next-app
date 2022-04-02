@@ -3,14 +3,13 @@ import { Modal } from '@mui/material'
 import Router from 'next/router'
 import React, { useState } from 'react'
 import axiosClient from '../config/client'
-import { LOGIN_CONSTANTS } from '../config/constants'
-
-import TextInput from '../partials/input/TextInput'
-import { LoginDto } from '../types/dto'
+import BaseInputText from '../partials/input/BaseInputText'
+import { LOGIN_ENUM } from '../config/enum'
+import { LOGIN_DTO } from '../config/types/dto'
 
 const LoginPage = () => {
   const [openModal, setOpenModal] = useState<boolean>(false)
-  const [formData, setFormData] = useState<LoginDto>()
+  const [formData, setFormData] = useState<LOGIN_DTO>()
   const handleChangeForm = (e: any) => {
     const { value, name } = e.target
     console.log({ value, name })
@@ -46,7 +45,7 @@ const LoginPage = () => {
         </button>
       </div>
       <main className=' h-full grid grid-cols-6 box-border relative pt-[60px] md:pt-0'>
-        <div className=' col-span-full md:col-span-4 flex flex-1 items-center justify-center gap-[1rem] flex-col relative'>
+        <div className=' col-span-full md:col-span-4 flex flex-1 items-center justify-center gap-[1rem] flex-col relative '>
           <div className='absolute top-[85px] left-[46px]'>
             <img
               src='/assets/bg/bg-triangle.svg'
@@ -66,32 +65,37 @@ const LoginPage = () => {
           <div className='mb-[55px]'>
             <p className='title-page text-white'>Log In to Your Account</p>
           </div>
-          <TextInput
-            classNameContainer='w-[312px] md:w-[310px] lg:w-[455px]'
-            placeholder='Enter Your Username or Phone Number'
-            icon='/assets/icons/user-icon.svg'
-            type='text'
-            error={false}
-            errorMessage='error message'
-            name={LOGIN_CONSTANTS.LOGIN_ID}
-            onChange={handleChangeForm}
-          />
-          <TextInput
-            classNameContainer='w-[312px] md:w-[310px] lg:w-[455px]'
-            placeholder='Enter Your Username or Phone Number'
-            icon='/assets/icons/key-icon.svg'
-            leftIcon='/assets/icons/eye-icon.svg'
-            type='password'
-            name={LOGIN_CONSTANTS.PASSWORD}
-            onChange={handleChangeForm}
-          />
-          <button
-            onClick={handlePostData}
-            className='btn --lg --primary w-[312px] md:w-[310px] lg:w-[455px] z-[999]'
-          >
-            Log In
-          </button>
-
+          <div className='w-[312px] md:w-[310px] lg:w-[455px] z-[999]'>
+            <BaseInputText
+              id='loginId-input'
+              type='text'
+              placeholder='Enter Your Username or Phone Number'
+              leftIcon='/assets/icons/user-icon.svg'
+              rightIconType='button'
+              error
+              errorMessage='Reprehenderit est esse et magna officia.'
+              name={LOGIN_ENUM.LOGIN_ID}
+              onChange={handleChangeForm}
+            />
+            <BaseInputText
+              id='password-input'
+              placeholder='Enter Your Username or Phone Number'
+              leftIcon='/assets/icons/key-icon.svg'
+              rightIcon='/assets/icons/eye-icon.svg'
+              rightIconType='button'
+              error={false}
+              errorMessage='Reprehenderit est esse et magna officia.'
+              type='password'
+              name={LOGIN_ENUM.PASSWORD}
+              onChange={handleChangeForm}
+            />
+            <button
+              onClick={handlePostData}
+              className='btn --lg --primary w-full'
+            >
+              Log In
+            </button>
+          </div>
           <div>
             <button className='text-white py-[0.5rem] h-[37px] md:h-[51px] lg:h-[61px] w-[312px] md:w-[310px] lg:w-[455px] text-left flex items-center justify-between'>
               <span className='text-left'>Forget Username or Password ? </span>
