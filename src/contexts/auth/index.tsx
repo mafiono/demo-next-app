@@ -17,7 +17,6 @@ export const AuthProvider = (props: Props) => {
     async function loadUserFromCookies() {
       const token = Cookies.get('JWT_TOKEN')
       if (token) {
-        console.log("Got a token in the cookies, let's see if it is valid")
         axiosClient.defaults.headers.common['Authorization'] = token
         const { data: user } = await axiosClient.get(
           'https://jsonplaceholder.typicode.com/todos/1',

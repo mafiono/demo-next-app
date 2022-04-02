@@ -19,7 +19,6 @@ const LoginPage = () => {
     }))
   }
   const handlePostData = () => {
-    console.log(formData, axiosClient.defaults)
     axiosClient
       .post('/login', formData)
       .then(res => {
