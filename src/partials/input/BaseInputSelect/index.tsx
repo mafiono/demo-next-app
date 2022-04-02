@@ -1,6 +1,10 @@
 /* eslint-disable @next/next/no-img-element */
+import { fontSize } from '@mui/system'
 import React from 'react'
-
+interface ListData {
+  label: string
+  value: any
+}
 interface Props {
   id: string
   rightIcon?: string
@@ -17,6 +21,7 @@ interface Props {
   type?: string
   name: string
   autoComplete?: string
+  data: ListData[]
 }
 
 function BaseInputSelect(props: Props) {
@@ -35,7 +40,7 @@ function BaseInputSelect(props: Props) {
       textSize = 'text-lg'
       break
     default:
-      inputSize = ' py-[.5rem]  px-[2.2rem] '
+      inputSize = ' py-[0.594rem]  px-[2.2rem] '
       imageSize = 'w-[25px] aspect-square'
       textSize = 'text-md'
       break
@@ -48,22 +53,24 @@ function BaseInputSelect(props: Props) {
         </label>
       )}
       <div className=' flex flex-row rounded-[8px] box-border relative'>
-        <input
-          autoComplete={props.autoComplete}
-          onChange={props.onChange}
-          name={props.name}
-          type={props.type}
-          placeholder={props.placeholder}
-          className={`
-          ${props.error ? '' : 'hover:border-primary'}
-          w-full
-          outline-none
-          border-[2px]
-          ${inputSize}
-          ${textSize}
-          border-${props.error ? 'danger' : 'white'}
-          rounded-[8px]`}
-        />
+        <select
+          className={`w-full outline-none rounded-[8px] ${textSize} ${inputSize} border ${
+            props.error ? '' : 'hover:border-primary'
+          } border-2 box-border`}
+        >
+          {(props.data || []).map((e, i) => (
+            <option key={i.toString()} value={e.value}>
+              {e.label}
+            </option>
+          ))}
+        </select>
+        <div className='absolute top-0 bottom-0 right-[0.5rem] flex items-center justify-center'>
+          <img
+            className={`${imageSize} rotate-[180deg]`}
+            alt={`alt-${props.id}`}
+            src='/assets/icons/arrow-black.svg'
+          />
+        </div>
         {props.rightIcon && (
           <div className='absolute right-[0.5rem] z-[3] cursor-pointer flex items-center justify-center top-0 bottom-0'>
             {props.rightIconType == 'button' ? (

@@ -32,3 +32,8 @@ and left sides of the text */
     border-color: white;
   }
 }
+select {
+  -moz-appearance: none; /* Firefox */
+  -webkit-appearance: none; /* Safari and Chrome */
+  appearance: none;
+}

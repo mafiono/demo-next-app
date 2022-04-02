@@ -65,7 +65,7 @@ const LoginPage = () => {
           <div className='mb-[55px]'>
             <p className='title-page text-white'>Log In to Your Account</p>
           </div>
-          <div className='w-[312px] md:w-[310px] lg:w-[455px] z-[999]'>
+          <div className='w-full p-[1rem] md:p-0 md:w-[310px] lg:w-[455px] z-[999]'>
             <BaseInputText
               id='loginId-input'
               type='text'
