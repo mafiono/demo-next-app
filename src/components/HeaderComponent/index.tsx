@@ -16,6 +16,7 @@ const BrandLogo = (props: PropsBand) => {
     // eslint-disable-next-line @next/next/no-html-link-for-pages
     <a href='/'>
       <img
+        alt='brand'
         className={props.className || 'h-[40.43px] w-[133.7px]'}
         src='assets/icons/brand-logo.svg'
       />
@@ -50,6 +51,7 @@ const HeaderComponent = (props: any) => {
                     className='h-[36.67px] w-[36.67px] rounded-[5px] hover:bg-accent items-center justify-center flex'
                   >
                     <img
+                      alt='wallet-icon'
                       className='h-[20px] w-[20px]'
                       src='assets/icons/wallet-icon.svg'
                     />
@@ -61,6 +63,7 @@ const HeaderComponent = (props: any) => {
                     className='h-[36.67px] w-[36.67px] rounded-[5px] hover:bg-accent items-center justify-center flex'
                   >
                     <img
+                      alt='inbox-icon'
                       className='h-[20px] w-[20px]'
                       src='assets/icons/inbox-icon.svg'
                     />
@@ -72,6 +75,7 @@ const HeaderComponent = (props: any) => {
                     className='h-[36.67px] w-[36.67px] rounded-[5px] hover:bg-accent items-center justify-center flex'
                   >
                     <img
+                      alt='login-icon'
                       className='h-[20px] w-[20px]'
                       src='assets/icons/login-icon-v2.svg'
                     />
@@ -83,6 +87,7 @@ const HeaderComponent = (props: any) => {
                     className='h-[36.67px] w-[36.67px] rounded-[5px] hover:bg-accent items-center justify-center flex'
                   >
                     <img
+                      alt='logout-icon'
                       className='h-[20px] w-[20px]'
                       src='assets/icons/logout-icon.svg'
                     />
@@ -99,6 +104,7 @@ const HeaderComponent = (props: any) => {
               </Link>
               <div className='bg-white rounded-[8px] h-[40px] w-[214px] gap-2 overflow-hidden items-center px-[8px] py-[10px] hidden lg:flex'>
                 <img
+                  alt='user-icon'
                   className='h-[20px] w-[20px]'
                   src='assets/icons/user-icon.svg'
                 />
@@ -110,6 +116,7 @@ const HeaderComponent = (props: any) => {
               </div>
               <div className='bg-white rounded-[8px] h-[40px] w-[214px] gap-2 overflow-hidden items-center px-[8px] py-[10px] hidden lg:flex'>
                 <img
+                  alt='key-icon'
                   className='h-[20px] w-[20px]'
                   src='assets/icons/key-icon.svg'
                 />
@@ -120,6 +127,7 @@ const HeaderComponent = (props: any) => {
                   className='outline-none h-full p-0 m-0 w-full text-[12px]'
                 />
                 <img
+                  alt='eye-icon'
                   className='h-[20px] w-[20px]'
                   src='assets/icons/eye-icon.svg'
                 />
@@ -140,6 +148,7 @@ const HeaderComponent = (props: any) => {
           <div className='flex justify-start items-center'>
             <button className='h-[36.67px] w-[36.67px] rounded-[5px] bg-[#5605A0] items-center justify-center flex'>
               <img
+                alt='menu-icon'
                 className='h-[20px] w-[20px]'
                 src='assets/icons/icon-menu.svg'
               />
@@ -156,6 +165,7 @@ const HeaderComponent = (props: any) => {
                   className='h-[36.67px] w-[36.67px] rounded-[5px] bg-accent items-center justify-center flex'
                 >
                   <img
+                    alt='wallet-icon'
                     className='h-[20px] w-[20px]'
                     src='assets/icons/wallet-icon.svg'
                   />
@@ -168,6 +178,7 @@ const HeaderComponent = (props: any) => {
                   className='h-[36.67px] w-[36.67px] rounded-[5px] bg-accent items-center justify-center flex'
                 >
                   <img
+                    alt='login-icon'
                     className='h-[20px] w-[20px]'
                     src='assets/icons/login-icon-v2.svg'
                   />
@@ -179,6 +190,7 @@ const HeaderComponent = (props: any) => {
               <Link href='/login' passHref>
                 <button className='h-[36.67px] w-[36.67px] rounded-[5px] bg-[#5605A0] items-center justify-center flex'>
                   <img
+                    alt='login-icon'
                     className='h-[20px] w-[20px]'
                     src='assets/icons/login-icon.svg'
                   />
@@ -187,6 +199,7 @@ const HeaderComponent = (props: any) => {
               <Link href='/register' passHref>
                 <button className='h-[36.67px] w-[36.67px] rounded-[5px] bg-[#FF3076] items-center justify-center flex'>
                   <img
+                    alt='add-icon'
                     className='h-[20px] w-[20px]'
                     src='assets/icons/add-user-icon.svg'
                   />

@@ -472,6 +472,7 @@ const Home: NextPage = props => {
                     className='flex items-center justify-center p-[10px]'
                   >
                     <img
+                      alt='arrow'
                       src='/assets/icons/arrow.svg'
                       className={`w-[24px] h-[24px] transition-all duration-500 ${
                         !collapsible ? 'rotate-[180deg]' : 'rotate-[0deg]'
