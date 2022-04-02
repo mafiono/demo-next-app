@@ -7,6 +7,7 @@ import Device from '../../partials/MobileDetection'
 import Skeleton from '@mui/material/Skeleton'
 import { Box } from '@mui/system'
 import cookie from 'js-cookie'
+import Link from 'next/link'
 interface PropsBand {
   className?: string
 }
@@ -91,12 +92,11 @@ const HeaderComponent = (props: any) => {
             </div>
           ) : (
             <div className='flex gap-[24px] justify-end items-center'>
-              <a
-                href='/forgot-password'
-                className='text-white text-[12px] hover:underline'
-              >
-                Forgot Your Password ?
-              </a>
+              <Link passHref href='/forgot-password'>
+                <span className='text-white text-[12px] hover:underline'>
+                  Forgot Your Password ?
+                </span>
+              </Link>
               <div className='bg-white rounded-[8px] h-[40px] w-[214px] gap-2 overflow-hidden items-center px-[8px] py-[10px] hidden lg:flex'>
                 <img
                   className='h-[20px] w-[20px]'
@@ -124,12 +124,14 @@ const HeaderComponent = (props: any) => {
                   src='assets/icons/eye-icon.svg'
                 />
               </div>
-              <a href='' className='btn --md --accent w-[99px]'>
-                <span>Log In</span>
-              </a>
-              <a href='/register' className='btn --md --danger w-[99px]'>
-                <span>Sign Up</span>
-              </a>
+              <Link href='/' passHref>
+                <button className='btn --md --accent w-[99px]'>
+                  <span>Log In</span>
+                </button>
+              </Link>
+              <Link href='/register' passHref>
+                <button className='btn --md --danger w-[99px]'>Sign Up</button>
+              </Link>
             </div>
           )}
         </div>
@@ -174,24 +176,22 @@ const HeaderComponent = (props: any) => {
             </ul>
           ) : (
             <div className='flex justify-end items-center gap-[6.33px]'>
-              <a
-                href='/login'
-                className='h-[36.67px] w-[36.67px] rounded-[5px] bg-[#5605A0] items-center justify-center flex'
-              >
-                <img
-                  className='h-[20px] w-[20px]'
-                  src='assets/icons/login-icon.svg'
-                />
-              </a>
-              <a
-                href='/register'
-                className='h-[36.67px] w-[36.67px] rounded-[5px] bg-[#FF3076] items-center justify-center flex'
-              >
-                <img
-                  className='h-[20px] w-[20px]'
-                  src='assets/icons/add-user-icon.svg'
-                />
-              </a>
+              <Link href='/login' passHref>
+                <button className='h-[36.67px] w-[36.67px] rounded-[5px] bg-[#5605A0] items-center justify-center flex'>
+                  <img
+                    className='h-[20px] w-[20px]'
+                    src='assets/icons/login-icon.svg'
+                  />
+                </button>
+              </Link>
+              <Link href='/register' passHref>
+                <button className='h-[36.67px] w-[36.67px] rounded-[5px] bg-[#FF3076] items-center justify-center flex'>
+                  <img
+                    className='h-[20px] w-[20px]'
+                    src='assets/icons/add-user-icon.svg'
+                  />
+                </button>
+              </Link>
             </div>
           )}
         </div>

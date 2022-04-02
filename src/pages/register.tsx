@@ -8,12 +8,13 @@ import BaseInputText from '../partials/input/BaseInputText'
 import TextInput from '../partials/input/TextInput'
 import { REGISTER_DTO } from '../config/types/dto'
 import BaseInputSelect from '../partials/input/BaseInputSelect'
+import Link from 'next/link'
 const RegisterPage = () => {
   const [openModal, setOpenModal] = useState(false)
   const [formData, setFormData] = useState<REGISTER_DTO>()
   const handleChangeForm = (e: any) => {
     const { name, value } = e
-    setFormData(prev => ({
+    setFormData((prev: any) => ({
       ...prev,
       [name]: value,
     }))
@@ -124,20 +125,32 @@ const RegisterPage = () => {
               </div>
               <div className='col-span-full md:col-span-3 grid grid-cols-3 gap-[1em]'>
                 <BaseInputSelect
+                  id='day'
+                  name={REGISTER_ENUM.DOB_DATE}
+                  onChange={() => {}}
+                  placeholder='day'
                   data={new Array(31).fill(0).map((e, i) => ({
-                    label: i + 1,
+                    label: `${i + 1}`,
                     value: i + 1,
                   }))}
                 />
                 <BaseInputSelect
+                  id='month'
+                  placeholder='month'
+                  name={REGISTER_ENUM.DOB_MONTH}
+                  onChange={() => {}}
                   data={new Array(12).fill(0).map((e, i) => ({
-                    label: i + 1,
+                    label: `${i + 1}`,
                     value: i + 1,
                   }))}
                 />
                 <BaseInputSelect
+                  id='year'
+                  placeholder='year'
+                  name={REGISTER_ENUM.DOB_YEAR}
+                  onChange={() => {}}
                   data={new Array(10).fill(0).map((e, i) => ({
-                    label: i + 1,
+                    label: `${i + 1}`,
                     value: i + 1,
                   }))}
                 />
@@ -236,9 +249,11 @@ const RegisterPage = () => {
               </p>
             </div>
             <div className='col-span-full md:col-span-2'>
-              <a href='/choose-character' className='btn --lg --primary w-full'>
-                <span>Sign Up</span>
-              </a>
+              <Link href='/choose-character' passHref>
+                <button className='btn --lg --primary w-full'>
+                  <span>Sign Up</span>
+                </button>
+              </Link>
             </div>
           </div>
         </div>

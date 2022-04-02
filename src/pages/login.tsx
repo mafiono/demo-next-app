@@ -6,14 +6,14 @@ import axiosClient from '../config/client'
 import BaseInputText from '../partials/input/BaseInputText'
 import { LOGIN_ENUM } from '../config/enum'
 import { LOGIN_DTO } from '../config/types/dto'
+import Link from 'next/link'
 
 const LoginPage = () => {
   const [openModal, setOpenModal] = useState<boolean>(false)
   const [formData, setFormData] = useState<LOGIN_DTO>()
   const handleChangeForm = (e: any) => {
     const { value, name } = e.target
-    console.log({ value, name })
-    setFormData(prev => ({
+    setFormData((prev: any) => ({
       ...prev,
       [name]: value,
     }))
@@ -109,9 +109,9 @@ const LoginPage = () => {
             <button className='text-white py-[0.5rem] h-[37px] md:h-[51px] lg:h-[61px] w-[312px] md:w-[310px] lg:w-[455px] text-left flex items-center justify-between'>
               <span className='text-left'>
                 Don`t Have an Account ?
-                <a href='/register'>
+                <Link href='/register' passHref>
                   <span className='text-primary underline'>Register Now !</span>
-                </a>
+                </Link>
               </span>
               <img
                 alt='arrow'

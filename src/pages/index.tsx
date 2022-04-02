@@ -11,6 +11,7 @@ import MarqueeComponent from '../partials/MarqueeComponent'
 import { SwipperComponent, SwipperWithButton } from '../partials/Swipper'
 import { SwiperSlide } from 'swiper/react'
 import SideMenuComponent from '../components/SideMenuComponent'
+import Link from 'next/link'
 
 const Home: NextPage = props => {
   console.log({ props })
@@ -71,21 +72,30 @@ const Home: NextPage = props => {
               })}
             </div>
             <div className='grid grid-cols-3 col-span-full md:col-[1/4] gap-[1rem] p-0 box-border relative'>
-              <a href='/promotion' className='btn --danger --lg'>
-                <img alt='promotions' src='/assets/icons/promotion-icon.svg' />
-                <span>Promotion</span>
-              </a>
-              <a href='/register' className='btn --primary --lg'>
-                <img
-                  alt='registration'
-                  src='/assets/icons/registration-icon.svg'
-                />
-                <span>Sign Up</span>
-              </a>
-              <a href='/login' className='btn --accent --lg'>
-                <img alt='login' src='/assets/icons/login-icon-v2.svg' />
-                <span>Log In</span>
-              </a>
+              <Link href='/promotion' passHref>
+                <button className='btn --danger --lg'>
+                  <img
+                    alt='promotions'
+                    src='/assets/icons/promotion-icon.svg'
+                  />
+                  <span>Promotion</span>
+                </button>
+              </Link>
+              <Link href='/register' passHref>
+                <button className='btn --primary --lg'>
+                  <img
+                    alt='registration'
+                    src='/assets/icons/registration-icon.svg'
+                  />
+                  <span>Sign Up</span>
+                </button>
+              </Link>
+              <Link href='/login' passHref>
+                <button className='btn --accent --lg'>
+                  <img alt='login' src='/assets/icons/login-icon-v2.svg' />
+                  <span>Log In</span>
+                </button>
+              </Link>
             </div>
             <div className=' col-span-full'>
               <div className='divider'>
