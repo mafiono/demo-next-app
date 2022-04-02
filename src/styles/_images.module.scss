@@ -1,0 +1,14 @@
+.img {
+  &-info-center {
+    @apply aspect-square w-[35.39px] md:w-[36.94px] lg:w-[70px];
+  }
+  &-social-media {
+    @apply aspect-square w-[70px] md:w-[70px] lg:w-[112px];
+    &-md {
+      @apply aspect-square w-[50px] md:w-[39px] lg:w-[50.1px];
+    }
+  }
+  &-bank {
+    @apply aspect-square w-[59px] md:w-[100px] lg:w-[148px];
+  }
+}

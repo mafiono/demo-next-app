@@ -1,0 +1,30 @@
+.card {
+  @apply rounded-[8px];
+
+  &.--dark {
+    @apply bg-[#1F2127];
+  }
+  &.--primary {
+    @apply bg-primary;
+  }
+
+  &-info-center {
+    @apply aspect-square w-[91px] md:w-[95px] lg:w-[180px];
+  }
+
+  &.character {
+    @apply bg-accent border-[#AE64FF];
+    .choose-btn {
+      @apply bg-danger text-white;
+      &::hover {
+        @apply bg-accent;
+      }
+    }
+    &:hover {
+      @apply bg-danger border-[#FF6B9D];
+      .choose-btn {
+        @apply bg-accent;
+      }
+    }
+  }
+}

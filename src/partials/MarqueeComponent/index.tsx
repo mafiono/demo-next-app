@@ -12,9 +12,11 @@ interface Props {
 const MarqueeComponent = (props: Props) => {
   return (
     <div
-      className={`${props?.className} h-[61px] rounded-[8px] bg-[${
+      className={`${
+        props?.className
+      } text-[10px] md:text-[18px] h-[31px] md:h-[61px] card --dark rounded-[8px] bg-[${
         props?.background || '#1F2127'
-      }] text-white flex items-center gap-[19px] p-[26px] text-[18px]`}
+      }] text-white flex items-center gap-[19px] p-[1rem] text-[18px]`}
     >
       {props?.icons && (
         <Image
