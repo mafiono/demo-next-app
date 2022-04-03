@@ -2,7 +2,7 @@
 
 import Router from 'next/router'
 import React from 'react'
-import TextInput from '../partials/input/TextInput'
+import BaseInputText from '../partials/input/BaseInputText'
 
 const ForgotPassword = () => {
   return (
@@ -34,15 +34,14 @@ const ForgotPassword = () => {
               your personal info below and we’ll send you a link to get back at
               your account
             </p>
-            <TextInput
-              error
-              classNameContainer='w-full border w-[231px] md:w-[341px] lg:w-[454px]'
+            <BaseInputText
+              id='input-id'
+              name='forgotId'
+              onChange={() => {}}
               placeholder='Enter Your Username / Email / Phone Number '
-              icon='/assets/icons/user-icon.svg'
-              type='text'
-              errorMessage='error message'
-              classNameError='text-slate-600'
+              leftIcon='/assets/icons/user-icon.svg'
             />
+
             <button className='btn --lg --primary w-[251px]'>
               <span>Reset Password </span>
             </button>
