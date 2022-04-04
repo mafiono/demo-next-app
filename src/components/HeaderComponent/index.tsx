@@ -9,6 +9,7 @@ import { Box } from '@mui/system'
 import cookie from 'js-cookie'
 import Link from 'next/link'
 import { useTranslation } from 'react-i18next'
+import { SESSIONS_NAME } from '../../config/enum'
 interface PropsBand {
   className?: string
 }
@@ -29,7 +30,7 @@ const HeaderComponent = (props: any) => {
   const { user } = useAuth() as any
   const { t: translate } = useTranslation(['title', 'button'])
 
-  const authToken = cookie.get('JWT_TOKEN')
+  const authToken = cookie.get(SESSIONS_NAME.JWT_TOKEN)
 
   return (
     <header className='sticky top-0 bg-primary z-50'>

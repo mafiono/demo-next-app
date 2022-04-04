@@ -4,12 +4,12 @@ import cogoToast from 'cogo-toast'
 interface Props {
   type: 'error' | 'info' | 'success'
   label: string
-  message: string
+  message?: string
 }
 
 export function baseToast(props: Props) {
   const { hide } = cogoToast[props.type](
-    props.label && props.message ? (
+    props.label ? (
       <div>
         <b>{props.label}</b>
         <p>{props.message}</p>

@@ -4,13 +4,19 @@ import Router from 'next/router'
 import React, { useState } from 'react'
 import axiosClient from '../config/client'
 import BaseInputText from '../partials/input/BaseInputText'
-import { LOGIN_ENUM } from '../config/enum'
+import { LOGIN_ENUM, SESSIONS_NAME } from '../config/enum'
 import { LOGIN_DTO } from '../config/types/dto'
 import Link from 'next/link'
+import { baseToast } from '../partials/BaseToast'
+import Cookies from 'js-cookie'
 
 const LoginPage = () => {
   const [openModal, setOpenModal] = useState<boolean>(false)
   const [formData, setFormData] = useState<LOGIN_DTO>()
+  const [formError, setFormError] = useState({
+    error: false,
+    message: '',
+  })
   const handleChangeForm = (e: any) => {
     const { value, name } = e.target
     setFormData((prev: any) => ({
@@ -19,13 +25,49 @@ const LoginPage = () => {
     }))
   }
   const handlePostData = () => {
+    setFormError({
+      error: false,
+      message: '',
+    })
     axiosClient
       .post('/login', formData)
       .then(res => {
-        console.log(res.data)
+        const { errorCode, jwtToken, message } = res.data
+        Cookies.set(SESSIONS_NAME.JWT_TOKEN, jwtToken)
+        Cookies.set(SESSIONS_NAME.AUTH_DATE, new Date().getTime().toString())
+        localStorage.setItem(SESSIONS_NAME.JWT_TOKEN, jwtToken)
+        localStorage.setItem(
+          SESSIONS_NAME.AUTH_DATE,
+          new Date().getTime().toString(),
+        )
+        if (errorCode !== 0) {
+          baseToast({
+            type: 'error',
+            message,
+            label: 'Login Error',
+          })
+          setFormError({
+            error: true,
+            message,
+          })
+        } else {
+          baseToast({
+            type: 'success',
+            label: 'Login Success',
+          })
+        }
       })
       .catch(error => {
-        console.log(error)
+        const { message, errorCode } = error?.response?.data || ({} as any)
+        setFormError({
+          error: true,
+          message,
+        })
+        baseToast({
+          type: 'error',
+          message: message,
+          label: 'Login Error',
+        })
       })
   }
   return (
@@ -71,8 +113,8 @@ const LoginPage = () => {
               placeholder='Enter Your Username or Phone Number'
               leftIcon='/assets/icons/user-icon.svg'
               rightIconType='button'
-              error
-              errorMessage='Reprehenderit est esse et magna officia.'
+              error={formError.error}
+              errorMessage={formError.message}
               name={LOGIN_ENUM.LOGIN_ID}
               onChange={handleChangeForm}
             />
@@ -82,8 +124,8 @@ const LoginPage = () => {
               leftIcon='/assets/icons/key-icon.svg'
               rightIcon='/assets/icons/eye-icon.svg'
               rightIconType='button'
-              error={false}
-              errorMessage='Reprehenderit est esse et magna officia.'
+              error={formError.error}
+              errorMessage={formError.message}
               type='password'
               name={LOGIN_ENUM.PASSWORD}
               onChange={handleChangeForm}
