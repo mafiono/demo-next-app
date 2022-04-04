@@ -8,23 +8,26 @@ import Skeleton from '@mui/material/Skeleton'
 import { Box } from '@mui/system'
 import cookie from 'js-cookie'
 import Link from 'next/link'
+import { useTranslation } from 'react-i18next'
 interface PropsBand {
   className?: string
 }
 const BrandLogo = (props: PropsBand) => {
   return (
-    // eslint-disable-next-line @next/next/no-html-link-for-pages
-    <a href='/'>
-      <img
-        alt='brand'
-        className={props.className || 'h-[40.43px] w-[133.7px]'}
-        src='assets/icons/brand-logo.svg'
-      />
-    </a>
+    <Link href='/'>
+      <a>
+        <img
+          alt='brand'
+          className={props.className || 'h-[40.43px] w-[133.7px]'}
+          src='assets/icons/brand-logo.svg'
+        />
+      </a>
+    </Link>
   )
 }
 const HeaderComponent = (props: any) => {
   const { user } = useAuth() as any
+  const { t: translate } = useTranslation(['title', 'button'])
 
   const authToken = cookie.get('JWT_TOKEN')
 
@@ -99,7 +102,7 @@ const HeaderComponent = (props: any) => {
             <div className='flex gap-[24px] justify-end items-center'>
               <Link passHref href='/forgot-password'>
                 <span className='text-white text-[12px] hover:underline'>
-                  Forgot Your Password ?
+                  {translate('title:FORGOT_PASSWORD')}
                 </span>
               </Link>
               <div className='bg-white rounded-[8px] h-[40px] w-[214px] gap-2 overflow-hidden items-center px-[8px] py-[10px] hidden lg:flex'>
@@ -109,7 +112,7 @@ const HeaderComponent = (props: any) => {
                   src='assets/icons/user-icon.svg'
                 />
                 <input
-                  placeholder='Enter Your Username'
+                  placeholder={translate('title:ENTER_USERNAME')}
                   name='email'
                   className='outline-none h-full p-0 m-0 w-full text-[12px]'
                 />
@@ -121,7 +124,7 @@ const HeaderComponent = (props: any) => {
                   src='assets/icons/key-icon.svg'
                 />
                 <input
-                  placeholder='Enter Your Password'
+                  placeholder={translate('title:ENTER_PASSWORD')}
                   type='password'
                   name='password'
                   className='outline-none h-full p-0 m-0 w-full text-[12px]'
@@ -133,12 +136,14 @@ const HeaderComponent = (props: any) => {
                 />
               </div>
               <Link href='/' passHref>
-                <button className='btn --md --accent w-[99px]'>
-                  <span>Log In</span>
-                </button>
+                <a className='btn --md --accent w-[99px] capitalize'>
+                  {translate('button:LOGIN')}
+                </a>
               </Link>
               <Link href='/register' passHref>
-                <button className='btn --md --danger w-[99px]'>Sign Up</button>
+                <a className='btn --md --danger w-[99px] capitalize'>
+                  {translate('button:SIGN_UP')}
+                </a>
               </Link>
             </div>
           )}

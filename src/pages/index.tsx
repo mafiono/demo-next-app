@@ -6,6 +6,8 @@ import { SwipperComponent, SwipperWithButton } from '../partials/Swipper'
 import { SwiperSlide } from 'swiper/react'
 import Link from 'next/link'
 import dynamic from 'next/dynamic'
+import { useTranslation } from 'react-i18next'
+import { serverSideTranslations } from 'next-i18next/serverSideTranslations'
 
 const HeaderComponent = dynamic(() => import('../components/HeaderComponent'))
 const MarqueeComponent = dynamic(() => import('../partials/MarqueeComponent'))
@@ -14,7 +16,9 @@ const SideMenuComponent = dynamic(
 )
 
 const Home: NextPage = props => {
+  const { t: translate } = useTranslation(['title', 'button'])
   const [collapsible, setCollapsible] = useState(false)
+
   return (
     <div>
       <HeaderComponent />
@@ -76,7 +80,9 @@ const Home: NextPage = props => {
                     alt='promotions'
                     src='/assets/icons/promotion-icon.svg'
                   />
-                  <span>Promotion</span>
+                  <span className='capitalize'>
+                    {translate('button:PROMOTION')}
+                  </span>
                 </button>
               </Link>
               <Link href='/register' passHref>
@@ -85,20 +91,25 @@ const Home: NextPage = props => {
                     alt='registration'
                     src='/assets/icons/registration-icon.svg'
                   />
-                  <span>Sign Up</span>
+                  <span className='capitalize'>
+                    {translate('button:SIGN_UP')}
+                  </span>
                 </button>
               </Link>
               <Link href='/login' passHref>
                 <button className='btn --accent --lg'>
                   <img alt='login' src='/assets/icons/login-icon-v2.svg' />
-                  <span>Log In</span>
+
+                  <span className='capitalize'>
+                    {translate('button:LOGIN')}
+                  </span>
                 </button>
               </Link>
             </div>
             <div className=' col-span-full'>
               <div className='divider'>
                 <span className='px-[1rem] title-page text-white'>
-                  Recommended Game
+                  {translate('RECOMMENDED_GAME')}
                 </span>
               </div>
             </div>
@@ -258,7 +269,7 @@ const Home: NextPage = props => {
                 <article className='grid-rows-[auto_1fr_auto] grid items-center col-span-full md:col-span-2 relative gap-[1rem] card --dark p-[1rem]'>
                   <div className='text-white border-white divider'>
                     <span className='px-[1rem] title-page text-white'>
-                      Game Baru
+                      {translate('NEW_GAME')}
                     </span>
                   </div>
                   <div className='grid-cols-2 grid-row-2 gap-[1em]  grid'>
@@ -280,13 +291,13 @@ const Home: NextPage = props => {
                     })}
                   </div>
                   <button className='btn --lg --danger'>
-                    <span>Play Now</span>
+                    <span>{translate('button:PLAY_NOW')}</span>
                   </button>
                 </article>
                 <article className='grid-rows-[auto_1fr_auto] grid items-center col-span-full md:col-[3/6] relative box-border p-[1em] card --dark gap-[1em]'>
                   <div className='text-white border-white divider'>
                     <span className='px-[1rem] title-page text-white'>
-                      Live Casino
+                      {translate('LIVE_CASINO')}
                     </span>
                   </div>
                   <div className='grid-cols-3 md:grid-cols-2 lg:grid-cols-3 gap-[1em] grid'>
@@ -313,7 +324,7 @@ const Home: NextPage = props => {
                     })}
                   </div>
                   <button className='btn --lg --danger'>
-                    <span>Play Now</span>
+                    <span>{translate('button:PLAY_NOW')}</span>
                   </button>
                 </article>
               </div>
@@ -322,16 +333,18 @@ const Home: NextPage = props => {
               <div className='order-1 col-span-full md:col-span-2 bg-[#282A2F] rounded-[8px] p-[1rem] flex flex-col justify-between gap-[1rem]'>
                 <div className='text-center text-white border-white'>
                   <span className='px-[1rem] title-page text-white'>
-                    Service Duration
+                    {translate('title:SERVICE_DURATION')}
                   </span>
                 </div>
                 <div className='w-full bg-primary rounded-[8px] p-[24px]'>
                   <div className='w-full'>
                     <div className='flex items-center justify-between text-white'>
                       <p className='label-card font-semibold'>
-                        Waktu Rata-Rata
+                        {translate('title:TIME_AVERAGE')}
                       </p>
-                      <p className=' label-card font-light'>1 Menit</p>
+                      <p className=' label-card font-light'>
+                        1 {translate('title:MINUTE')}
+                      </p>
                     </div>
                     <div className='bg-[#400377] rounded-full p-[1px] relative mt-[6px]'>
                       <div className='bg-[#FF3076] h-[14px] rounded-full w-[30%]' />
@@ -340,9 +353,11 @@ const Home: NextPage = props => {
                   <div className='w-full mt-[20px]'>
                     <div className='flex items-center justify-between text-white'>
                       <p className='label-card font-semibold'>
-                        Waktu Rata-Rata
+                        {translate('title:TIME_AVERAGE')}
                       </p>
-                      <p className=' label-card font-light'>3 Menit</p>
+                      <p className=' label-card font-light'>
+                        3 {translate('title:MINUTE')}
+                      </p>
                     </div>
                     <div className='bg-[#400377] rounded-full p-[1px] relative mt-[6px]'>
                       <div className='bg-[#FF3076] h-[14px] rounded-full w-[60%]' />
@@ -353,7 +368,7 @@ const Home: NextPage = props => {
               <div className='order-3 md:order-2 col-span-full md:col-[3/6] row-span-2 bg-[#282A2F] rounded-[8px] flex flex-col justify-between gap-[1rem] p-[1rem]'>
                 <div className='text-white text-center border-white'>
                   <span className='px-[1rem] title-page text-white'>
-                    Information Center
+                    {translate('title:INFORMATION_CENTER')}
                   </span>
                 </div>
                 <div className='grid grid-cols-3 gap-[1rem] box-border items-center'>
@@ -427,7 +442,7 @@ const Home: NextPage = props => {
               <div className='order-2 md:order-3 col-span-full md:col-span-2 card --dark flex justify-between flex-col p-[1rem] gap-[1rem]'>
                 <div className='text-center text-white border-white'>
                   <span className='px-[1rem] title-page text-white'>
-                    Member Service
+                    {translate('title:INFORMATION_CENTER')}
                   </span>
                 </div>
                 <div className='grid grid-cols-2 items-center'>
@@ -459,7 +474,7 @@ const Home: NextPage = props => {
             <div className='my-[24px] col-span-full'>
               <div className='divider text-white border-white'>
                 <span className='px-[1rem] title-page text-white'>
-                  Site Information
+                  {translate('title:SITE_INFORMATION')}
                 </span>
               </div>
               <div>
@@ -612,39 +627,39 @@ const Home: NextPage = props => {
               <div className='grid grid-cols-5 gap-[67px]'>
                 <div className='col-span-full md:col-span-3'>
                   <p className=' text-primary text-[24px] font-semibold mb-[25px]'>
-                    Information
+                    {translate('title:INFORMATION')}
                   </p>
-                  <ul className='flex justify-between'>
+                  <ul className='flex justify-between gap-[0.5rem]'>
                     <li>
                       <a href='/dsds' className='text-white label-link'>
-                        About Us
+                        {translate('title:ABOUT_US')}
                       </a>
                     </li>
                     <li>
                       <a href='/dsds' className='text-white label-link'>
-                        Contact Us
+                        {translate('title:CONTACT_US')}
                       </a>
                     </li>
                     <li>
                       <a href='/dsds' className='text-white label-link'>
-                        Get Help
+                        {translate('title:GET_HELP')}
                       </a>
                     </li>
                     <li>
                       <a href='/dsds' className='text-white label-link'>
-                        More Info
+                        {translate('title:MORE_INFO')}
                       </a>
                     </li>
                     <li>
                       <a href='/dsds' className='text-white label-link'>
-                        Terms & Condition
+                        {translate('title:TNC')}
                       </a>
                     </li>
                   </ul>
                 </div>
                 <div className='col-span-full md:col-span-2'>
                   <p className='text-[18px] text-primary font-semibold mb-[25px]'>
-                    Stay Connected
+                    {translate('title:STAY_CONNECTED')}
                   </p>
                   <div>
                     <ul className='flex items-center gap-[40px]'>
@@ -682,7 +697,7 @@ const Home: NextPage = props => {
               <div className='divider my-[24px]' />
               <div>
                 <p className='text-[18px] text-primary font-semibold mb-[25px]'>
-                  Stay Connected
+                  {translate('title:PAYMENT_METHOD')}
                 </p>
 
                 <ul className='grid grid-cols-3 items-center md:grid-cols-5'>
@@ -739,5 +754,13 @@ const Home: NextPage = props => {
       </div>
     </div>
   )
+}
+export const getServerSideProps = async ({ locale }) => {
+  const translation = await serverSideTranslations(locale, ['title', 'button'])
+  return {
+    props: {
+      ...translation,
+    },
+  }
 }
 export default Home
