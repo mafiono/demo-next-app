@@ -48,6 +48,8 @@ const ChoseCharacter = props => {
             message: message,
             label: 'Register error',
           })
+        } else {
+          setOpenModal(true)
         }
       })
       .catch(e => {
