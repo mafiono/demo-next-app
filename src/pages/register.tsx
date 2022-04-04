@@ -6,15 +6,131 @@ import BaseInputText from '../partials/input/BaseInputText'
 import { REGISTER_DTO } from '../config/types/dto'
 import BaseInputSelect from '../partials/input/BaseInputSelect'
 import Link from 'next/link'
+import BaseInputDob from '../partials/input/BaseInputDob'
+import Validator from '../config/helpers/validatior'
+import { keys } from '@mui/system'
+import Cookies from 'js-cookie'
+
 const RegisterPage = () => {
-  const [openModal, setOpenModal] = useState(false)
+  const [checkTnc, setCheckTnc] = useState(false)
   const [formData, setFormData] = useState<REGISTER_DTO>()
+  const [invalidForm, setInvalidForm] = useState({})
   const handleChangeForm = (e: any) => {
-    const { name, value } = e
+    const { name, value } = e?.target || {}
+    if (name === REGISTER_ENUM.USERNAME) {
+      const validation = new Validator().validationUsername(value)
+      setInvalidForm((prev: any) => ({
+        ...prev,
+        [`error_${name}`]: !validation,
+      }))
+    } else if (name === REGISTER_ENUM.PASSWORD) {
+      const validation = new Validator().validationPassword(value)
+      setInvalidForm((prev: any) => ({
+        ...prev,
+        [`error_${name}`]: !validation,
+      }))
+    } else if (name === REGISTER_ENUM.CONFIRM_PASSWORD) {
+      const validation = new Validator().validationConfirmPassword(
+        formData[REGISTER_ENUM.PASSWORD],
+        value,
+      )
+      setInvalidForm((prev: any) => ({
+        ...prev,
+        [`error_${name}`]: !validation,
+      }))
+    } else if (name === REGISTER_ENUM.PHONE_NUMBER) {
+      const validation = new Validator().validationPhoneNumber(value)
+      setInvalidForm((prev: any) => ({
+        ...prev,
+        [`error_${name}`]: !validation,
+      }))
+    } else if (name === REGISTER_ENUM.EMAIL) {
+      const validation = new Validator().validationEmail(value)
+      setInvalidForm((prev: any) => ({
+        ...prev,
+        [`error_${name}`]: !validation,
+      }))
+    }
     setFormData((prev: any) => ({
       ...prev,
       [name]: value,
     }))
+  }
+  const handleRegisterData = async () => {
+    const validate = await validateForm()
+    if (validate) {
+      Router.push({
+        pathname: '/choose-character',
+        query: { ...formData },
+      })
+      Cookies.set('register-data', JSON.stringify(formData))
+      localStorage.setItem('register-data', JSON.stringify(formData))
+    } else {
+      //
+    }
+  }
+  const validateForm = async () => {
+    const results = await Promise.all(
+      Object.keys(REGISTER_ENUM).reduce((acc: any, key: string) => {
+        const name = REGISTER_ENUM[key]
+        const value = formData[name] || ''
+        let error: any
+
+        if (name === REGISTER_ENUM.USERNAME) {
+          const validation = new Validator().validationUsername(value)
+          setInvalidForm((prev: any) => ({
+            ...prev,
+            [`error_${name}`]: !validation,
+          }))
+          if (!validation) {
+            error = { [`error_${name}`]: !validation }
+          }
+        } else if (name === REGISTER_ENUM.PASSWORD) {
+          const validation = new Validator().validationPassword(value)
+          setInvalidForm((prev: any) => ({
+            ...prev,
+            [`error_${name}`]: !validation,
+          }))
+          if (!validation) {
+            error = { [`error_${name}`]: !validation }
+          }
+        } else if (name === REGISTER_ENUM.CONFIRM_PASSWORD) {
+          const validation = new Validator().validationConfirmPassword(
+            formData[REGISTER_ENUM.PASSWORD],
+            value,
+          )
+          setInvalidForm((prev: any) => ({
+            ...prev,
+            [`error_${name}`]: !validation,
+          }))
+          if (!validation) {
+            error = { [`error_${name}`]: !validation }
+          }
+        } else if (name === REGISTER_ENUM.PHONE_NUMBER) {
+          const validation = new Validator().validationPhoneNumber(value)
+          setInvalidForm((prev: any) => ({
+            ...prev,
+            [`error_${name}`]: !validation,
+          }))
+          if (!validation) {
+            error = { [`error_${name}`]: !validation }
+          }
+        } else if (name === REGISTER_ENUM.EMAIL) {
+          const validation = new Validator().validationEmail(value)
+          setInvalidForm((prev: any) => ({
+            ...prev,
+            [`error_${name}`]: !validation,
+          }))
+          if (!validation) {
+            error = { [`error_${name}`]: !validation }
+          }
+        }
+        acc.push(error)
+        return acc
+      }, []),
+    )
+    const releaseValue = results.filter(e => e !== undefined)
+    return !(releaseValue.length > 0)
   }
   return (
     <div className='h-screen'>
@@ -68,7 +184,7 @@ const RegisterPage = () => {
                   placeholder='Enter Your Username or Phone Number'
                   leftIcon='/assets/icons/user-icon.svg'
                   rightIconType='button'
-                  error={false}
+                  error={invalidForm[`error_${REGISTER_ENUM.USERNAME}`]}
                   errorMessage='Reprehenderit est esse et magna officia.'
                   name={REGISTER_ENUM.USERNAME}
                   onChange={handleChangeForm}
@@ -88,7 +204,7 @@ const RegisterPage = () => {
                   leftIcon='/assets/icons/key-icon.svg'
                   rightIcon='/assets/icons/eye-icon.svg'
                   rightIconType='button'
-                  error={false}
+                  error={invalidForm[`error_${REGISTER_ENUM.PASSWORD}`]}
                   errorMessage='Reprehenderit est esse et magna officia.'
                   name={REGISTER_ENUM.PASSWORD}
                   onChange={handleChangeForm}
@@ -108,7 +224,7 @@ const RegisterPage = () => {
                   leftIcon='/assets/icons/key-icon.svg'
                   rightIcon='/assets/icons/eye-icon.svg'
                   rightIconType='button'
-                  error={false}
+                  error={invalidForm[`error_${REGISTER_ENUM.CONFIRM_PASSWORD}`]}
                   errorMessage='Reprehenderit est esse et magna officia.'
                   name={REGISTER_ENUM.CONFIRM_PASSWORD}
                   onChange={handleChangeForm}
@@ -121,35 +237,9 @@ const RegisterPage = () => {
                 <p className='label-card text-white'>:</p>
               </div>
               <div className='col-span-full md:col-span-3 grid grid-cols-3 gap-[1em]'>
-                <BaseInputSelect
-                  id='day'
-                  name={REGISTER_ENUM.DOB_DATE}
-                  onChange={() => {}}
-                  placeholder='day'
-                  data={new Array(31).fill(0).map((e, i) => ({
-                    label: `${i + 1}`,
-                    value: i + 1,
-                  }))}
-                />
-                <BaseInputSelect
-                  id='month'
-                  placeholder='month'
-                  name={REGISTER_ENUM.DOB_MONTH}
-                  onChange={() => {}}
-                  data={new Array(12).fill(0).map((e, i) => ({
-                    label: `${i + 1}`,
-                    value: i + 1,
-                  }))}
-                />
-                <BaseInputSelect
-                  id='year'
-                  placeholder='year'
-                  name={REGISTER_ENUM.DOB_YEAR}
-                  onChange={() => {}}
-                  data={new Array(10).fill(0).map((e, i) => ({
-                    label: `${i + 1}`,
-                    value: i + 1,
-                  }))}
+                <BaseInputDob
+                  name={REGISTER_ENUM.DOB}
+                  onChange={handleChangeForm}
                 />
               </div>
             </div>
@@ -165,14 +255,14 @@ const RegisterPage = () => {
               </div>
               <div className=' col-span-full md:col-span-3'>
                 <BaseInputText
-                  id={REGISTER_ENUM.USERNAME}
+                  id={REGISTER_ENUM.EMAIL}
                   type='text'
                   placeholder='Enter Your Email'
                   leftIcon='/assets/icons/email-icon.svg'
                   rightIconType='button'
-                  error={false}
+                  error={invalidForm[`error_${REGISTER_ENUM.EMAIL}`]}
                   errorMessage='Reprehenderit est esse et magna officia.'
-                  name={REGISTER_ENUM.USERNAME}
+                  name={REGISTER_ENUM.EMAIL}
                   onChange={handleChangeForm}
                 />
               </div>
@@ -184,14 +274,14 @@ const RegisterPage = () => {
               </div>
               <div className=' col-span-full md:col-span-3'>
                 <BaseInputText
-                  id={REGISTER_ENUM.USERNAME}
+                  id={REGISTER_ENUM.PHONE_NUMBER}
                   type='text'
                   placeholder='Enter Your Phone Number'
                   leftIcon='/assets/icons/phone-icon.svg'
                   rightIconType='button'
-                  error={false}
+                  error={invalidForm[`error_${REGISTER_ENUM.PHONE_NUMBER}`]}
                   errorMessage='Reprehenderit est esse et magna officia.'
-                  name={REGISTER_ENUM.USERNAME}
+                  name={REGISTER_ENUM.PHONE_NUMBER}
                   onChange={handleChangeForm}
                 />
               </div>
@@ -203,13 +293,13 @@ const RegisterPage = () => {
               </div>
               <div className='col-span-full h-[40px] md:col-span-3 grid grid-cols-3 relative gap-[1rem]'>
                 <BaseInputText
-                  id={REGISTER_ENUM.USERNAME}
+                  id={REGISTER_ENUM.CAPTCHA}
                   type='text'
                   placeholder='Captcha'
                   rightIconType='button'
-                  error={false}
+                  error={invalidForm[`error_${REGISTER_ENUM.CAPTCHA}`]}
                   errorMessage='Reprehenderit est esse et magna officia.'
-                  name={REGISTER_ENUM.USERNAME}
+                  name={REGISTER_ENUM.CAPTCHA}
                   onChange={handleChangeForm}
                 />
                 <div className='rounded-[8px] overflow-hidden flex items-center h-[44px]'>
@@ -234,7 +324,7 @@ const RegisterPage = () => {
           <div className=' border-b-[3px] border-b-primary w-full' />
           <div className='grid grid-cols-5 gap-[1rem] pb-[5rem]'>
             <div className='col-span-full md:col-span-3 flex gap-[1rem]'>
-              <input type='checkbox' />
+              <input onChange={() => setCheckTnc(!checkTnc)} type='checkbox' />
               <p className='text-white text-[12px]'>
                 While clicking the button SIGN UP, I declare that I m 18 years
                 old or more. I ve read and agreed to all the terms and
@@ -245,12 +335,16 @@ const RegisterPage = () => {
                 </a>
               </p>
             </div>
-            <div className='col-span-full md:col-span-2'>
-              <Link href='/choose-character' passHref>
-                <button className='btn --lg --primary w-full'>
-                  <span>Sign Up</span>
-                </button>
-              </Link>
+            <div className='col-span-full md:col-span-2 z-50'>
+              <button
+                disabled={!checkTnc}
+                onClick={handleRegisterData}
+                className={`btn --lg --primary w-full ${
+                  !checkTnc ? 'disabled' : ''
+                }`}
+              >
+                <span>Sign Up</span>
+              </button>
             </div>
           </div>
         </div>

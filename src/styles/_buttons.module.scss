@@ -38,4 +38,7 @@
          justify-center
          gap-[16px];
   }
+  &.disabled {
+    @apply contrast-50 cursor-not-allowed;
+  }
 }

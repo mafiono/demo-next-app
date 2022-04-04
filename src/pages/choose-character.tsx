@@ -1,11 +1,63 @@
 /* eslint-disable @next/next/no-html-link-for-pages */
 /* eslint-disable @next/next/no-img-element */
 import { Modal } from '@mui/material'
-import Router from 'next/router'
+import { format } from 'date-fns'
+import Cookies from 'js-cookie'
+import dynamic from 'next/dynamic'
+import Router, { useRouter } from 'next/router'
 import React, { useState } from 'react'
+import axiosClient from '../config/client'
+import { REGISTER_ENUM } from '../config/enum/register.enum'
+import { baseToast } from '../partials/BaseToast'
 
-const ChoseCharacter = () => {
+const ChoseCharacter = props => {
+  const routerData = useRouter()
+
   const [openModal, setOpenModal] = useState<boolean>(false)
+  const handlePostRegister = () => {
+    const cookiesData = Cookies.get('register-data')
+    const localStorageData = localStorage.getItem('register-data')
+    const localStorageDataJson = JSON.parse(localStorageData)
+    const cookiesDataJson = JSON.parse(cookiesData)
+
+    const queryData =
+      localStorageDataJson || cookiesDataJson || routerData.query || ({} as any)
+    const formData = {
+      ...queryData,
+      [REGISTER_ENUM.DOB]: format(
+        new Date(queryData[REGISTER_ENUM.DOB]),
+        'yyyy-MM-dd',
+      ),
+      [REGISTER_ENUM.FIRST_NAME]: '',
+      [REGISTER_ENUM.LAST_NAME]: '',
+      [REGISTER_ENUM.COUNTRY_ID]: 'ID',
+      [REGISTER_ENUM.CURRENCY_ID]: 'IDR',
+      [REGISTER_ENUM.JURISDICTION_ID]: 'ID',
+      // [REGISTER_ENUM.PLAYER_STATUS]: 1,
+      // [REGISTER_ENUM.CHARACTER_ID]: 1,
+      // [REGISTER_ENUM.PLAYER_LEVEL]: 1,
+      [REGISTER_ENUM.REFERRAL_ID]: '',
+    }
+    axiosClient
+      .post('/register', formData)
+      .then(res => {
+        const { errorCode, message } = res.data
+        if (errorCode !== 0) {
+          baseToast({
+            type: 'error',
+            message: message,
+            label: 'Register error',
+          })
+        }
+      })
+      .catch(e => {
+        baseToast({
+          type: 'error',
+          message: e.message,
+          label: 'Register error',
+        })
+      })
+  }
   return (
     <div className='flex flex-col flex-1 h-screen gap-[1rem]'>
       <div className='p-[.5rem]'>
@@ -122,7 +174,7 @@ const ChoseCharacter = () => {
                       </ul>
                     </div>
                     <button
-                      onClick={() => setOpenModal(true)}
+                      onClick={handlePostRegister}
                       className='choose-btn btn --md p-[0.5rem]'
                     >
                       <span>Choose Character</span>

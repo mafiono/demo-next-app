@@ -22,6 +22,7 @@ interface Props {
   name: string
   autoComplete?: string
   data: ListData[]
+  value?: any
 }
 
 function BaseInputSelect(props: Props) {
@@ -54,6 +55,9 @@ function BaseInputSelect(props: Props) {
       )}
       <div className=' flex flex-row rounded-[8px] box-border relative'>
         <select
+          value={props.value}
+          onChange={props.onChange}
+          name={props.name}
           className={`w-full outline-none rounded-[8px] ${textSize} ${inputSize} border ${
             props.error ? '' : 'hover:border-primary'
           } border-2 box-border`}

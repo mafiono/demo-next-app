@@ -41,7 +41,7 @@ function BaseInputText(props: Props) {
       break
   }
   return (
-    <div id={props.id} className=' relative w-full mb-[1rem]'>
+    <div id={props.id} className=' relative w-full mb-[1rem] transition-all'>
       {props.label && (
         <label className={`block ${textSize} text-white mb-[.25rem]`}>
           {props.label}
@@ -92,18 +92,18 @@ function BaseInputText(props: Props) {
           </div>
         )}
       </div>
-      {props.error && (
-        <div className='mt-[0.5rem] flex flex-row gap-[.5rem] items-center'>
-          <img
-            className={imageSize}
-            alt={`alt-${props.id}`}
-            src='/assets/icons/warning-icon.svg'
-          />
-          <p className='text-xs text-danger'>
-            {props?.errorMessage || 'Error'}
-          </p>
-        </div>
-      )}
+      <div
+        className={`mt-[0.5rem] flex flex-row gap-[.5rem] items-center ${
+          props.error ? 'block' : 'hidden'
+        }`}
+      >
+        <img
+          className={imageSize}
+          alt={`alt-${props.id}`}
+          src='/assets/icons/warning-icon.svg'
+        />
+        <p className='text-xs text-danger'>{props?.errorMessage || 'Error'}</p>
+      </div>
     </div>
   )
 }
