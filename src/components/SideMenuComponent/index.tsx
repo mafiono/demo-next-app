@@ -4,7 +4,7 @@ import React from 'react'
 function SideMenuComponent() {
   return (
     <div className='top-0 bottom-0 fixed z-30 hidden md:block'>
-      <aside className='h-screen sticky top-0 bg-[#1F2127] pt-[64px] w-[89px]'>
+      <aside className='h-screen sticky top-0 bg-[#1F2127] pt-[64px] w-[89px]  overflow-auto'>
         <div className='grid gap-[1rem] mt-[1rem]'>
           {[
             {

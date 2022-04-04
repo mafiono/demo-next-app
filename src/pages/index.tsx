@@ -330,7 +330,7 @@ const Home: NextPage = props => {
               </div>
             </div>
             <div className='grid grid-cols-5 gap-[24px] mt-[24px] col-span-full'>
-              <div className='order-1 col-span-full md:col-span-2 bg-[#282A2F] rounded-[8px] p-[1rem] flex flex-col justify-between gap-[1rem]'>
+              <div className='order-1 col-span-full md:col-span-2 card --dark rounded-[8px] p-[1rem] flex flex-col justify-between gap-[1rem]'>
                 <div className='text-center text-white border-white'>
                   <span className='px-[1rem] title-page text-white'>
                     {translate('title:SERVICE_DURATION')}
@@ -365,7 +365,7 @@ const Home: NextPage = props => {
                   </div>
                 </div>
               </div>
-              <div className='order-3 md:order-2 col-span-full md:col-[3/6] row-span-2 bg-[#282A2F] rounded-[8px] flex flex-col justify-between gap-[1rem] p-[1rem]'>
+              <div className='order-3 md:order-2 col-span-full md:col-[3/6] row-span-2 card --dark rounded-[8px] flex flex-col justify-between gap-[1rem] p-[1rem]'>
                 <div className='text-white text-center border-white'>
                   <span className='px-[1rem] title-page text-white'>
                     {translate('title:INFORMATION_CENTER')}
