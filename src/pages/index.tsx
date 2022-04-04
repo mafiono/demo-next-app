@@ -755,8 +755,11 @@ const Home: NextPage = props => {
     </div>
   )
 }
-export const getServerSideProps = async ({ locale }) => {
-  const translation = await serverSideTranslations(locale, ['title', 'button'])
+export const getServerSideProps = async (props: any) => {
+  const translation = await serverSideTranslations(props.locale, [
+    'title',
+    'button',
+  ])
   return {
     props: {
       ...translation,
