@@ -249,11 +249,11 @@ const Home: NextPage = props => {
                       key={i.toString()}
                       className='flex flex-col gap-[1rem]'
                     >
-                      <div className='rounded-[8px] overflow-hidden'>
+                      <div className='rounded-[8px] overflow-hidden relative h-0 pb-[74.6%]'>
                         <img
                           src='https://pnimg.net/w/articles/4/5b0/eae3d31ca3.png'
                           alt='game'
-                          className='h-full w-full object-cover'
+                          className='h-full w-full object-cover absolute top-0 bottom-0 left-0 right-0'
                         />
                       </div>
                       <p className='text-[14px] text-center font-semibold text-white'>
@@ -264,59 +264,89 @@ const Home: NextPage = props => {
                 })}
               </div>
             </div>
-            <div className=' col-span-full'>
-              <div className='grid grid-cols-5 gap-[1rem]'>
-                <article className='grid-rows-[auto_1fr_auto] grid items-center col-span-full md:col-span-2 relative gap-[1rem] card --dark p-[1rem]'>
-                  <div className='text-white border-white divider'>
-                    <span className='px-[1rem] title-page text-white'>
-                      {translate('NEW_GAME')}
-                    </span>
-                  </div>
-                  <div className='grid-cols-2 grid-row-2 gap-[1em]  grid'>
-                    {new Array(4).fill(0).map((e, i) => {
-                      return (
-                        <div key={i.toString()} className='grid gap-[1rem]'>
-                          <div className='flex flex-col border border-danger rounded-[8px] overflow-hidden'>
-                            <img
-                              src='https://d3ejb2l5e3bvmc.cloudfront.net/game-images/pg-soft/3973/thumbnail.jpg'
-                              alt='casino'
-                              className='h-full w-full'
-                            />
+            <div className=' col-span-full box-border'>
+              <div className='grid grid-cols-5 gap-[1rem] box-border'>
+                <article className='grid-rows-[auto_1fr_auto] box-border items-end grid col-span-full md:col-span-2 relative gap-[1rem] card --dark p-[1rem]'>
+                  <header>
+                    <div className='text-white border-white divider'>
+                      <span className='px-[1rem] title-page text-white'>
+                        {translate('NEW_GAME')}
+                      </span>
+                    </div>
+                  </header>
+                  <div className='h-full flex flex-col justify-between'>
+                    <div className='grid-cols-2 gap-[26px] grid box-border'>
+                      {new Array(2).fill(0).map((e, i) => {
+                        return (
+                          <div
+                            key={i.toString()}
+                            className='flex flex-col gap-[1rem] box-border'
+                          >
+                            <div className='flex flex-col border border-danger rounded-[8px] overflow-hidden relative h-0 pb-[75.8%] box-border'>
+                              <img
+                                src='https://i.postimg.cc/6yGQ4rLf/bbb1a7fcf4130f0d244f66f516edccd214be2cf0.jpg'
+                                alt='casino'
+                                className='h-full w-full absolute top-0 bottom-0 left-0 right-0 box-border'
+                              />
+                            </div>
+                            <p className='text-white font-semibold text-[12px] md:text-[16px] lg:text-[18px] text-center box-border'>
+                              Game Title
+                            </p>
                           </div>
-                          <p className='text-white font-semibold text-[14px] text-center'>
-                            Game Title
-                          </p>
-                        </div>
-                      )
-                    })}
+                        )
+                      })}
+                    </div>
+                    <div className='grid-cols-2 gap-[26px] grid box-border'>
+                      {new Array(2).fill(0).map((e, i) => {
+                        return (
+                          <div
+                            key={i.toString()}
+                            className='flex flex-col gap-[1rem] box-border'
+                          >
+                            <div className='flex flex-col border border-danger rounded-[8px] overflow-hidden relative h-0 pb-[75.8%] box-border'>
+                              <img
+                                src='https://i.postimg.cc/6yGQ4rLf/bbb1a7fcf4130f0d244f66f516edccd214be2cf0.jpg'
+                                alt='casino'
+                                className='h-full w-full absolute top-0 bottom-0 left-0 right-0 box-border'
+                              />
+                            </div>
+                            <p className='text-white font-semibold text-[12px] md:text-[16px] lg:text-[18px] text-center box-border'>
+                              Game Title
+                            </p>
+                          </div>
+                        )
+                      })}
+                    </div>
                   </div>
                   <button className='btn --lg --danger'>
                     <span>{translate('button:PLAY_NOW')}</span>
                   </button>
                 </article>
                 <article className='grid-rows-[auto_1fr_auto] grid items-center col-span-full md:col-[3/6] relative box-border p-[1em] card --dark gap-[1em]'>
-                  <div className='text-white border-white divider'>
-                    <span className='px-[1rem] title-page text-white'>
-                      {translate('LIVE_CASINO')}
-                    </span>
-                  </div>
-                  <div className='grid-cols-3 md:grid-cols-2 lg:grid-cols-3 gap-[1em] grid'>
+                  <header>
+                    <div className='text-white border-white divider box-border'>
+                      <span className='px-[1rem] title-page text-white'>
+                        {translate('LIVE_CASINO')}
+                      </span>
+                    </div>
+                  </header>
+                  <div className='grid-cols-3 md:grid-cols-2 lg:grid-cols-3 gap-[1em] grid box-border'>
                     {new Array(3).fill(0).map((e, i) => {
                       return (
                         <div
                           key={i.toString()}
-                          className={`gap-[1rem] ${
-                            i == 2 ? 'grid md:hidden lg:grid' : 'grid'
+                          className={`gap-[1rem] flex-col box-border ${
+                            i == 2 ? 'flex md:hidden lg:grid' : 'flex'
                           }`}
                         >
-                          <div className='flex flex-col border border-danger rounded-[8px] overflow-hidden'>
+                          <div className='flex flex-col border border-danger rounded-[8px] overflow-hidden relative pb-[201%] box-border'>
                             <img
-                              src='https://dmwl0ca1bvnm.cloudfront.net/common/dark/casino/vivo-gaming.png'
+                              src='https://i.postimg.cc/P5b9Tpkg/singapore-1024x538-1.jpg'
                               alt='casino'
-                              className='h-full w-full'
+                              className='h-full w-full absolute top-0 bottom-0 left-0 right-0'
                             />
                           </div>
-                          <p className='text-white font-semibold text-[14px] text-center'>
+                          <p className='text-white font-semibold text-[12px] md:text-[16px] lg:text-[18px] text-center'>
                             Game Title {i}
                           </p>
                         </div>
@@ -624,12 +654,12 @@ const Home: NextPage = props => {
                 </div>
               </div>
               <div className='divider my-[24px]' />
-              <div className='grid grid-cols-5 gap-[67px]'>
-                <div className='col-span-full md:col-span-3'>
+              <div className='grid grid-cols-6 gap-[67px]'>
+                <div className='col-span-full md:col-span-4'>
                   <p className=' text-primary text-[24px] font-semibold mb-[25px]'>
                     {translate('title:INFORMATION')}
                   </p>
-                  <ul className='flex justify-between gap-[0.5rem]'>
+                  <ul className='flex justify-start md:justify-between gap-[0.5rem] flex-wrap'>
                     <li>
                       <a href='/dsds' className='text-white label-link'>
                         {translate('title:ABOUT_US')}
