@@ -7,9 +7,12 @@ import dynamic from 'next/dynamic'
 import Router, { useRouter } from 'next/router'
 import React, { useState } from 'react'
 import axiosClient from '../config/client'
+import { SESSIONS_NAME } from '../config/enum'
 import { REGISTER_ENUM } from '../config/enum/register.enum'
 import { baseToast } from '../partials/BaseToast'
-
+import cookie from 'cookie'
+import { serverSideTranslations } from 'next-i18next/serverSideTranslations'
+import Link from 'next/link'
 const ChoseCharacter = () => {
   const routerData = useRouter()
 
@@ -59,6 +62,11 @@ const ChoseCharacter = () => {
           label: 'Register error',
         })
       })
+  }
+  const handleRedirectHome = () => {
+    Cookies.remove(SESSIONS_NAME.CHOOSE_CHARACTER)
+    Cookies.remove(SESSIONS_NAME.REGISTER_DATA)
+    localStorage.removeItem(SESSIONS_NAME.REGISTER_DATA)
   }
   return (
     <div className='flex flex-col flex-1 h-screen gap-[1rem]'>
@@ -225,14 +233,51 @@ const ChoseCharacter = () => {
                 </p>
               </div>
             </div>
-            <a href='/' className='btn --lg --primary w-full'>
+
+            <button
+              onClick={handleRedirectHome}
+              className='btn --lg --primary w-full'
+            >
               Play Now
-            </a>
+            </button>
           </div>
         </div>
       </Modal>
     </div>
   )
+}
+
+export const getServerSideProps = async (ctx: any) => {
+  const cookies = cookie.parse(ctx.req.headers.cookie || '')
+  if (cookies[SESSIONS_NAME.JWT_TOKEN]) {
+    return {
+      redirect: {
+        destination: '/',
+        permanent: false,
+      },
+    }
+  } else {
+    if (
+      !cookies[SESSIONS_NAME.REGISTER_DATA] ||
+      !cookies[SESSIONS_NAME.CHOOSE_CHARACTER]
+    ) {
+      return {
+        redirect: {
+          destination: '/register',
+          permanent: false,
+        },
+      }
+    }
+  }
+  const translation = await serverSideTranslations(ctx.locale, [
+    'title',
+    'button',
+  ])
+  return {
+    props: {
+      ...translation,
+    },
+  }
 }
 
 export default ChoseCharacter
