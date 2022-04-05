@@ -10,6 +10,7 @@ import cookie from 'js-cookie'
 import Link from 'next/link'
 import { useTranslation } from 'react-i18next'
 import { SESSIONS_NAME } from '../../config/enum'
+import axiosClient from '../../config/client'
 interface PropsBand {
   className?: string
 }
@@ -31,7 +32,21 @@ const HeaderComponent = (props: any) => {
   const { t: translate } = useTranslation(['title', 'button'])
 
   const authToken = cookie.get(SESSIONS_NAME.JWT_TOKEN)
-
+  useEffect(() => {
+    getBalance()
+  }, [])
+  const getBalance = () => {
+    if (authToken) {
+      axiosClient
+        .get('/balance')
+        .then(res => {
+          console.log(res.data)
+        })
+        .catch(e => {
+          console.log(e)
+        })
+    }
+  }
   return (
     <header className='sticky top-0 bg-primary z-50'>
       <div className='container mx-auto'>

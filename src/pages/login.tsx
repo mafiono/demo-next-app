@@ -55,6 +55,7 @@ const LoginPage = () => {
             type: 'success',
             label: 'Login Success',
           })
+          setOpenModal(true)
         }
       })
       .catch(error => {
@@ -209,12 +210,9 @@ const LoginPage = () => {
                 </p>
               </div>
             </div>
-            <a
-              onClick={() => Router.push('/')}
-              className='btn --lg --primary w-full'
-            >
-              Play Now
-            </a>
+            <Link href='/'>
+              <a className='btn --lg --primary w-full'>Play Now</a>
+            </Link>
           </div>
         </div>
       </Modal>

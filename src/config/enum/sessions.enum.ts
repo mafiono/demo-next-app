@@ -1,4 +1,4 @@
 export enum SESSIONS_NAME {
-  JWT_TOKEN = 'JWT_TOKEN',
-  AUTH_DATE = 'AUTH_DATE',
+  JWT_TOKEN = 'jwt-token',
+  AUTH_DATE = 'auth-date',
 }
