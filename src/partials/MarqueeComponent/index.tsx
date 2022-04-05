@@ -1,3 +1,4 @@
+/* eslint-disable @next/next/no-img-element */
 import Image from 'next/image'
 import React from 'react'
 import Marquee from 'react-fast-marquee'
@@ -19,12 +20,10 @@ const MarqueeComponent = (props: Props) => {
       }] text-white flex items-center gap-[19px] p-[1rem] text-[18px]`}
     >
       {props?.icons && (
-        <Image
+        <img
           alt='ticker-icon'
           src='/assets/icons/ticker-icon.svg'
           className='h-[20px] w-[20px]'
-          height={20}
-          width={20}
         />
       )}
       <Marquee

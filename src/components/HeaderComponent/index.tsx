@@ -115,16 +115,15 @@ const HeaderComponent = (props: any) => {
                   )} ${balanceData?.currency || ''}`}</a>
                 </li>
                 <li>
-                  <a
-                    href=''
-                    className='h-[36.67px] w-[36.67px] rounded-[5px] hover:bg-accent items-center justify-center flex'
-                  >
-                    <img
-                      alt='wallet-icon'
-                      className='h-[20px] w-[20px]'
-                      src='/assets/icons/wallet-icon.svg'
-                    />
-                  </a>
+                  <Link href='/transaction'>
+                    <a className='h-[36.67px] w-[36.67px] rounded-[5px] hover:bg-accent items-center justify-center flex'>
+                      <img
+                        alt='wallet-icon'
+                        className='h-[20px] w-[20px]'
+                        src='/assets/icons/wallet-icon.svg'
+                      />
+                    </a>
+                  </Link>
                 </li>
                 <li>
                   <a

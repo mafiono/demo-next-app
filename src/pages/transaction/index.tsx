@@ -1,10 +1,11 @@
+/* eslint-disable @next/next/no-img-element */
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations'
 import Link from 'next/link'
 import { useRouter } from 'next/router'
 import React, { useEffect, useState } from 'react'
 import HeaderComponent from '../../components/HeaderComponent'
 import axiosClient from '../../config/client'
-
+import _ from 'lodash'
 interface ButtonHeaderProps {
   label: string
   active?: boolean
@@ -16,6 +17,11 @@ const typeTransaction = {
   LAST_5_TRX: 'last_5_trx',
   GAME_HISTORY: 'game_history',
   BALANCE_HISTORY: 'balance_history',
+}
+const method = {
+  BANK: 'Bank',
+  PULSA: 'Pulsa',
+  EWALLET: 'Ewallet',
 }
 const ButtonHeader = (props: ButtonHeaderProps) => {
   return (
@@ -33,6 +39,21 @@ const ButtonHeader = (props: ButtonHeaderProps) => {
 interface PaymentCardProps {
   disabled?: boolean
   active?: boolean
+  accountNumber?: string
+  accountOwnerName?: string
+  adminFee?: number
+  adminFeeType?: number
+  code?: string
+  imageUrl?: string
+  maximumAmount?: number
+  method?: string
+  minimumAmount?: number
+  nameDisplayPartial?: boolean
+  nameIsDisplayed?: boolean
+  numberIsDisplayed?: boolean
+  numberIsDisplayedPartial?: boolean
+  operatorPaymentAccountId?: string
+  status?: number
 }
 const PaymentCard = (props: PaymentCardProps) => {
   return (
@@ -49,7 +70,13 @@ const PaymentCard = (props: PaymentCardProps) => {
             !props.disabled ? 'bg-green-500' : 'bg-danger'
           } rounded-full h-[7px] aspect-square`}
         />
-        IMGS
+        <div className='relative h-0 overflow-hidden w-[62%] pb-[20%]'>
+          <img
+            alt={props.method}
+            src={props.imageUrl}
+            className='absolute top-0 bottom-0 left-0 right-0 w-full h-full'
+          />
+        </div>
       </a>
     </Link>
   )
@@ -57,7 +84,7 @@ const PaymentCard = (props: PaymentCardProps) => {
 const TransactionPage = () => {
   const router = useRouter()
   const [tabType, setTabType] = useState<any>('')
-  const [listPayment, setListPayment] = useState({})
+  const [listPayment, setListPayment] = useState<any[]>([])
   const { type } = router.query || {}
   useEffect(() => {
     setTabType(type || typeTransaction.DEPOSIT)
@@ -66,7 +93,12 @@ const TransactionPage = () => {
     axiosClient
       .get('/operator/payment-account')
       .then(res => {
-        console.log(res.data)
+        const { operatorPaymentAccountList } = res.data
+        const groupingData = _.chain(operatorPaymentAccountList)
+          .groupBy('method')
+          .map((value, key) => ({ method: key, data: value }))
+          .value()
+        setListPayment(groupingData)
       })
       .catch(e => {
         console.log(e)
@@ -119,11 +151,15 @@ const TransactionPage = () => {
                     </h2>
                   </div>
                   <div className='grid grid-cols-3 gap-[1rem]'>
-                    {Array(6)
-                      .fill(0)
-                      .map((e, i) => {
+                    {listPayment
+                      .find((e: any) => e.method === method.BANK)
+                      ?.data.map((e: any, i: number) => {
                         return (
-                          <PaymentCard disabled={i == 0} key={i.toString()} />
+                          <PaymentCard
+                            {...e}
+                            disabled={i == 0}
+                            key={i.toString()}
+                          />
                         )
                       })}
                   </div>
@@ -137,11 +173,15 @@ const TransactionPage = () => {
                     </h2>
                   </div>
                   <div className='grid grid-cols-3 md:grid-cols-2 gap-[1rem] items-center'>
-                    {Array(4)
-                      .fill(0)
-                      .map((e, i) => {
+                    {listPayment
+                      .find((e: any) => e.method === method.EWALLET)
+                      ?.data.map((e: any, i: number) => {
                         return (
-                          <PaymentCard disabled={i == 3} key={i.toString()} />
+                          <PaymentCard
+                            {...e}
+                            disabled={i == 0}
+                            key={i.toString()}
+                          />
                         )
                       })}
                   </div>
@@ -155,11 +195,15 @@ const TransactionPage = () => {
                     </h2>
                   </div>
                   <div className='grid grid-cols-3 md:grid-cols-1 gap-[1rem]'>
-                    {Array(2)
-                      .fill(0)
-                      .map((e, i) => {
+                    {listPayment
+                      .find((e: any) => e.method === method.PULSA)
+                      ?.data.map((e: any, i: number) => {
                         return (
-                          <PaymentCard disabled={i == 1} key={i.toString()} />
+                          <PaymentCard
+                            {...e}
+                            disabled={i == 0}
+                            key={i.toString()}
+                          />
                         )
                       })}
                   </div>
