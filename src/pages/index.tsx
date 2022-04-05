@@ -258,9 +258,11 @@ const Home = (props: any) => {
                             className='h-full w-full object-cover absolute top-0 bottom-0 left-0 right-0 object-top'
                           />
                         </div>
-                        <p className='text-[14px] text-center font-semibold text-white'>
-                          {e.name}
-                        </p>
+                        <div className='w-full overflow-hidden'>
+                          <p className='text-white text-center text-[12px] md:text-[16px] lg:text-[18px] font-semibold truncate whitespace-nowrap'>
+                            {e.name}
+                          </p>
+                        </div>
                       </div>
                     )
                   },
@@ -292,9 +294,11 @@ const Home = (props: any) => {
                               />
                             </div>
                           </div>
-                          <p className='text-white text-center text-[18px] font-semibold'>
-                            {e.name}
-                          </p>
+                          <div className='w-full overflow-hidden'>
+                            <p className='text-white text-center text-[12px] md:text-[16px] lg:text-[18px] font-semibold truncate whitespace-nowrap'>
+                              {e.name}
+                            </p>
+                          </div>
                         </div>
                       ),
                     )}
@@ -312,9 +316,11 @@ const Home = (props: any) => {
                               />
                             </div>
                           </div>
-                          <p className='text-white text-center text-[18px] font-semibold'>
-                            {e.name}
-                          </p>
+                          <div className='w-full overflow-hidden'>
+                            <p className='text-white text-center text-[12px] md:text-[16px] lg:text-[18px] font-semibold truncate whitespace-nowrap'>
+                              {e.name}
+                            </p>
+                          </div>
                         </div>
                       ),
                     )}
@@ -349,9 +355,11 @@ const Home = (props: any) => {
                               className='h-full w-full'
                             />
                           </div>
-                          <p className='text-white text-center text-[18px] font-semibold'>
-                            {e.name}
-                          </p>
+                          <div className='w-full overflow-hidden'>
+                            <p className='text-white text-center text-[12px] md:text-[16px] lg:text-[18px] font-semibold truncate whitespace-nowrap'>
+                              {e.name}
+                            </p>
+                          </div>
                         </div>
                       )
                     })}

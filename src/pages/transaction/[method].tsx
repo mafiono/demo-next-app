@@ -1,4 +1,5 @@
 /* eslint-disable @next/next/no-img-element */
+import { Modal } from '@mui/material'
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations'
 import Link from 'next/link'
 import { useRouter } from 'next/router'
@@ -36,6 +37,7 @@ const ButtonHeader = (props: ButtonHeaderProps) => {
 function MethodPayment(props: any) {
   const [showWarningText, setShowWarningText] = useState<boolean>(false)
   const [tabType, setTabType] = useState<any>('')
+  const [addNewAccount, setAddNewAccount] = useState(false)
   const router = useRouter()
   const { method, type } = router.query
 
@@ -202,7 +204,10 @@ function MethodPayment(props: any) {
                     },
                   ]}
                 />
-                <button className='btn --md --primary w-full'>
+                <button
+                  onClick={() => setAddNewAccount(true)}
+                  className='btn --md --primary w-full'
+                >
                   Add New Account
                 </button>
               </div>
@@ -354,6 +359,63 @@ function MethodPayment(props: any) {
           </div>
         </div>
       </div>
+      <Modal
+        open={addNewAccount}
+        aria-labelledby='modal-modal-title'
+        aria-describedby='modal-modal-description'
+        onClose={() => setAddNewAccount(false)}
+      >
+        <div className='h-screen w-full flex items-center justify-center'>
+          <div className='container grid grid-cols-4 p-2 md:p-0'>
+            <div className='col-span-full md:col-[2/4] bg-[#282A30] rounded-[8px] overflow-hidden'>
+              <div className='bg-primary p-[27px]'>
+                <h2 className='lg:text-[32px] text-white text-center'>
+                  Add New Account
+                </h2>
+              </div>
+              <div className='p-5 grid grid-cols-2 gap-[1rem]'>
+                <div className=''>
+                  <p className='text-[15px] lg:text-[20px] text-white text-left font-semibold mb-[0.5rem]'>
+                    Provider :
+                  </p>
+                  <BaseInputSelect
+                    classInput='border-primary'
+                    id='bank-account'
+                    placeholder=''
+                    onChange={() => {}}
+                    name='bank-account'
+                    data={[
+                      {
+                        label: 'BCA',
+                        value: '093892832',
+                      },
+                    ]}
+                  />
+                </div>
+                <div className=''>
+                  <p className='text-[15px] lg:text-[20px] text-white text-left font-semibold mb-[0.5rem]'>
+                    Account Number :
+                  </p>
+                  <BaseInputText
+                    type='number'
+                    classInput=' border-primary'
+                    name='amount'
+                    id='amount'
+                    placeholder=''
+                    onChange={handleChangeForm}
+                  />
+                </div>
+                <div
+                  onClick={() => setAddNewAccount(false)}
+                  className=' col-span-full'
+                >
+                  <button className='w-full btn --lg --primary'>Save</button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </Modal>
     </div>
   )
 }
