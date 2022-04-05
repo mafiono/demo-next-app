@@ -1,7 +1,7 @@
 /* eslint-disable @next/next/no-img-element */
 /* eslint-disable react/jsx-no-comment-textnodes */
 import type { NextPage } from 'next'
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { SwipperComponent, SwipperWithButton } from '../partials/Swipper'
 import { SwiperSlide } from 'swiper/react'
 import Link from 'next/link'
@@ -12,14 +12,18 @@ import axiosClient from '../config/client'
 import HeaderComponent from '../components/HeaderComponent'
 import MarqueeComponent from '../partials/MarqueeComponent'
 import SideMenuComponent from '../components/SideMenuComponent'
+import Cookies from 'js-cookie'
+import { SESSIONS_NAME } from '../config/enum'
 
 const Home = (props: any) => {
-  console.log({
-    listGameNew: props.listGameNew,
-  })
-
   const { t: translate } = useTranslation(['title', 'button'])
   const [collapsible, setCollapsible] = useState(false)
+  useEffect(() => {
+    Cookies.remove(SESSIONS_NAME.CHOOSE_CHARACTER)
+    Cookies.remove(SESSIONS_NAME.REGISTER_DATA)
+    localStorage.removeItem(SESSIONS_NAME.CHOOSE_CHARACTER)
+    localStorage.removeItem(SESSIONS_NAME.REGISTER_DATA)
+  }, [])
 
   return (
     <div>
@@ -281,19 +285,22 @@ const Home = (props: any) => {
                       {translate('NEW_GAME')}
                     </h3>
                   </header>
-                  <div className='flex flex-row gap-[21.25px] md:gap-[19px] lg:gap-[24px] items-center justify-center'>
+                  {/* <div className='flex flex-row gap-[21.25px] md:gap-[19px] lg:gap-[24px] items-center justify-center mt-[15px] md:mt-[11px] lg:mt-[26px]'> */}
+                  <div className='grid grid-cols-2 gap-[21.25px] md:gap-[19px] lg:gap-[24px]'>
                     {(props?.listGameNew?.slice(0, 2) || []).map(
                       (e: any, i: number) => (
                         <div key={i.toString()}>
-                          <div className='w-[135.75px] h-[101.81px] md:w-[166px] md:h-[124px] lg:w-[200px] lg:h-[150px] rounded-[8px] overflow-hidden border-danger border-[3px] mb-[13px]'>
-                            <div className='rounded-[8px] overflow-hidden relative h-0 pb-[74.6%]'>
-                              <img
-                                src={`${e?.image_url}?width=200&height=150`}
-                                alt='game'
-                                className='h-full w-full object-cover absolute top-0 bottom-0 left-0 right-0 object-top'
-                              />
-                            </div>
+                          {/* <div className='w-[135.75px] h-[101.81px] md:w-[166px] md:h-[124px] lg:w-[200px] lg:h-[150px] rounded-[8px] overflow-hidden border-danger border-[3px] mb-[13px]'>
+                            <div className='rounded-[8px] overflow-hidden relative h-0 pb-[74.6%]'> */}
+                          <div className='h-0 pb-[75%] relative overflow-hidden border-[3px] border-danger rounded-[8px] mb-[13px]'>
+                            <img
+                              src={`${e?.image_url}?width=200&height=150`}
+                              alt='game'
+                              className='h-full w-full object-cover absolute top-0 bottom-0 left-0 right-0 object-top'
+                            />
                           </div>
+                          {/* </div>
+                          </div> */}
                           <div className='w-full overflow-hidden'>
                             <p className='text-white text-center text-[12px] md:text-[16px] lg:text-[18px] font-semibold truncate whitespace-nowrap'>
                               {e.name}
@@ -303,19 +310,22 @@ const Home = (props: any) => {
                       ),
                     )}
                   </div>
-                  <div className='flex flex-row gap-[21.25px] md:gap-[19px] lg:gap-[24px] items-center justify-center mt-[15px] md:mt-[11px] lg:mt-[26px]'>
+                  {/* <div className='flex flex-row gap-[21.25px] md:gap-[19px] lg:gap-[24px] items-center justify-center mt-[15px] md:mt-[11px] lg:mt-[26px]'> */}
+                  <div className='grid grid-cols-2 gap-[21.25px] md:gap-[19px] lg:gap-[24px] mt-[15px] md:mt-[4px] lg:mt-[15px]'>
                     {(props?.listGameNew?.slice(2, 4) || []).map(
                       (e: any, i: number) => (
                         <div key={i.toString()}>
-                          <div className='w-[135.75px] h-[101.81px] md:w-[166px] md:h-[124px] lg:w-[200px] lg:h-[150px] rounded-[8px] overflow-hidden border-danger border-[3px] mb-[13px]'>
-                            <div className='rounded-[8px] overflow-hidden relative h-0 pb-[74.6%]'>
-                              <img
-                                src={`${e?.image_url}?width=200&height=150`}
-                                alt='game'
-                                className='h-full w-full object-cover absolute top-0 bottom-0 left-0 right-0 object-top'
-                              />
-                            </div>
+                          {/* <div className='w-[135.75px] h-[101.81px] md:w-[166px] md:h-[124px] lg:w-[200px] lg:h-[150px] rounded-[8px] overflow-hidden border-danger border-[3px] mb-[13px]'>
+                            <div className='rounded-[8px] overflow-hidden relative h-0 pb-[74.6%]'> */}
+                          <div className='h-0 pb-[75%] relative overflow-hidden border-[3px] border-danger rounded-[8px] mb-[13px]'>
+                            <img
+                              src={`${e?.image_url}?width=200&height=150`}
+                              alt='game'
+                              className='h-full w-full object-cover absolute top-0 bottom-0 left-0 right-0 object-top'
+                            />
                           </div>
+                          {/* </div>
+                          </div> */}
                           <div className='w-full overflow-hidden'>
                             <p className='text-white text-center text-[12px] md:text-[16px] lg:text-[18px] font-semibold truncate whitespace-nowrap'>
                               {e.name}
@@ -348,11 +358,13 @@ const Home = (props: any) => {
                           }`}
                           key={i.toString()}
                         >
-                          <div className='w-[89.64px] h-[179.73px] md:h-[296px] md:w-[147.18px] lg:h-[362px] lg:w-[180px] border-[3px] border-danger rounded-[8px] mb-[13px]'>
+                          {/* <div className='w-[89.64px] h-[179.73px] md:h-[296px] md:w-[147.18px] lg:h-[362px] lg:w-[180px] border-[3px] border-danger rounded-[8px] mb-[13px]'> */}
+                          <div className=' relative h-0 pb-[201%] overflow-hidden border-[3px] border-danger rounded-[8px] w-full mb-[13px]'>
                             <img
                               src={`${e?.image_url}?width=180&height=362`}
                               alt='game'
-                              className='h-full w-full'
+                              // className='h-full w-full'
+                              className='h-full w-full bottom-0 top-0 left-0 right-0 absolute'
                             />
                           </div>
                           <div className='w-full overflow-hidden'>
