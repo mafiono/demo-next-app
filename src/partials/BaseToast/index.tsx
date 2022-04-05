@@ -7,7 +7,7 @@ interface Props {
   message?: string
 }
 export function baseToast(props: Props) {
-  cogoToast[props.type](
+  const { hide } = cogoToast[props.type](
     props.label ? (
       <div>
         <b>{props.label}</b>
@@ -17,7 +17,9 @@ export function baseToast(props: Props) {
       'Internal Server Error'
     ),
     {
-      hideAfter: 10,
+      onClick: () => {
+        hide()
+      },
     },
   )
 }

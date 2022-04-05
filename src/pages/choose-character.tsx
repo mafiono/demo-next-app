@@ -10,13 +10,13 @@ import axiosClient from '../config/client'
 import { REGISTER_ENUM } from '../config/enum/register.enum'
 import { baseToast } from '../partials/BaseToast'
 
-const ChoseCharacter = props => {
+const ChoseCharacter = () => {
   const routerData = useRouter()
 
   const [openModal, setOpenModal] = useState<boolean>(false)
   const handlePostRegister = () => {
-    const cookiesData = Cookies.get('register-data')
-    const localStorageData = localStorage.getItem('register-data')
+    const cookiesData = Cookies.get('register-data') || '{}'
+    const localStorageData = localStorage.getItem('register-data') || '{}'
     const localStorageDataJson = JSON.parse(localStorageData)
     const cookiesDataJson = JSON.parse(cookiesData)
 

@@ -11,7 +11,7 @@ enum FORM_DATA {
   YEAR = 'YEAR',
 }
 const BaseInputDob = (props: Props) => {
-  const [days, setDays] = useState([])
+  const [days, setDays] = useState<any[]>([])
   const [months, setMonths] = useState(
     Array(12)
       .fill(0)
@@ -20,8 +20,8 @@ const BaseInputDob = (props: Props) => {
         label: `${i + 1}`,
       })),
   )
-  const [years, setYears] = useState([])
-  const [formData, setFormData] = useState({})
+  const [years, setYears] = useState<any[]>([])
+  const [formData, setFormData] = useState<any>({})
   const [values, setValues] = useState<any>(null)
 
   useEffect(() => {

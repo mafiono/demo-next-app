@@ -3,7 +3,6 @@
 import isMobile from 'is-mobile'
 import React, { useEffect, useState } from 'react'
 import { useAuth } from '../../contexts/auth'
-import Device from '../../partials/MobileDetection'
 import Skeleton from '@mui/material/Skeleton'
 import { Box } from '@mui/system'
 import cookie from 'js-cookie'
@@ -11,6 +10,8 @@ import Link from 'next/link'
 import { useTranslation } from 'react-i18next'
 import { SESSIONS_NAME } from '../../config/enum'
 import axiosClient from '../../config/client'
+import { baseToast } from '../../partials/BaseToast'
+import ErrorRequestHandler from '../../config/helpers/error-request'
 interface PropsBand {
   className?: string
 }
@@ -28,6 +29,7 @@ const BrandLogo = (props: PropsBand) => {
   )
 }
 const HeaderComponent = (props: any) => {
+  const [formData, setFormData] = useState<any>({})
   const { user } = useAuth() as any
   const { t: translate } = useTranslation(['title', 'button'])
 
@@ -46,6 +48,53 @@ const HeaderComponent = (props: any) => {
           console.log(e)
         })
     }
+  }
+  const handleLogout = () => {
+    cookie.remove(SESSIONS_NAME.JWT_TOKEN)
+    cookie.remove(SESSIONS_NAME.AUTH_DATE)
+    localStorage.removeItem(SESSIONS_NAME.AUTH_DATE)
+    localStorage.removeItem(SESSIONS_NAME.JWT_TOKEN)
+    window.location.href = '/'
+  }
+  const handleLogin = () => {
+    console.log({ formData })
+
+    axiosClient
+      .post('/login', formData)
+      .then(res => {
+        const { errorCode, jwtToken, message } = res.data
+        cookie.set(SESSIONS_NAME.JWT_TOKEN, jwtToken)
+        cookie.set(SESSIONS_NAME.AUTH_DATE, new Date().getTime().toString())
+        localStorage.setItem(SESSIONS_NAME.JWT_TOKEN, jwtToken)
+        localStorage.setItem(
+          SESSIONS_NAME.AUTH_DATE,
+          new Date().getTime().toString(),
+        )
+        if (errorCode !== 0) {
+          baseToast({
+            type: 'error',
+            message,
+            label: 'Login Error',
+          })
+        } else {
+          baseToast({
+            type: 'success',
+            label: 'Login Success',
+          })
+          window.location.href = '/'
+        }
+      })
+      .catch(e => {
+        new ErrorRequestHandler(e, 'Error Login')
+      })
+  }
+  const handleChangeForm = (e: any) => {
+    const { value, name } = e.target
+
+    setFormData((prev: any) => ({
+      ...prev,
+      [name]: value,
+    }))
   }
   return (
     <header className='sticky top-0 bg-primary z-50'>
@@ -101,8 +150,8 @@ const HeaderComponent = (props: any) => {
                   </a>
                 </li>
                 <li>
-                  <a
-                    href=''
+                  <button
+                    onClick={handleLogout}
                     className='h-[36.67px] w-[36.67px] rounded-[5px] hover:bg-accent items-center justify-center flex'
                   >
                     <img
@@ -110,7 +159,7 @@ const HeaderComponent = (props: any) => {
                       className='h-[20px] w-[20px]'
                       src='assets/icons/logout-icon.svg'
                     />
-                  </a>
+                  </button>
                 </li>
               </ul>
             </div>
@@ -129,8 +178,9 @@ const HeaderComponent = (props: any) => {
                 />
                 <input
                   placeholder={translate('title:ENTER_USERNAME')}
-                  name='email'
+                  name='loginId'
                   className='outline-none h-full p-0 m-0 w-full text-[12px]'
+                  onChange={handleChangeForm}
                 />
               </div>
               <div className='bg-white rounded-[8px] h-[40px] w-[214px] gap-2 overflow-hidden items-center px-[8px] py-[10px] hidden lg:flex'>
@@ -144,6 +194,7 @@ const HeaderComponent = (props: any) => {
                   type='password'
                   name='password'
                   className='outline-none h-full p-0 m-0 w-full text-[12px]'
+                  onChange={handleChangeForm}
                 />
                 <img
                   alt='eye-icon'
@@ -151,11 +202,14 @@ const HeaderComponent = (props: any) => {
                   src='assets/icons/eye-icon.svg'
                 />
               </div>
-              <Link href='/' passHref>
-                <a className='btn --md --accent w-[99px] capitalize'>
-                  {translate('button:LOGIN')}
-                </a>
-              </Link>
+
+              <button
+                onClick={handleLogin}
+                className='btn --md --accent w-[99px] capitalize'
+              >
+                {translate('button:LOGIN')}
+              </button>
+
               <Link href='/register' passHref>
                 <a className='btn --md --danger w-[99px] capitalize'>
                   {translate('button:SIGN_UP')}

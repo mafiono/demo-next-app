@@ -13,8 +13,8 @@ import Cookies from 'js-cookie'
 
 const RegisterPage = () => {
   const [checkTnc, setCheckTnc] = useState(false)
-  const [formData, setFormData] = useState<REGISTER_DTO>()
-  const [invalidForm, setInvalidForm] = useState({})
+  const [formData, setFormData] = useState<any>()
+  const [invalidForm, setInvalidForm] = useState<any>({})
   const handleChangeForm = (e: any) => {
     const { name, value } = e?.target || {}
     if (name === REGISTER_ENUM.USERNAME) {
@@ -70,9 +70,10 @@ const RegisterPage = () => {
     }
   }
   const validateForm = async () => {
+    const regEnum = REGISTER_ENUM as any
     const results = await Promise.all(
-      Object.keys(REGISTER_ENUM).reduce((acc: any, key: string) => {
-        const name = REGISTER_ENUM[key]
+      Object.keys(regEnum).reduce((acc: any, key: string) => {
+        const name = regEnum[key]
         const value = formData[name] || ''
         let error: any
 
