@@ -10,7 +10,7 @@ import BaseInputDob from '../partials/input/BaseInputDob'
 import Validator from '../config/helpers/validatior'
 import { keys } from '@mui/system'
 import Cookies from 'js-cookie'
-
+import { SESSIONS_NAME } from '../config/enum/sessions.enum'
 const RegisterPage = () => {
   const [checkTnc, setCheckTnc] = useState(false)
   const [formData, setFormData] = useState<any>()
@@ -63,8 +63,15 @@ const RegisterPage = () => {
         pathname: '/choose-character',
         query: { ...formData },
       })
-      Cookies.set('register-data', JSON.stringify(formData))
-      localStorage.setItem('register-data', JSON.stringify(formData))
+      Cookies.set(SESSIONS_NAME.REGISTER_DATA, JSON.stringify(formData))
+      Cookies.set(
+        SESSIONS_NAME.CHOOSE_CHARACTER,
+        JSON.stringify({ choose: true }),
+      )
+      localStorage.setItem(
+        SESSIONS_NAME.REGISTER_DATA,
+        JSON.stringify(formData),
+      )
     } else {
       //
     }
