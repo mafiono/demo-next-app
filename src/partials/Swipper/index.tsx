@@ -32,7 +32,7 @@ const SwipperWithButton = (props: Props & SwiperProps) => {
     <div className='flex w-full gap-[1rem] items-center'>
       <button
         ref={navigationPrevRef}
-        className='h-[30px] w-[30px] aspect-square'
+        className='w-[40px] h-[40px] aspect-square'
       >
         <img
           alt='left-btn'
@@ -62,7 +62,7 @@ const SwipperWithButton = (props: Props & SwiperProps) => {
       </Swiper>
       <button
         ref={navigationNextRef}
-        className='h-[30px] w-[30px] aspect-square'
+        className='w-[40px] h-[40px] aspect-square'
       >
         <img
           alt='left-btn'

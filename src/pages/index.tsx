@@ -8,14 +8,12 @@ import Link from 'next/link'
 import dynamic from 'next/dynamic'
 import { useTranslation } from 'react-i18next'
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations'
+import axiosClient from '../config/client'
+import HeaderComponent from '../components/HeaderComponent'
+import MarqueeComponent from '../partials/MarqueeComponent'
+import SideMenuComponent from '../components/SideMenuComponent'
 
-const HeaderComponent = dynamic(() => import('../components/HeaderComponent'))
-const MarqueeComponent = dynamic(() => import('../partials/MarqueeComponent'))
-const SideMenuComponent = dynamic(
-  () => import('../components/SideMenuComponent'),
-)
-
-const Home: NextPage = props => {
+const Home = (props: any) => {
   const { t: translate } = useTranslation(['title', 'button'])
   const [collapsible, setCollapsible] = useState(false)
 
@@ -29,7 +27,7 @@ const Home: NextPage = props => {
             Ullamco eiusmod nulla aliquip quis non amet esse. Non cillum id
           </MarqueeComponent>
           <div className='grid grid-cols-5 gap-[1rem]'>
-            <div className='col-span-full md:col-[1/4] rounded-[8px] pb-[48%] h-0 overflow-hidden'>
+            <div className='col-span-full md:col-[1/4] rounded-[8px] pb-[55%] h-0 overflow-hidden'>
               <SwipperComponent
                 autoplay
                 loop
@@ -43,7 +41,7 @@ const Home: NextPage = props => {
                   .map((e, index) => {
                     return (
                       <SwiperSlide key={index.toString()}>
-                        <div className='relative overflow-hidden h-0 pb-[48%] box-border'>
+                        <div className='relative overflow-hidden h-0 pb-[55%] box-border'>
                           <img
                             className='absolute bottom-0 top-0 left-0 right-0 object-cover w-full h-full'
                             alt='promos'
@@ -58,16 +56,16 @@ const Home: NextPage = props => {
               </SwipperComponent>
             </div>
             <div className=' col-span-full md:col-span-2 grid grid-cols-4 md:grid-cols-2 grid-rows-1 md:grid-rows-2 gap-[1rem] row-span-1 md:row-span-2 relative h-[100%] w-[100%] overflow-hidden'>
-              {new Array(4).fill(0).map((e, i) => {
+              {(props?.listGameHot?.slice(0, 4) || []).map((e, i) => {
                 return (
                   <div
                     className='h-full w-full rounded-[8px] overflow-hidden'
-                    key={i.toString()}
+                    key={e?.id}
                   >
                     <img
                       alt='images-game'
                       className='h-full w-full object-cover'
-                      src='https://i.ibb.co/60wjPM0/zeus-slot.jpg'
+                      src={`${e?.image_url}?width=200&height=188&func=bound`}
                     />
                   </div>
                 )
@@ -243,28 +241,90 @@ const Home: NextPage = props => {
             </div>
             <div className='col-span-full'>
               <div className='card --primary grid grid-cols-2 md:grid-cols-4 lg:grid-cols-5 p-[1rem] gap-[1rem]'>
-                {new Array(10).fill(0).map((e, i) => {
-                  return (
-                    <div
-                      key={i.toString()}
-                      className='flex flex-col gap-[1rem]'
-                    >
-                      <div className='rounded-[8px] overflow-hidden relative h-0 pb-[74.6%]'>
-                        <img
-                          src='https://pnimg.net/w/articles/4/5b0/eae3d31ca3.png'
-                          alt='game'
-                          className='h-full w-full object-cover absolute top-0 bottom-0 left-0 right-0'
-                        />
+                {(props?.listGameHot?.slice(5, 15) || []).map(
+                  (e: any, i: number) => {
+                    return (
+                      <div key={e.id} className='flex flex-col gap-[13px]'>
+                        <div className='rounded-[8px] overflow-hidden relative h-0 pb-[74.6%]'>
+                          <img
+                            src={`${e?.image_url}?width=200&height=150`}
+                            alt='game'
+                            className='h-full w-full object-cover absolute top-0 bottom-0 left-0 right-0 object-top'
+                          />
+                        </div>
+                        <p className='text-[14px] text-center font-semibold text-white'>
+                          {e.name}
+                        </p>
                       </div>
-                      <p className='text-[14px] text-center font-semibold text-white'>
-                        Netent Game
-                      </p>
-                    </div>
-                  )
-                })}
+                    )
+                  },
+                )}
               </div>
             </div>
-            <div className=' col-span-full box-border'>
+            <div className=' col-span-full'>
+              <div className='flex flex-row gap-[24.57px]'>
+                <article className='bg-[#282A2F] rounded-[8px] w-[470px] h-[612px] pb-[24px] pl-[24px] pr-[22px] pt-[18px]'>
+                  <header className='mb-[39px]'>
+                    <h3 className=' text-center font-semibold text-white text-[36px]'>
+                      {translate('NEW_GAME')}
+                    </h3>
+                  </header>
+                  <div className='flex flex-row gap-[24px] mb-[26px]'>
+                    {[1, 1].map((e, i) => (
+                      <div key={i.toString()}>
+                        <div className='w-[200px] h-[150px] rounded-[8px] overflow-hidden border-danger border-[3px] mb-[13px]'>
+                          dskjhd
+                        </div>
+                        <p className='text-white text-center text-[18px] font-semibold'>
+                          Game Title
+                        </p>
+                      </div>
+                    ))}
+                  </div>
+                  <div className='flex flex-row gap-[24px]'>
+                    {[1, 1].map((e, i) => (
+                      <div key={i.toString()}>
+                        <div className='w-[200px] h-[150px] rounded-[8px] overflow-hidden border-danger border-[3px] mb-[13px]'>
+                          dskjhd
+                        </div>
+                        <p className='text-white text-center text-[18px] font-semibold'>
+                          Game Title
+                        </p>
+                      </div>
+                    ))}
+                  </div>
+                  <button className=' bg-danger rounded-[8px] text-center text-white w-full h-[61px] mt-[21px]'>
+                    {translate('button:PLAY_NOW')}
+                  </button>
+                </article>
+                <article className='bg-[#282A2F] rounded-[8px] w-[646px] h-[612px] pt-[18px] px-[29px] pb-[24px]'>
+                  <header className='mb-[39px]'>
+                    <h3 className=' text-center font-semibold text-white text-[36px]'>
+                      {translate('LIVE_CASINO')}
+                    </h3>
+                  </header>
+                  <div className='grid grid-cols-3 gap-[24px]'>
+                    {[1, 1, 1].map((e, i) => {
+                      return (
+                        <div key={i.toString()}>
+                          <div className='h-[362px] w-[180px] border-[3px] border-danger rounded-[8px] mb-[13px]'>
+                            dsds
+                          </div>
+                          <p className='text-white text-center text-[18px] font-semibold'>
+                            Game Title
+                          </p>
+                        </div>
+                      )
+                    })}
+                  </div>
+                  <button className=' bg-danger rounded-[8px] text-center text-white w-full h-[61px] mt-[22px]'>
+                    {translate('button:PLAY_NOW')}
+                  </button>
+                </article>
+              </div>
+            </div>
+
+            {/* <div className=' col-span-full box-border'>
               <div className='grid grid-cols-5 gap-[1rem] box-border'>
                 <article className='grid-rows-[auto_1fr_auto] box-border items-end grid col-span-full md:col-span-2 relative gap-[1rem] card --dark p-[1rem]'>
                   <header>
@@ -276,42 +336,44 @@ const Home: NextPage = props => {
                   </header>
                   <div className='h-full flex flex-col justify-between'>
                     <div className='grid-cols-2 gap-[26px] grid box-border'>
-                      {new Array(2).fill(0).map((e, i) => {
-                        return (
-                          <div
-                            key={i.toString()}
-                            className='flex flex-col gap-[1rem] box-border'
-                          >
-                            <div className='flex flex-col border border-danger rounded-[8px] overflow-hidden relative h-0 pb-[75.8%] box-border'>
-                              <img
-                                src='https://i.postimg.cc/6yGQ4rLf/bbb1a7fcf4130f0d244f66f516edccd214be2cf0.jpg'
-                                alt='casino'
-                                className='h-full w-full absolute top-0 bottom-0 left-0 right-0 box-border'
-                              />
+                      {(props?.listGameHot?.slice(15, 17) || []).map(
+                        (e: any, i: number) => {
+                          return (
+                            <div
+                              key={e.id}
+                              className='flex flex-col gap-[1rem] box-border'
+                            >
+                              <div className='flex flex-col border-[3px] border-danger rounded-[8px] overflow-hidden relative h-0 pb-[75.8%] box-border'>
+                                <img
+                                  src={`${e?.image_url}?width=166&height=124`}
+                                  alt='casino'
+                                  className='h-full w-full absolute top-0 bottom-0 left-0 right-0 box-border'
+                                />
+                              </div>
+                              <p className='text-white font-semibold text-[12px] md:text-[16px] lg:text-[18px] text-center box-border'>
+                                {e.name}
+                              </p>
                             </div>
-                            <p className='text-white font-semibold text-[12px] md:text-[16px] lg:text-[18px] text-center box-border'>
-                              Game Title
-                            </p>
-                          </div>
-                        )
-                      })}
+                          )
+                        },
+                      )}
                     </div>
                     <div className='grid-cols-2 gap-[26px] grid box-border'>
-                      {new Array(2).fill(0).map((e, i) => {
+                      {(props?.listGameHot?.slice(17, 19) || []).map((e, i) => {
                         return (
                           <div
-                            key={i.toString()}
+                            key={e.id}
                             className='flex flex-col gap-[1rem] box-border'
                           >
-                            <div className='flex flex-col border border-danger rounded-[8px] overflow-hidden relative h-0 pb-[75.8%] box-border'>
+                            <div className='flex flex-col border-[3px] border-danger rounded-[8px] overflow-hidden relative h-0 pb-[75.8%] box-border'>
                               <img
-                                src='https://i.postimg.cc/6yGQ4rLf/bbb1a7fcf4130f0d244f66f516edccd214be2cf0.jpg'
+                                src={`${e?.image_url}?width=166&height=124`}
                                 alt='casino'
                                 className='h-full w-full absolute top-0 bottom-0 left-0 right-0 box-border'
                               />
                             </div>
                             <p className='text-white font-semibold text-[12px] md:text-[16px] lg:text-[18px] text-center box-border'>
-                              Game Title
+                              {e.name}
                             </p>
                           </div>
                         )
@@ -331,174 +393,180 @@ const Home: NextPage = props => {
                     </div>
                   </header>
                   <div className='grid-cols-3 md:grid-cols-2 lg:grid-cols-3 gap-[1em] grid box-border'>
-                    {new Array(3).fill(0).map((e, i) => {
-                      return (
-                        <div
-                          key={i.toString()}
-                          className={`gap-[1rem] flex-col box-border ${
-                            i == 2 ? 'flex md:hidden lg:grid' : 'flex'
-                          }`}
-                        >
-                          <div className='flex flex-col border border-danger rounded-[8px] overflow-hidden relative pb-[201%] box-border'>
-                            <img
-                              src='https://i.postimg.cc/P5b9Tpkg/singapore-1024x538-1.jpg'
-                              alt='casino'
-                              className='h-full w-full absolute top-0 bottom-0 left-0 right-0'
-                            />
+                    {(props?.listGameLobby?.slice(0, 3) || []).map(
+                      (e: any, i: number) => {
+                        return (
+                          <div
+                            key={i.toString()}
+                            className={`gap-[1rem] flex-col box-border ${
+                              i == 2 ? 'flex md:hidden lg:grid' : 'flex'
+                            }`}
+                          >
+                            <div className='flex flex-col border-[3px] border-danger rounded-[8px] overflow-hidden relative pb-[201%] box-border'>
+                              <img
+                                src={e.image_url}
+                                alt='casino'
+                                className='h-full w-full absolute top-0 bottom-0 left-0 right-0'
+                              />
+                            </div>
+                            <p className='text-white font-semibold text-[12px] md:text-[16px] lg:text-[18px] text-center'>
+                              {e.name}
+                            </p>
                           </div>
-                          <p className='text-white font-semibold text-[12px] md:text-[16px] lg:text-[18px] text-center'>
-                            Game Title {i}
-                          </p>
-                        </div>
-                      )
-                    })}
+                        )
+                      },
+                    )}
                   </div>
                   <button className='btn --lg --danger'>
                     <span>{translate('button:PLAY_NOW')}</span>
                   </button>
                 </article>
               </div>
-            </div>
-            <div className='grid grid-cols-5 gap-[24px] mt-[24px] col-span-full'>
-              <div className='order-1 col-span-full md:col-span-2 card --dark rounded-[8px] p-[1rem] flex flex-col justify-between gap-[1rem]'>
-                <div className='text-center text-white border-white'>
-                  <span className='px-[1rem] title-page text-white'>
-                    {translate('title:SERVICE_DURATION')}
-                  </span>
-                </div>
-                <div className='w-full bg-primary rounded-[8px] p-[24px]'>
-                  <div className='w-full'>
-                    <div className='flex items-center justify-between text-white'>
-                      <p className='label-card font-semibold'>
-                        {translate('title:TIME_AVERAGE')}
-                      </p>
-                      <p className=' label-card font-light'>
-                        1 {translate('title:MINUTE')}
-                      </p>
-                    </div>
-                    <div className='bg-[#400377] rounded-full p-[1px] relative mt-[6px]'>
-                      <div className='bg-[#FF3076] h-[14px] rounded-full w-[30%]' />
-                    </div>
-                  </div>
-                  <div className='w-full mt-[20px]'>
-                    <div className='flex items-center justify-between text-white'>
-                      <p className='label-card font-semibold'>
-                        {translate('title:TIME_AVERAGE')}
-                      </p>
-                      <p className=' label-card font-light'>
-                        3 {translate('title:MINUTE')}
-                      </p>
-                    </div>
-                    <div className='bg-[#400377] rounded-full p-[1px] relative mt-[6px]'>
-                      <div className='bg-[#FF3076] h-[14px] rounded-full w-[60%]' />
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <div className='order-3 md:order-2 col-span-full md:col-[3/6] row-span-2 card --dark rounded-[8px] flex flex-col justify-between gap-[1rem] p-[1rem]'>
-                <div className='text-white text-center border-white'>
-                  <span className='px-[1rem] title-page text-white'>
-                    {translate('title:INFORMATION_CENTER')}
-                  </span>
-                </div>
-                <div className='grid grid-cols-3 gap-[1rem] box-border items-center'>
-                  {[
-                    {
-                      link: '/',
-                      label: translate('title:JOIN_US'),
-                      img: '/assets/icons/joinus_icon.svg',
-                    },
-                    {
-                      link: '/',
-                      label: translate('title:SECURITY'),
-                      img: '/assets/icons/security_icon.svg',
-                    },
-                    {
-                      link: '/',
-                      label: translate('title:ACCESS'),
-                      img: '/assets/icons/access_icon.svg',
-                    },
-                    {
-                      link: '/',
-                      label: translate('title:ACCOUNT'),
-                      img: '/assets/icons/account_icon.svg',
-                    },
-                    {
-                      link: '/',
-                      label: translate('title:WITHDRAWAL'),
-                      img: '/assets/icons/withdrawal_icon.svg',
-                    },
-                    {
-                      link: '/',
-                      label: translate('title:GUIDE'),
-                      img: '/assets/icons/guide.svg',
-                    },
-                    {
-                      link: '/',
-                      label: translate('title:HELP'),
-                      img: '/assets/icons/help_icon.svg',
-                    },
-                    {
-                      link: '/',
-                      label: translate('title:BET'),
-                      img: '/assets/icons/bet_icon.svg',
-                    },
-                    {
-                      link: '/',
-                      label: translate('title:MEMBERSHIP'),
-                      img: '/assets/icons/membership_icon.svg',
-                    },
-                  ].map((e, index) => {
-                    return (
-                      <div
-                        className='flex items-center justify-center'
-                        key={index.toString()}
-                      >
-                        <div className='card --primary text-center flex flex-col items-center justify-center card-info-center gap-[0.5em]'>
-                          <img
-                            alt={e.label}
-                            src={e.img}
-                            className='img-info-center'
-                          />
-                          <p className='label-card font-semibold text-white'>
-                            {e.label}
-                          </p>
-                        </div>
+            </div> */}
+            <div className='flex flex-row gap-[25px]'>
+              <div className='flex flex-col'>
+                <article className='w-[469px] h-[360px] bg-[#282A2F] pt-[36px] pb-[37px] pl-[23px] pr-[22px] rounded-[8px]'>
+                  <header className='mb-[64px]'>
+                    <h3 className=' text-center font-semibold text-white text-[36px]'>
+                      {translate('title:SERVICE_DURATION')}
+                    </h3>
+                  </header>
+                  <div className='w-full bg-primary rounded-[8px] p-[24px]'>
+                    <div className='w-full'>
+                      <div className='flex items-center justify-between text-white'>
+                        <p className='label-card font-semibold'>
+                          {translate('title:TIME_AVERAGE')}
+                        </p>
+                        <p className=' label-card font-light'>
+                          1 {translate('title:MINUTE')}
+                        </p>
                       </div>
-                    )
-                  })}
-                </div>
+                      <div className='bg-[#400377] rounded-full p-[1px] relative mt-[6px]'>
+                        <div className='bg-[#FF3076] h-[14px] rounded-full w-[30%]' />
+                      </div>
+                    </div>
+                    <div className='w-full mt-[20px]'>
+                      <div className='flex items-center justify-between text-white'>
+                        <p className='label-card font-semibold'>
+                          {translate('title:TIME_AVERAGE')}
+                        </p>
+                        <p className=' label-card font-light'>
+                          3 {translate('title:MINUTE')}
+                        </p>
+                      </div>
+                      <div className='bg-[#400377] rounded-full p-[1px] relative mt-[6px]'>
+                        <div className='bg-[#FF3076] h-[14px] rounded-full w-[60%]' />
+                      </div>
+                    </div>
+                  </div>
+                </article>
+                <article className='w-[469px] h-[381px] bg-[#282A2F] pt-[36px] pb-[37px] pl-[23px] pr-[22px] rounded-[8px] mt-[24px]'>
+                  <header className='mb-[64px]'>
+                    <h3 className=' text-center font-semibold text-white text-[36px]'>
+                      {translate('title:MEMBER_SERVICE')}
+                    </h3>
+                  </header>
+                  <div className='grid grid-cols-2 items-center'>
+                    <div className='flex items-center justify-center text-center flex-col gap-[1rem]'>
+                      <img
+                        className='img-social-media'
+                        src='/assets/icons/wa-btn.svg'
+                        alt='wa'
+                      />
+                      <div className=' text-center text-white'>
+                        <p className='label-card font-semibold'>WhatsApp</p>
+                        <p className='font-light label-card'>0003298392</p>
+                      </div>
+                    </div>
+                    <div className='flex items-center justify-center text-center flex-col gap-[1rem]'>
+                      <img
+                        className='img-social-media'
+                        src='/assets/icons/telegram-btn.svg'
+                        alt='tele'
+                      />
+                      <div className=' text-center text-white'>
+                        <p className='label-card font-semibold'>Telegram</p>
+                        <p className='font-light label-card'>0003298392</p>
+                      </div>
+                    </div>
+                  </div>
+                </article>
               </div>
-              <div className='order-2 md:order-3 col-span-full md:col-span-2 card --dark flex justify-between flex-col p-[1rem] gap-[1rem]'>
-                <div className='text-center text-white border-white'>
-                  <span className='px-[1rem] title-page text-white'>
-                    {translate('title:INFORMATION_CENTER')}
-                  </span>
-                </div>
-                <div className='grid grid-cols-2 items-center'>
-                  <div className='flex items-center justify-center text-center flex-col gap-[1rem]'>
-                    <img
-                      className='img-social-media'
-                      src='/assets/icons/wa-btn.svg'
-                      alt='wa'
-                    />
-                    <div className=' text-center text-white'>
-                      <p className='label-card font-semibold'>WhatsApp</p>
-                      <p className='font-light label-card'>0003298392</p>
-                    </div>
+              <div>
+                <article className='w-[647px] h-[765px] bg-[#282A2F] rounded-[8px] pt-[36px] pb-[27px] pl-[28px] pr-[26px]'>
+                  <header className='mb-[64px]'>
+                    <h3 className=' text-center font-semibold text-white text-[36px]'>
+                      {translate('title:INFORMATION_CENTER')}
+                    </h3>
+                  </header>
+                  <div className='grid grid-cols-3 gap-[26px] box-border items-center'>
+                    {[
+                      {
+                        link: '/',
+                        label: translate('title:JOIN_US'),
+                        img: '/assets/icons/joinus_icon.svg',
+                      },
+                      {
+                        link: '/',
+                        label: translate('title:SECURITY'),
+                        img: '/assets/icons/security_icon.svg',
+                      },
+                      {
+                        link: '/',
+                        label: translate('title:ACCESS'),
+                        img: '/assets/icons/access_icon.svg',
+                      },
+                      {
+                        link: '/',
+                        label: translate('title:ACCOUNT'),
+                        img: '/assets/icons/account_icon.svg',
+                      },
+                      {
+                        link: '/',
+                        label: translate('title:WITHDRAWAL'),
+                        img: '/assets/icons/withdrawal_icon.svg',
+                      },
+                      {
+                        link: '/',
+                        label: translate('title:GUIDE'),
+                        img: '/assets/icons/guide.svg',
+                      },
+                      {
+                        link: '/',
+                        label: translate('title:HELP'),
+                        img: '/assets/icons/help_icon.svg',
+                      },
+                      {
+                        link: '/',
+                        label: translate('title:BET'),
+                        img: '/assets/icons/bet_icon.svg',
+                      },
+                      {
+                        link: '/',
+                        label: translate('title:MEMBERSHIP'),
+                        img: '/assets/icons/membership_icon.svg',
+                      },
+                    ].map((e, index) => {
+                      return (
+                        <div
+                          className='flex items-center justify-center'
+                          key={index.toString()}
+                        >
+                          <div className='card --primary text-center flex flex-col items-center justify-center card-info-center gap-[0.5em]'>
+                            <img
+                              alt={e.label}
+                              src={e.img}
+                              className='img-info-center'
+                            />
+                            <p className='label-card font-semibold text-white'>
+                              {e.label}
+                            </p>
+                          </div>
+                        </div>
+                      )
+                    })}
                   </div>
-                  <div className='flex items-center justify-center text-center flex-col gap-[1rem]'>
-                    <img
-                      className='img-social-media'
-                      src='/assets/icons/telegram-btn.svg'
-                      alt='tele'
-                    />
-                    <div className=' text-center text-white'>
-                      <p className='label-card font-semibold'>Telegram</p>
-                      <p className='font-light label-card'>0003298392</p>
-                    </div>
-                  </div>
-                </div>
+                </article>
               </div>
             </div>
             <div className='my-[24px] col-span-full'>
@@ -786,6 +854,8 @@ const Home: NextPage = props => {
   )
 }
 export const getServerSideProps = async (props: any) => {
+  const listGameHot = await axiosClient.get('/games/hot')
+  const listGameLobby = await axiosClient.get('/games/lobbies')
   const translation = await serverSideTranslations(props.locale, [
     'title',
     'button',
@@ -793,6 +863,8 @@ export const getServerSideProps = async (props: any) => {
   return {
     props: {
       ...translation,
+      listGameHot: listGameHot.data?.data || [],
+      listGameLobby: listGameLobby.data?.data || [],
     },
   }
 }

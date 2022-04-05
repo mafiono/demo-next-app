@@ -203,12 +203,21 @@ const HeaderComponent = (props: any) => {
                 />
               </div>
 
-              <button
-                onClick={handleLogin}
-                className='btn --md --accent w-[99px] capitalize'
-              >
-                {translate('button:LOGIN')}
-              </button>
+              <div className='lg:block hidden'>
+                <button
+                  onClick={handleLogin}
+                  className='btn --md --accent w-[99px] capitalize'
+                >
+                  {translate('button:LOGIN')}
+                </button>
+              </div>
+              <div className='block lg:hidden '>
+                <Link href='/login' passHref>
+                  <a className='btn --md --accent w-[99px] capitalize'>
+                    {translate('button:LOGIN')}
+                  </a>
+                </Link>
+              </div>
 
               <Link href='/register' passHref>
                 <a className='btn --md --danger w-[99px] capitalize'>
