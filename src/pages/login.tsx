@@ -138,15 +138,19 @@ const LoginPage = () => {
               Log In
             </button>
           </div>
-          <div>
-            <button className='text-white py-[0.5rem] h-[37px] md:h-[51px] lg:h-[61px] w-[312px] md:w-[310px] lg:w-[455px] text-left flex items-center justify-between'>
-              <span className='text-left'>Forget Username or Password ? </span>
-              <img
-                alt='arrow'
-                src='/assets/icons/arrow.svg'
-                className='h-[20px] w-[20px] rotate-[90deg]'
-              />
-            </button>
+          <div className='z-[99]'>
+            <Link href='/forgot-password'>
+              <a className='text-white py-[0.5rem] h-[37px] md:h-[51px] lg:h-[61px] w-[312px] md:w-[310px] lg:w-[455px] text-left flex items-center justify-between'>
+                <span className='text-left'>
+                  Forget Username or Password ?{' '}
+                </span>
+                <img
+                  alt='arrow'
+                  src='/assets/icons/arrow.svg'
+                  className='h-[20px] w-[20px] rotate-[90deg]'
+                />
+              </a>
+            </Link>
             <div className='divider -white w-[312px] md:w-[310px] lg:w-[455px]' />
             <button className='text-white py-[0.5rem] h-[37px] md:h-[51px] lg:h-[61px] w-[312px] md:w-[310px] lg:w-[455px] text-left flex items-center justify-between'>
               <span className='text-left'>
