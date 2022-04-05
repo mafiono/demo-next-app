@@ -6,6 +6,9 @@ import React, { useEffect, useState } from 'react'
 import HeaderComponent from '../../components/HeaderComponent'
 import axiosClient from '../../config/client'
 import _ from 'lodash'
+import Cookies from 'js-cookie'
+import { SESSIONS_NAME } from '../../config/enum'
+import cookie from 'cookie'
 interface ButtonHeaderProps {
   label: string
   active?: boolean
@@ -55,6 +58,7 @@ interface PaymentCardProps {
   operatorPaymentAccountId?: string
   status?: number
 }
+
 const PaymentCard = (props: PaymentCardProps) => {
   return (
     <Link href=''>
@@ -81,29 +85,27 @@ const PaymentCard = (props: PaymentCardProps) => {
     </Link>
   )
 }
-const TransactionPage = () => {
+
+const TransactionPage = (props: any) => {
   const router = useRouter()
   const [tabType, setTabType] = useState<any>('')
-  const [listPayment, setListPayment] = useState<any[]>([])
   const { type } = router.query || {}
   useEffect(() => {
     setTabType(type || typeTransaction.DEPOSIT)
   }, [type])
-  useEffect(() => {
-    axiosClient
-      .get('/operator/payment-account')
-      .then(res => {
-        const { operatorPaymentAccountList } = res.data
-        const groupingData = _.chain(operatorPaymentAccountList)
-          .groupBy('method')
-          .map((value, key) => ({ method: key, data: value }))
-          .value()
-        setListPayment(groupingData)
-      })
-      .catch(e => {
-        console.log(e)
-      })
-  }, [])
+  // useEffect(() => {
+  //   getPaymentListAccount()
+  // }, [])
+  // const getPaymentListAccount = async () => {
+  //   try {
+  //     const listPaymentProvider = await axiosClient.get(
+  //       '/operator/payment-account',
+  //     )
+  //     const { operatorPaymentAccountList } = listPaymentProvider.data
+  //   } catch (error) {
+  //     console.log(error)
+  //   }
+  // }
 
   return (
     <div>
@@ -151,7 +153,7 @@ const TransactionPage = () => {
                     </h2>
                   </div>
                   <div className='grid grid-cols-3 gap-[1rem]'>
-                    {listPayment
+                    {(props.listPaymentProvider || [])
                       .find((e: any) => e.method === method.BANK)
                       ?.data.map((e: any, i: number) => {
                         return (
@@ -173,7 +175,7 @@ const TransactionPage = () => {
                     </h2>
                   </div>
                   <div className='grid grid-cols-3 md:grid-cols-2 gap-[1rem] items-center'>
-                    {listPayment
+                    {(props.listPaymentProvider || [])
                       .find((e: any) => e.method === method.EWALLET)
                       ?.data.map((e: any, i: number) => {
                         return (
@@ -195,7 +197,7 @@ const TransactionPage = () => {
                     </h2>
                   </div>
                   <div className='grid grid-cols-3 md:grid-cols-1 gap-[1rem]'>
-                    {listPayment
+                    {(props.listPaymentProvider || [])
                       .find((e: any) => e.method === method.PULSA)
                       ?.data.map((e: any, i: number) => {
                         return (
@@ -226,14 +228,40 @@ const TransactionPage = () => {
 
 export default TransactionPage
 
-export const getServerSideProps = async (props: any) => {
-  const translation = await serverSideTranslations(props.locale, [
+export const getServerSideProps = async (ctx: any) => {
+  const cookies = cookie.parse(ctx.req.headers.cookie || '')
+
+  let paymentList: any[]
+  if (cookies[SESSIONS_NAME.JWT_TOKEN]) {
+    const listPaymentProvider = await axiosClient.get(
+      '/operator/payment-account',
+      {
+        headers: {
+          Authorization: `Bearer ${cookies[SESSIONS_NAME.JWT_TOKEN]}`,
+        },
+      },
+    )
+    const { operatorPaymentAccountList } = listPaymentProvider.data
+    paymentList = _.chain(operatorPaymentAccountList)
+      .groupBy('method')
+      .map((value, key) => ({ method: key, data: value }))
+      .value()
+  } else {
+    return {
+      redirect: {
+        destination: '/',
+        permanent: false,
+      },
+    }
+  }
+  const translation = await serverSideTranslations(ctx.locale, [
     'title',
     'button',
   ])
   return {
     props: {
       ...translation,
+      listPaymentProvider: paymentList || [],
     },
   }
 }

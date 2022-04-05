@@ -5,10 +5,11 @@ import Link from 'next/link'
 import { useRouter } from 'next/router'
 import React, { useEffect, useState } from 'react'
 import HeaderComponent from '../../components/HeaderComponent'
+import { SESSIONS_NAME } from '../../config/enum'
 import BaseInputSelect from '../../partials/input/BaseInputSelect'
 import BaseInputText from '../../partials/input/BaseInputText'
 import BaseInputTextArea from '../../partials/input/BaseInputTextArea'
-
+import cookie from 'cookie'
 interface ButtonHeaderProps {
   label: string
   active?: boolean
@@ -420,8 +421,20 @@ function MethodPayment(props: any) {
   )
 }
 
-export const getServerSideProps = async (props: any) => {
-  const translation = await serverSideTranslations(props.locale, [
+export const getServerSideProps = async (ctx: any) => {
+  const cookies = cookie.parse(ctx.req.headers.cookie || '')
+
+  if (cookies[SESSIONS_NAME.JWT_TOKEN]) {
+    //
+  } else {
+    return {
+      redirect: {
+        destination: '/',
+        permanent: false,
+      },
+    }
+  }
+  const translation = await serverSideTranslations(ctx.locale, [
     'title',
     'button',
   ])
