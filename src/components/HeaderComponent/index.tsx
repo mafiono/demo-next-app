@@ -1,10 +1,7 @@
 /* eslint-disable @next/next/no-img-element */
 /* eslint-disable jsx-a11y/alt-text */
-import isMobile from 'is-mobile'
 import React, { useEffect, useState } from 'react'
 import { useAuth } from '../../contexts/auth'
-import Skeleton from '@mui/material/Skeleton'
-import { Box } from '@mui/system'
 import cookie from 'js-cookie'
 import Link from 'next/link'
 import { useTranslation } from 'react-i18next'
@@ -22,7 +19,7 @@ const BrandLogo = (props: PropsBand) => {
         <img
           alt='brand'
           className={props.className || 'h-[40.43px] w-[133.7px]'}
-          src='assets/icons/brand-logo.svg'
+          src='/assets/icons/brand-logo.svg'
         />
       </a>
     </Link>
@@ -30,6 +27,7 @@ const BrandLogo = (props: PropsBand) => {
 }
 const HeaderComponent = (props: any) => {
   const [formData, setFormData] = useState<any>({})
+  const [balanceData, setBalanceData] = useState<any>({})
   const { user } = useAuth() as any
   const { t: translate } = useTranslation(['title', 'button'])
 
@@ -42,7 +40,10 @@ const HeaderComponent = (props: any) => {
       axiosClient
         .get('/balance')
         .then(res => {
-          console.log(res.data)
+          const { data } = res.data
+          console.log({ data })
+
+          setBalanceData(data)
         })
         .catch(e => {
           console.log(e)
@@ -110,8 +111,8 @@ const HeaderComponent = (props: any) => {
                     className='text-white text-[16px] font-semibold border border-white rounded-full px-[1rem] py-[.5rem]'
                     href=''
                   >{`${new Intl.NumberFormat('id-ID').format(
-                    39203902,
-                  )} IDR`}</a>
+                    balanceData?.balance || 0,
+                  )} ${balanceData?.currency || ''}`}</a>
                 </li>
                 <li>
                   <a
@@ -121,7 +122,7 @@ const HeaderComponent = (props: any) => {
                     <img
                       alt='wallet-icon'
                       className='h-[20px] w-[20px]'
-                      src='assets/icons/wallet-icon.svg'
+                      src='/assets/icons/wallet-icon.svg'
                     />
                   </a>
                 </li>
@@ -133,7 +134,7 @@ const HeaderComponent = (props: any) => {
                     <img
                       alt='inbox-icon'
                       className='h-[20px] w-[20px]'
-                      src='assets/icons/inbox-icon.svg'
+                      src='/assets/icons/inbox-icon.svg'
                     />
                   </a>
                 </li>
@@ -145,7 +146,7 @@ const HeaderComponent = (props: any) => {
                     <img
                       alt='login-icon'
                       className='h-[20px] w-[20px]'
-                      src='assets/icons/login-icon-v2.svg'
+                      src='/assets/icons/login-icon-v2.svg'
                     />
                   </a>
                 </li>
@@ -157,7 +158,7 @@ const HeaderComponent = (props: any) => {
                     <img
                       alt='logout-icon'
                       className='h-[20px] w-[20px]'
-                      src='assets/icons/logout-icon.svg'
+                      src='/assets/icons/logout-icon.svg'
                     />
                   </button>
                 </li>
@@ -174,7 +175,7 @@ const HeaderComponent = (props: any) => {
                 <img
                   alt='user-icon'
                   className='h-[20px] w-[20px]'
-                  src='assets/icons/user-icon.svg'
+                  src='/assets/icons/user-icon.svg'
                 />
                 <input
                   placeholder={translate('title:ENTER_USERNAME')}
@@ -187,7 +188,7 @@ const HeaderComponent = (props: any) => {
                 <img
                   alt='key-icon'
                   className='h-[20px] w-[20px]'
-                  src='assets/icons/key-icon.svg'
+                  src='/assets/icons/key-icon.svg'
                 />
                 <input
                   placeholder={translate('title:ENTER_PASSWORD')}
@@ -199,7 +200,7 @@ const HeaderComponent = (props: any) => {
                 <img
                   alt='eye-icon'
                   className='h-[20px] w-[20px]'
-                  src='assets/icons/eye-icon.svg'
+                  src='/assets/icons/eye-icon.svg'
                 />
               </div>
 
@@ -225,7 +226,7 @@ const HeaderComponent = (props: any) => {
               <img
                 alt='menu-icon'
                 className='h-[20px] w-[20px]'
-                src='assets/icons/icon-menu.svg'
+                src='/assets/icons/icon-menu.svg'
               />
             </button>
           </div>
@@ -242,7 +243,7 @@ const HeaderComponent = (props: any) => {
                   <img
                     alt='wallet-icon'
                     className='h-[20px] w-[20px]'
-                    src='assets/icons/wallet-icon.svg'
+                    src='/assets/icons/wallet-icon.svg'
                   />
                 </a>
               </li>
@@ -255,7 +256,7 @@ const HeaderComponent = (props: any) => {
                   <img
                     alt='login-icon'
                     className='h-[20px] w-[20px]'
-                    src='assets/icons/login-icon-v2.svg'
+                    src='/assets/icons/login-icon-v2.svg'
                   />
                 </a>
               </li>
@@ -267,7 +268,7 @@ const HeaderComponent = (props: any) => {
                   <img
                     alt='login-icon'
                     className='h-[20px] w-[20px]'
-                    src='assets/icons/login-icon.svg'
+                    src='/assets/icons/login-icon.svg'
                   />
                 </button>
               </Link>
@@ -276,7 +277,7 @@ const HeaderComponent = (props: any) => {
                   <img
                     alt='add-icon'
                     className='h-[20px] w-[20px]'
-                    src='assets/icons/add-user-icon.svg'
+                    src='/assets/icons/add-user-icon.svg'
                   />
                 </button>
               </Link>

@@ -2,12 +2,12 @@
 import React, { HTMLAttributes, InputHTMLAttributes } from 'react'
 
 interface Props {
-  id: string
+  id?: string
   rightIcon?: string
   leftIcon?: string | React.ReactNode
   rightIconType?: 'button' | 'icon' | undefined
   leftIconType?: 'button' | 'icon' | 'text'
-  placeholder: string
+  placeholder?: string
   label?: string
   error?: boolean
   errorMessage?: string
@@ -20,23 +20,19 @@ interface Props {
   classInput?: string
 }
 
-function BaseInputText(props: Props) {
-  var inputSize = ''
+function BaseInputTextArea(props: Props) {
   var imageSize = ''
   var textSize = ''
   switch (props.size) {
     case 'sm':
-      inputSize = ' py-[.3rem]  px-[1.5rem] '
       imageSize = 'w-[15px] aspect-square'
       textSize = 'text-sm'
       break
     case 'lg':
-      inputSize = ' py-[1rem]  px-[2.5rem] '
       imageSize = 'w-[20px] aspect-square'
       textSize = 'text-lg'
       break
     default:
-      inputSize = ' py-[.5rem]  px-[2.2rem] '
       imageSize = 'w-[25px] aspect-square'
       textSize = 'text-md'
       break
@@ -49,20 +45,17 @@ function BaseInputText(props: Props) {
         </label>
       )}
       <div className=' flex flex-row rounded-[8px] box-border relative'>
-        <input
-          autoComplete={props.autoComplete}
-          onChange={props.onChange}
-          name={props.name}
-          type={props.type}
-          placeholder={props.placeholder}
+        <textarea
+          rows={3}
+          id='w3review'
+          name='w3review'
           className={`${props.classInput}
-          ${props.error ? '' : 'hover:border-primary'}
+          hover:border-primary
           w-full
           outline-none
           border-[2px]
-          ${inputSize}
           ${textSize}
-          border-${props.error ? 'danger' : 'white'}
+          
           rounded-[8px] appearance-none`}
         />
         {props.rightIcon && (
@@ -113,4 +106,4 @@ function BaseInputText(props: Props) {
   )
 }
 
-export default BaseInputText
+export default BaseInputTextArea

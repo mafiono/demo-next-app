@@ -405,47 +405,47 @@ const Home: NextPage = props => {
                   {[
                     {
                       link: '/',
-                      label: 'Join Us',
+                      label: translate('title:JOIN_US'),
                       img: '/assets/icons/joinus_icon.svg',
                     },
                     {
                       link: '/',
-                      label: 'Security',
+                      label: translate('title:SECURITY'),
                       img: '/assets/icons/security_icon.svg',
                     },
                     {
                       link: '/',
-                      label: 'Access',
+                      label: translate('title:ACCESS'),
                       img: '/assets/icons/access_icon.svg',
                     },
                     {
                       link: '/',
-                      label: 'Account',
+                      label: translate('title:ACCOUNT'),
                       img: '/assets/icons/account_icon.svg',
                     },
                     {
                       link: '/',
-                      label: 'Withdrawal',
+                      label: translate('title:WITHDRAWAL'),
                       img: '/assets/icons/withdrawal_icon.svg',
                     },
                     {
                       link: '/',
-                      label: 'Guide',
+                      label: translate('title:GUIDE'),
                       img: '/assets/icons/guide.svg',
                     },
                     {
                       link: '/',
-                      label: 'Help',
+                      label: translate('title:HELP'),
                       img: '/assets/icons/help_icon.svg',
                     },
                     {
                       link: '/',
-                      label: 'Bet',
+                      label: translate('title:BET'),
                       img: '/assets/icons/bet_icon.svg',
                     },
                     {
                       link: '/',
-                      label: 'Membership',
+                      label: translate('title:MEMBERSHIP'),
                       img: '/assets/icons/membership_icon.svg',
                     },
                   ].map((e, index) => {

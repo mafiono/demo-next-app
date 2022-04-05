@@ -23,6 +23,7 @@ interface Props {
   autoComplete?: string
   data: ListData[]
   value?: any
+  classInput?: string
 }
 
 function BaseInputSelect(props: Props) {
@@ -41,7 +42,7 @@ function BaseInputSelect(props: Props) {
       textSize = 'text-lg'
       break
     default:
-      inputSize = ' py-[0.594rem]  px-[2.2rem] '
+      inputSize = ' py-[0.50rem]  px-[2.2rem] '
       imageSize = 'w-[25px] aspect-square'
       textSize = 'text-md'
       break
@@ -58,7 +59,9 @@ function BaseInputSelect(props: Props) {
           value={props.value}
           onChange={props.onChange}
           name={props.name}
-          className={`w-full outline-none rounded-[8px] ${textSize} ${inputSize} border ${
+          className={`${
+            props.classInput
+          } w-full outline-none rounded-[8px] ${textSize} ${inputSize} border ${
             props.error ? '' : 'hover:border-primary'
           } border-2 box-border`}
         >
