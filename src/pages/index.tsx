@@ -261,11 +261,82 @@ const Home = (props: any) => {
                 )}
               </div>
             </div>
-            <div className=' col-span-full'>
-              <div className='flex flex-row gap-[24.57px]'>
-                <article className='bg-[#282A2F] rounded-[8px] w-[470px] h-[612px] pb-[24px] pl-[24px] pr-[22px] pt-[18px]'>
+            <div className='col-span-full'>
+              <div className='flex flex-col md:flex-row gap-[10px] md:gap-[15px] lg:gap-[24.57px]'>
+                <article
+                  className='h-full w-full md:h-[498px] md:w-[393px] lg:h-[612px] lg:w-[470px] overflow-hidden rounded-[8px] bg-[#282A2F]
+                p-[18px_21.25px_17px_22px] md:p-[13px_18px_22px_24px] lg:p-[18px_22px_24px_24px]
+                '
+                >
+                  <header className='mb-[28px] md:mb-[27px] lg:mb-[39px]'>
+                    <h3 className=' text-center font-semibold text-white text-[20px] md:text-[24px] lg:text-[36px]'>
+                      {translate('NEW_GAME')}
+                    </h3>
+                  </header>
+                  <div className='flex flex-row gap-[21.25px] md:gap-[19px] lg:gap-[24px] items-center justify-center'>
+                    {[1, 1].map((e, i) => (
+                      <div key={i.toString()}>
+                        <div className='w-[135.75px] h-[101.81px] md:w-[166px] md:h-[124px] lg:w-[200px] lg:h-[150px] rounded-[8px] overflow-hidden border-danger border-[3px] mb-[13px]'>
+                          dskjhd
+                        </div>
+                        <p className='text-white text-center text-[18px] font-semibold'>
+                          Game Title
+                        </p>
+                      </div>
+                    ))}
+                  </div>
+                  <div className='flex flex-row gap-[21.25px] md:gap-[19px] lg:gap-[24px] items-center justify-center mt-[15px] md:mt-[11px] lg:mt-[26px]'>
+                    {[1, 1].map((e, i) => (
+                      <div key={i.toString()}>
+                        <div className='w-[135.75px] h-[101.81px] md:w-[166px] md:h-[124px] lg:w-[200px] lg:h-[150px] rounded-[8px] overflow-hidden border-danger border-[3px] mb-[13px]'>
+                          dskjhd
+                        </div>
+                        <p className='text-white text-center text-[18px] font-semibold'>
+                          Game Title
+                        </p>
+                      </div>
+                    ))}
+                  </div>
+                  <button className=' bg-danger rounded-[8px] text-center text-white w-full h-[61px] mt-[21px]'>
+                    {translate('button:PLAY_NOW')}
+                  </button>
+                </article>
+                <article
+                  className='h-full w-full md:h-[498px] md:w-[361px] lg:h-[612px] lg:w-[646px] overflow-hidden rounded-[8px] bg-[#282A2F]
+                p-[15.3px_20px_18px_19px] md:p-[16px_23.81px_24px_23.21px] lg:p-[18px_29px_24px_29px]
+                '
+                >
+                  <header className='mb-[28px] md:mb-[27px] lg:mb-[39px]'>
+                    <h3 className=' text-center font-semibold text-white text-[20px] md:text-[24px] lg:text-[36px]'>
+                      {translate('LIVE_CASINO')}
+                    </h3>
+                  </header>
+                  <div className='grid lg:grid-cols-3 md:grid-cols-2 grid-cols-3 gap-[24px] items-center'>
+                    {[1, 1, 1].map((e, i) => {
+                      return (
+                        <div
+                          className={`flex-col items-center justify-center ${
+                            i == 2 ? 'md:hidden lg:flex flex' : 'flex'
+                          }`}
+                          key={i.toString()}
+                        >
+                          <div className='w-[89.64px] h-[179.73px] md:h-[296px] md:w-[147.18px] lg:h-[362px] lg:w-[180px] border-[3px] border-danger rounded-[8px] mb-[13px]'>
+                            dsds
+                          </div>
+                          <p className='text-white text-center text-[18px] font-semibold'>
+                            Game Title
+                          </p>
+                        </div>
+                      )
+                    })}
+                  </div>
+                  <button className=' bg-danger rounded-[8px] text-center text-white w-full h-[61px] mt-[21px]'>
+                    {translate('button:PLAY_NOW')}
+                  </button>
+                </article>
+                {/* <article className='bg-[#282A2F] rounded-[8px] w-full h-full md:w-[470px] md:h-[498px] lg:w-[393px] lg:h-[612px] pb-[24px] pl-[24px] pr-[22px] pt-[18px] overflow-hidden'>
                   <header className='mb-[39px]'>
-                    <h3 className=' text-center font-semibold text-white text-[36px]'>
+                    <h3 className=' text-center font-semibold text-white text-[20px] md:text-[24px] lg:text-[36px]'>
                       {translate('NEW_GAME')}
                     </h3>
                   </header>
@@ -281,7 +352,7 @@ const Home = (props: any) => {
                       </div>
                     ))}
                   </div>
-                  <div className='flex flex-row gap-[24px]'>
+                  <div className='flex flex-row gap-[24px] mt-[26px]'>
                     {[1, 1].map((e, i) => (
                       <div key={i.toString()}>
                         <div className='w-[200px] h-[150px] rounded-[8px] overflow-hidden border-danger border-[3px] mb-[13px]'>
@@ -297,17 +368,22 @@ const Home = (props: any) => {
                     {translate('button:PLAY_NOW')}
                   </button>
                 </article>
-                <article className='bg-[#282A2F] rounded-[8px] w-[646px] h-[612px] pt-[18px] px-[29px] pb-[24px]'>
+                <article className='bg-[#282A2F] rounded-[8px] w-full h-full md:h-[498px] md:w-[361px]  lg:w-[646px] lg:h-[612px] pt-[18px] px-[29px] pb-[24px] overflow-hidden'>
                   <header className='mb-[39px]'>
-                    <h3 className=' text-center font-semibold text-white text-[36px]'>
+                    <h3 className=' text-center font-semibold text-white text-[20px] md:text-[24px] lg:text-[36px]'>
                       {translate('LIVE_CASINO')}
                     </h3>
                   </header>
-                  <div className='grid grid-cols-3 gap-[24px]'>
+                  <div className='grid md:lg:grid-cols-2 grid-cols-3 gap-[24px]'>
                     {[1, 1, 1].map((e, i) => {
                       return (
-                        <div key={i.toString()}>
-                          <div className='h-[362px] w-[180px] border-[3px] border-danger rounded-[8px] mb-[13px]'>
+                        <div
+                          className={
+                            i == 2 ? 'md:hidden block' : 'flex flex-col'
+                          }
+                          key={i.toString()}
+                        >
+                          <div className='w-[89.64px] h-[179.73px] md:h-[296px] md:w-[147.18px] lg:h-[362px] lg:w-[180px] border-[3px] border-danger rounded-[8px] mb-[13px]'>
                             dsds
                           </div>
                           <p className='text-white text-center text-[18px] font-semibold'>
@@ -320,132 +396,46 @@ const Home = (props: any) => {
                   <button className=' bg-danger rounded-[8px] text-center text-white w-full h-[61px] mt-[22px]'>
                     {translate('button:PLAY_NOW')}
                   </button>
-                </article>
+                </article> */}
               </div>
             </div>
 
-            {/* <div className=' col-span-full box-border'>
-              <div className='grid grid-cols-5 gap-[1rem] box-border'>
-                <article className='grid-rows-[auto_1fr_auto] box-border items-end grid col-span-full md:col-span-2 relative gap-[1rem] card --dark p-[1rem]'>
-                  <header>
-                    <div className='text-white border-white divider'>
-                      <span className='px-[1rem] title-page text-white'>
-                        {translate('NEW_GAME')}
-                      </span>
-                    </div>
-                  </header>
-                  <div className='h-full flex flex-col justify-between'>
-                    <div className='grid-cols-2 gap-[26px] grid box-border'>
-                      {(props?.listGameHot?.slice(15, 17) || []).map(
-                        (e: any, i: number) => {
-                          return (
-                            <div
-                              key={e.id}
-                              className='flex flex-col gap-[1rem] box-border'
-                            >
-                              <div className='flex flex-col border-[3px] border-danger rounded-[8px] overflow-hidden relative h-0 pb-[75.8%] box-border'>
-                                <img
-                                  src={`${e?.image_url}?width=166&height=124`}
-                                  alt='casino'
-                                  className='h-full w-full absolute top-0 bottom-0 left-0 right-0 box-border'
-                                />
-                              </div>
-                              <p className='text-white font-semibold text-[12px] md:text-[16px] lg:text-[18px] text-center box-border'>
-                                {e.name}
-                              </p>
-                            </div>
-                          )
-                        },
-                      )}
-                    </div>
-                    <div className='grid-cols-2 gap-[26px] grid box-border'>
-                      {(props?.listGameHot?.slice(17, 19) || []).map((e, i) => {
-                        return (
-                          <div
-                            key={e.id}
-                            className='flex flex-col gap-[1rem] box-border'
-                          >
-                            <div className='flex flex-col border-[3px] border-danger rounded-[8px] overflow-hidden relative h-0 pb-[75.8%] box-border'>
-                              <img
-                                src={`${e?.image_url}?width=166&height=124`}
-                                alt='casino'
-                                className='h-full w-full absolute top-0 bottom-0 left-0 right-0 box-border'
-                              />
-                            </div>
-                            <p className='text-white font-semibold text-[12px] md:text-[16px] lg:text-[18px] text-center box-border'>
-                              {e.name}
-                            </p>
-                          </div>
-                        )
-                      })}
-                    </div>
-                  </div>
-                  <button className='btn --lg --danger'>
-                    <span>{translate('button:PLAY_NOW')}</span>
-                  </button>
-                </article>
-                <article className='grid-rows-[auto_1fr_auto] grid items-center col-span-full md:col-[3/6] relative box-border p-[1em] card --dark gap-[1em]'>
-                  <header>
-                    <div className='text-white border-white divider box-border'>
-                      <span className='px-[1rem] title-page text-white'>
-                        {translate('LIVE_CASINO')}
-                      </span>
-                    </div>
-                  </header>
-                  <div className='grid-cols-3 md:grid-cols-2 lg:grid-cols-3 gap-[1em] grid box-border'>
-                    {(props?.listGameLobby?.slice(0, 3) || []).map(
-                      (e: any, i: number) => {
-                        return (
-                          <div
-                            key={i.toString()}
-                            className={`gap-[1rem] flex-col box-border ${
-                              i == 2 ? 'flex md:hidden lg:grid' : 'flex'
-                            }`}
-                          >
-                            <div className='flex flex-col border-[3px] border-danger rounded-[8px] overflow-hidden relative pb-[201%] box-border'>
-                              <img
-                                src={e.image_url}
-                                alt='casino'
-                                className='h-full w-full absolute top-0 bottom-0 left-0 right-0'
-                              />
-                            </div>
-                            <p className='text-white font-semibold text-[12px] md:text-[16px] lg:text-[18px] text-center'>
-                              {e.name}
-                            </p>
-                          </div>
-                        )
-                      },
-                    )}
-                  </div>
-                  <button className='btn --lg --danger'>
-                    <span>{translate('button:PLAY_NOW')}</span>
-                  </button>
-                </article>
-              </div>
-            </div> */}
-            <div className='flex flex-row gap-[25px]'>
+            <div className='flex flex-col md:flex-row gap-[10px] md:gap-[15px] lg:gap-[25px] col-span-full'>
               <div className='flex flex-col'>
-                <article className='w-[469px] h-[360px] bg-[#282A2F] pt-[36px] pb-[37px] pl-[23px] pr-[22px] rounded-[8px]'>
-                  <header className='mb-[64px]'>
-                    <h3 className=' text-center font-semibold text-white text-[36px]'>
+                <article
+                  className='
+                w-full
+                md:w-[393px]
+                md:h-[207px]
+                lg:w-[469px]
+                lg:h-[360px]
+                bg-[#282A2F]
+                overflow-hidden rounded-[8px]
+                p-[19.27px_20px_20px_20px]
+                md:p-[20px_23px_22px_23px]
+                lg:p-[36px_22px_37px_23px]
+                '
+                >
+                  <header className='mb-[27.2px] md:mb-[26px] lg:mb-[64px]'>
+                    <h3 className='text-center font-semibold text-white text-[20px] md:text-[24px] lg:text-[36px]'>
                       {translate('title:SERVICE_DURATION')}
                     </h3>
                   </header>
-                  <div className='w-full bg-primary rounded-[8px] p-[24px]'>
+                  <div className='w-full bg-primary rounded-[8px] p-[14px_25px] md:p-[18px_35px] lg:p-[1rem]'>
                     <div className='w-full'>
                       <div className='flex items-center justify-between text-white'>
                         <p className='label-card font-semibold'>
                           {translate('title:TIME_AVERAGE')}
                         </p>
-                        <p className=' label-card font-light'>
+                        <p className='label-card font-light'>
                           1 {translate('title:MINUTE')}
                         </p>
                       </div>
-                      <div className='bg-[#400377] rounded-full p-[1px] relative mt-[6px]'>
-                        <div className='bg-[#FF3076] h-[14px] rounded-full w-[30%]' />
+                      <div className='bg-[#400377] rounded-full p-[1px] relative md:m-0 lg:mt-[6px]'>
+                        <div className='bg-[#FF3076] h-[9px] lg:h-[14px] rounded-full w-[30%]' />
                       </div>
                     </div>
-                    <div className='w-full mt-[20px]'>
+                    <div className='w-full md:mt-[9px] lg:mt-[20px]'>
                       <div className='flex items-center justify-between text-white'>
                         <p className='label-card font-semibold'>
                           {translate('title:TIME_AVERAGE')}
@@ -455,19 +445,19 @@ const Home = (props: any) => {
                         </p>
                       </div>
                       <div className='bg-[#400377] rounded-full p-[1px] relative mt-[6px]'>
-                        <div className='bg-[#FF3076] h-[14px] rounded-full w-[60%]' />
+                        <div className='bg-[#FF3076] h-[9px] lg:h-[14px] rounded-full w-[60%]' />
                       </div>
                     </div>
                   </div>
                 </article>
-                <article className='w-[469px] h-[381px] bg-[#282A2F] pt-[36px] pb-[37px] pl-[23px] pr-[22px] rounded-[8px] mt-[24px]'>
-                  <header className='mb-[64px]'>
-                    <h3 className=' text-center font-semibold text-white text-[36px]'>
+                <article className='w-full md:w-[393px] md:h-[186px] lg:w-[469px] lg:h-[381px] bg-[#282A2F] rounded-[8px] mt-[10px] md:mt-[12px] lg:mt-[24px] p-[20px_] md:p-[9px_12px_16px_12px] lg:p-[36px_37px_23px_22px]'>
+                  <header className='mb-[16px] md:mb-[19px] lg:mb-[64px]'>
+                    <h3 className=' text-center font-semibold text-white text-[20px] md:text-[24px] lg:text-[36px]'>
                       {translate('title:MEMBER_SERVICE')}
                     </h3>
                   </header>
-                  <div className='grid grid-cols-2 items-center'>
-                    <div className='flex items-center justify-center text-center flex-col gap-[1rem]'>
+                  <div className='flex flex-row items-center justify-center gap-[47px] md:gap-[63px] lg:gap-[64px]'>
+                    <div className='flex items-center justify-center text-center flex-col gap-[15px] md:gap-[11px] lg:gap-[1rem]'>
                       <img
                         className='img-social-media'
                         src='/assets/icons/wa-btn.svg'
@@ -478,7 +468,7 @@ const Home = (props: any) => {
                         <p className='font-light label-card'>0003298392</p>
                       </div>
                     </div>
-                    <div className='flex items-center justify-center text-center flex-col gap-[1rem]'>
+                    <div className='flex items-center justify-center text-center flex-col gap-[15px] md:gap-[11px] lg:gap-[1rem]'>
                       <img
                         className='img-social-media'
                         src='/assets/icons/telegram-btn.svg'
@@ -493,13 +483,13 @@ const Home = (props: any) => {
                 </article>
               </div>
               <div>
-                <article className='w-[647px] h-[765px] bg-[#282A2F] rounded-[8px] pt-[36px] pb-[27px] pl-[28px] pr-[26px]'>
-                  <header className='mb-[64px]'>
-                    <h3 className=' text-center font-semibold text-white text-[36px]'>
+                <article className='w-full md:w-[361px] md:h-[405px] lg:w-[647px] lg:h-[765px] bg-[#282A2F] p-[20px] rounded-[8px] md:p-[20px] lg:p-[36px_27px_28px_26px]'>
+                  <header className='mb-[30px] md:mb-[27px] lg:mb-[64px]'>
+                    <h3 className=' text-center font-semibold text-white text-[20px] md:text-[24px] lg:text-[36px]'>
                       {translate('title:INFORMATION_CENTER')}
                     </h3>
                   </header>
-                  <div className='grid grid-cols-3 gap-[26px] box-border items-center'>
+                  <div className='grid grid-cols-3 gap-[13px] lg:gap-[26px] box-border items-center'>
                     {[
                       {
                         link: '/',
