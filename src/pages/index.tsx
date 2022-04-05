@@ -14,6 +14,10 @@ import MarqueeComponent from '../partials/MarqueeComponent'
 import SideMenuComponent from '../components/SideMenuComponent'
 
 const Home = (props: any) => {
+  console.log({
+    listGameNew: props.listGameNew,
+  })
+
   const { t: translate } = useTranslation(['title', 'button'])
   const [collapsible, setCollapsible] = useState(false)
 
@@ -56,20 +60,22 @@ const Home = (props: any) => {
               </SwipperComponent>
             </div>
             <div className=' col-span-full md:col-span-2 grid grid-cols-4 md:grid-cols-2 grid-rows-1 md:grid-rows-2 gap-[1rem] row-span-1 md:row-span-2 relative h-[100%] w-[100%] overflow-hidden'>
-              {(props?.listGameHot?.slice(0, 4) || []).map((e, i) => {
-                return (
-                  <div
-                    className='h-full w-full rounded-[8px] overflow-hidden'
-                    key={e?.id}
-                  >
-                    <img
-                      alt='images-game'
-                      className='h-full w-full object-cover'
-                      src={`${e?.image_url}?width=200&height=188&func=bound`}
-                    />
-                  </div>
-                )
-              })}
+              {(props?.listGameHot?.slice(0, 4) || []).map(
+                (e: any, i: number) => {
+                  return (
+                    <div
+                      className='h-full w-full rounded-[8px] overflow-hidden'
+                      key={e?.id}
+                    >
+                      <img
+                        alt='images-game'
+                        className='h-full w-full object-cover'
+                        src={`${e?.image_url}?width=200&height=188&func=bound`}
+                      />
+                    </div>
+                  )
+                },
+              )}
             </div>
             <div className='grid grid-cols-3 col-span-full md:col-[1/4] gap-[1rem] p-0 box-border relative'>
               <Link href='/promotion' passHref>
@@ -264,7 +270,7 @@ const Home = (props: any) => {
             <div className='col-span-full'>
               <div className='flex flex-col md:flex-row gap-[10px] md:gap-[15px] lg:gap-[24.57px]'>
                 <article
-                  className='h-full w-full md:h-[498px] md:w-[393px] lg:h-[612px] lg:w-[470px] overflow-hidden rounded-[8px] bg-[#282A2F]
+                  className='h-full w-full md:w-[393px] lg:h-[612px] lg:w-[470px] overflow-hidden rounded-[8px] bg-[#282A2F]
                 p-[18px_21.25px_17px_22px] md:p-[13px_18px_22px_24px] lg:p-[18px_22px_24px_24px]
                 '
                 >
@@ -274,35 +280,51 @@ const Home = (props: any) => {
                     </h3>
                   </header>
                   <div className='flex flex-row gap-[21.25px] md:gap-[19px] lg:gap-[24px] items-center justify-center'>
-                    {[1, 1].map((e, i) => (
-                      <div key={i.toString()}>
-                        <div className='w-[135.75px] h-[101.81px] md:w-[166px] md:h-[124px] lg:w-[200px] lg:h-[150px] rounded-[8px] overflow-hidden border-danger border-[3px] mb-[13px]'>
-                          dskjhd
+                    {(props?.listGameNew?.slice(0, 2) || []).map(
+                      (e: any, i: number) => (
+                        <div key={i.toString()}>
+                          <div className='w-[135.75px] h-[101.81px] md:w-[166px] md:h-[124px] lg:w-[200px] lg:h-[150px] rounded-[8px] overflow-hidden border-danger border-[3px] mb-[13px]'>
+                            <div className='rounded-[8px] overflow-hidden relative h-0 pb-[74.6%]'>
+                              <img
+                                src={`${e?.image_url}?width=200&height=150`}
+                                alt='game'
+                                className='h-full w-full object-cover absolute top-0 bottom-0 left-0 right-0 object-top'
+                              />
+                            </div>
+                          </div>
+                          <p className='text-white text-center text-[18px] font-semibold'>
+                            {e.name}
+                          </p>
                         </div>
-                        <p className='text-white text-center text-[18px] font-semibold'>
-                          Game Title
-                        </p>
-                      </div>
-                    ))}
+                      ),
+                    )}
                   </div>
                   <div className='flex flex-row gap-[21.25px] md:gap-[19px] lg:gap-[24px] items-center justify-center mt-[15px] md:mt-[11px] lg:mt-[26px]'>
-                    {[1, 1].map((e, i) => (
-                      <div key={i.toString()}>
-                        <div className='w-[135.75px] h-[101.81px] md:w-[166px] md:h-[124px] lg:w-[200px] lg:h-[150px] rounded-[8px] overflow-hidden border-danger border-[3px] mb-[13px]'>
-                          dskjhd
+                    {(props?.listGameNew?.slice(2, 4) || []).map(
+                      (e: any, i: number) => (
+                        <div key={i.toString()}>
+                          <div className='w-[135.75px] h-[101.81px] md:w-[166px] md:h-[124px] lg:w-[200px] lg:h-[150px] rounded-[8px] overflow-hidden border-danger border-[3px] mb-[13px]'>
+                            <div className='rounded-[8px] overflow-hidden relative h-0 pb-[74.6%]'>
+                              <img
+                                src={`${e?.image_url}?width=200&height=150`}
+                                alt='game'
+                                className='h-full w-full object-cover absolute top-0 bottom-0 left-0 right-0 object-top'
+                              />
+                            </div>
+                          </div>
+                          <p className='text-white text-center text-[18px] font-semibold'>
+                            {e.name}
+                          </p>
                         </div>
-                        <p className='text-white text-center text-[18px] font-semibold'>
-                          Game Title
-                        </p>
-                      </div>
-                    ))}
+                      ),
+                    )}
                   </div>
                   <button className=' bg-danger rounded-[8px] text-center text-white w-full h-[61px] mt-[21px]'>
                     {translate('button:PLAY_NOW')}
                   </button>
                 </article>
                 <article
-                  className='h-full w-full md:h-[498px] md:w-[361px] lg:h-[612px] lg:w-[646px] overflow-hidden rounded-[8px] bg-[#282A2F]
+                  className='h-full w-full md:w-[361px] lg:h-[612px] lg:w-[646px] overflow-hidden rounded-[8px] bg-[#282A2F]
                 p-[15.3px_20px_18px_19px] md:p-[16px_23.81px_24px_23.21px] lg:p-[18px_29px_24px_29px]
                 '
                 >
@@ -312,7 +334,7 @@ const Home = (props: any) => {
                     </h3>
                   </header>
                   <div className='grid lg:grid-cols-3 md:grid-cols-2 grid-cols-3 gap-[24px] items-center'>
-                    {[1, 1, 1].map((e, i) => {
+                    {(props.listGameLobby || []).map((e: any, i: number) => {
                       return (
                         <div
                           className={`flex-col items-center justify-center ${
@@ -321,10 +343,14 @@ const Home = (props: any) => {
                           key={i.toString()}
                         >
                           <div className='w-[89.64px] h-[179.73px] md:h-[296px] md:w-[147.18px] lg:h-[362px] lg:w-[180px] border-[3px] border-danger rounded-[8px] mb-[13px]'>
-                            dsds
+                            <img
+                              src={`${e?.image_url}?width=180&height=362`}
+                              alt='game'
+                              className='h-full w-full'
+                            />
                           </div>
                           <p className='text-white text-center text-[18px] font-semibold'>
-                            Game Title
+                            {e.name}
                           </p>
                         </div>
                       )
@@ -334,72 +360,8 @@ const Home = (props: any) => {
                     {translate('button:PLAY_NOW')}
                   </button>
                 </article>
-                {/* <article className='bg-[#282A2F] rounded-[8px] w-full h-full md:w-[470px] md:h-[498px] lg:w-[393px] lg:h-[612px] pb-[24px] pl-[24px] pr-[22px] pt-[18px] overflow-hidden'>
-                  <header className='mb-[39px]'>
-                    <h3 className=' text-center font-semibold text-white text-[20px] md:text-[24px] lg:text-[36px]'>
-                      {translate('NEW_GAME')}
-                    </h3>
-                  </header>
-                  <div className='flex flex-row gap-[24px] mb-[26px]'>
-                    {[1, 1].map((e, i) => (
-                      <div key={i.toString()}>
-                        <div className='w-[200px] h-[150px] rounded-[8px] overflow-hidden border-danger border-[3px] mb-[13px]'>
-                          dskjhd
-                        </div>
-                        <p className='text-white text-center text-[18px] font-semibold'>
-                          Game Title
-                        </p>
-                      </div>
-                    ))}
-                  </div>
-                  <div className='flex flex-row gap-[24px] mt-[26px]'>
-                    {[1, 1].map((e, i) => (
-                      <div key={i.toString()}>
-                        <div className='w-[200px] h-[150px] rounded-[8px] overflow-hidden border-danger border-[3px] mb-[13px]'>
-                          dskjhd
-                        </div>
-                        <p className='text-white text-center text-[18px] font-semibold'>
-                          Game Title
-                        </p>
-                      </div>
-                    ))}
-                  </div>
-                  <button className=' bg-danger rounded-[8px] text-center text-white w-full h-[61px] mt-[21px]'>
-                    {translate('button:PLAY_NOW')}
-                  </button>
-                </article>
-                <article className='bg-[#282A2F] rounded-[8px] w-full h-full md:h-[498px] md:w-[361px]  lg:w-[646px] lg:h-[612px] pt-[18px] px-[29px] pb-[24px] overflow-hidden'>
-                  <header className='mb-[39px]'>
-                    <h3 className=' text-center font-semibold text-white text-[20px] md:text-[24px] lg:text-[36px]'>
-                      {translate('LIVE_CASINO')}
-                    </h3>
-                  </header>
-                  <div className='grid md:lg:grid-cols-2 grid-cols-3 gap-[24px]'>
-                    {[1, 1, 1].map((e, i) => {
-                      return (
-                        <div
-                          className={
-                            i == 2 ? 'md:hidden block' : 'flex flex-col'
-                          }
-                          key={i.toString()}
-                        >
-                          <div className='w-[89.64px] h-[179.73px] md:h-[296px] md:w-[147.18px] lg:h-[362px] lg:w-[180px] border-[3px] border-danger rounded-[8px] mb-[13px]'>
-                            dsds
-                          </div>
-                          <p className='text-white text-center text-[18px] font-semibold'>
-                            Game Title
-                          </p>
-                        </div>
-                      )
-                    })}
-                  </div>
-                  <button className=' bg-danger rounded-[8px] text-center text-white w-full h-[61px] mt-[22px]'>
-                    {translate('button:PLAY_NOW')}
-                  </button>
-                </article> */}
               </div>
             </div>
-
             <div className='flex flex-col md:flex-row gap-[10px] md:gap-[15px] lg:gap-[25px] col-span-full'>
               <div className='flex flex-col'>
                 <article
@@ -843,9 +805,11 @@ const Home = (props: any) => {
     </div>
   )
 }
-export const getServerSideProps = async (props: any) => {
+export const getStaticProps = async (props: any) => {
   const listGameHot = await axiosClient.get('/games/hot')
-  const listGameLobby = await axiosClient.get('/games/lobbies')
+  const listGameLobby = await axiosClient.get('/games/lobbies?limit=3')
+  const listGameNew = await axiosClient.get('/games/new?limit=4')
+
   const translation = await serverSideTranslations(props.locale, [
     'title',
     'button',
@@ -855,6 +819,8 @@ export const getServerSideProps = async (props: any) => {
       ...translation,
       listGameHot: listGameHot.data?.data || [],
       listGameLobby: listGameLobby.data?.data || [],
+      listGameNew: listGameNew.data?.data || [],
+      revalidate: 60, // In seconds
     },
   }
 }
